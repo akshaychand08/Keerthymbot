@@ -1,11 +1,11 @@
 from datetime import timedelta, datetime
 from pymongo import MongoClient
 import os
-from info import DATABASE_URL, DATABASE_NAME
+from info import DATABASE_NAME, DATABASE_URI
 from os import environ
 import pytz
 
-client = MongoClient(DATABASE_URL)
+client = MongoClient(DATABASE_URI)
 datab = client[f"{DATABASE_NAME}"]
 db = datab.verifications
 kolkata_timezone = pytz.timezone('Asia/Kolkata')
