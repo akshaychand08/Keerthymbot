@@ -14,7 +14,7 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
-from info import TUTORIAL_LINK, VR_photo, VR_COM_photo, VR_LOG, CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
+from info import TUTORIAL_LINK, VR_COM_photo, VR_LOG, CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
@@ -49,7 +49,7 @@ async def start(client:Client, message):
         await client.send_message(VR_LOG, script.VR_LOG_COM_TXT.format(m.from_user.mention, user_id, current_time, current_date)) 
 
         dmm = await m.reply_photo(
-        photo=(VR_photo), 
+        photo=(VR_COM_photo), 
         caption=(script.COM_TXT.format(message.from_user.mention)), 
         reply_markup=InlineKeyboardMarkup(buttons),parse_mode=enums.ParseMode.HTML)
         save_verification(user_id)	    
