@@ -46,7 +46,7 @@ async def start(client:Client, message):
         time_zone = datetime.now(pytz.timezone("Asia/Kolkata")) 
         current_date = time_zone.strftime("%d-%m-%Y") 
         current_time = time_zone.strftime("%I:%M:%S %p")     
-        await client.send_message(VR_LOG, VR_COM_photo.VERIFIED_TXT.format(m.from_user.mention, user_id, current_time, current_date)) 
+        await client.send_message(VR_LOG, script.VR_LOG_COM_TXT.format(m.from_user.mention, user_id, current_time, current_date)) 
 
         dmm = await m.reply_photo(
         photo=(VR_photo), 
@@ -155,7 +155,7 @@ async def start(client:Client, message):
         buttons = [[InlineKeyboardButton(text="🔹 Click hare to Verify 🔹", url=url),], [InlineKeyboardButton(text="🌀 How to verify 🌀", url=TUTORIAL_LINK)]]
         reply_markup=InlineKeyboardMarkup(buttons)
         if not await db.is_user_verified(user_id): 
-            temp.F_ID[message.from_user.id] = f"https://t.me/{temp.U_NAME}?start={message.command[1]}"
+            temp.VR_ID[message.from_user.id] = f"https://t.me/{temp.U_NAME}?start={message.command[1]}"
             time_zone = datetime.now(pytz.timezone("Asia/Kolkata")) 
             current_date = time_zone.strftime("%d-%m-%Y")  
             current_time = time_zone.strftime("%I:%M:%S %p")      
