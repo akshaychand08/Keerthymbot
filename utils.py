@@ -1,13 +1,15 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM
-from imdb import IMDb
+from info import VR_API, VR_SITE, AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM
+from imdb import Cinemagoer
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
 from pyrogram import enums
 from typing import Union
 import re
 import os
+from shortzy import Shortzy
+import shortzy
 from datetime import datetime
 from typing import List
 from database.users_chats_db import db
@@ -21,7 +23,7 @@ BTN_URL_REGEX = re.compile(
     r"(\[([^\[]+?)\]\((buttonurl|buttonalert):(?:/{0,2})(.+?)(:same)?\))"
 )
 
-imdb = IMDb() 
+imdb = Cinemagoer() 
 
 BANNED = {}
 SMART_OPEN = '“'
@@ -376,3 +378,14 @@ def humanbytes(size):
         size /= power
         n += 1
     return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
+
+
+
+async def get_vr_shortlink(url):
+    api, site = VR_API, VR_SITE
+    shortzy = Shortzy(api, site)
+    try:
+        url = await shortzy.convert(url)
+    except Exception as e:
+        url = await shortzy.get_quick_link(url)
+    return url
