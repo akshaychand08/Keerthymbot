@@ -39,7 +39,7 @@ async def start(client:Client, message):
             return
         await db.update_notcopy_user(user_id, {"last_verified":datetime.now(tz=ist_timezone)})
         await db.update_verify_id_info(user_id, verify_id, {"verified":True})     
-        url = temp.F_ID.get(user_id)
+        url = temp.VR_ID.get(user_id)
         buttons = [[InlineKeyboardButton("🚶 ʙᴀᴄᴋ ᴛᴏ ɢʀᴏᴜᴘ 🚶",url="https://t.me/+9G1Tx8tQ05pkNjU1"),]]
         if file_id:
             buttons.insert(0, [InlineKeyboardButton("♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ɢᴇᴛ ғɪʟᴇ ♻️", url=url)])
