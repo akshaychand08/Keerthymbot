@@ -1,7 +1,7 @@
 from datetime import timedelta
 import pytz
 import datetime, time
-from info import ADMINS, PREMIUM_LOGS
+from info import ADMINS
 from utils import get_seconds
 from database.users_chats_db import db 
 from pyrogram import Client, filters 
@@ -110,12 +110,11 @@ async def give_premium_cmd_handler(client, message):
                 chat_id=user_id,
                 caption=f"<b>Hay {user.mention}\n\nᴘʀᴇᴍɪᴜᴍ ᴀᴅᴅᴇᴅ ᴛᴏ ʏᴏᴜʀ ᴀᴄᴄᴏᴜɴᴛ ᴇɴᴊᴏʏ 😀..\n\n⏰ premium access: {time}\n\n🎩 Joining : {current_time}\n\n⌛️ Expiry: {expiry_str_in_ist}</b>"              
             )    
-            await client.send_message(PREMIUM_LOGS, text=f"#added_Premium\n\n👤 User: {user.mention}\n\n🪙 id: <code>{user_id}</code>\n\n⏰ premium access: {time}\n\n🎩 Joining : {current_time}\n\n⌛️ Expiry: {expiry_str_in_ist}", disable_web_page_preview=True)
-                    
+
         else:
             await message.reply_text("Invalid time format. Please use '1day for days', '1hour for hours', or '1min for minutes', or '1month for months' or '1year for year'")
     else:
-        await message.reply_text("Usage: /add_premium user_id time (e.g., '1day for days', '1hour for hours', or '1min for minutes', or '1month for months' or '1year for year')")
+        await message.reply_text("Usage: /add_premium user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
 
 @Client.on_message(filters.command("premium_users") & filters.user(ADMINS))
 async def premium_user(client, message):
