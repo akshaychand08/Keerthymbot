@@ -13,6 +13,7 @@ class Database:
         self.grp = self.db.groups
         self.misc = self.db.misc
         self.verify_id = self.db.verify_id
+        self.users = self.db.uersz
 
 
     def new_user(self, id, name):
