@@ -205,5 +205,49 @@ class Database:
         newvalues = { "$set": value }
         return await self.verify_id.update_one(myquery, newvalues)
 
+# premium    
+    async def get_user(self, user_id):
+        user_data = await self.users.find_one({"id": user_id})
+        return user_data
+    async def update_user(self, user_data):
+        await self.users.update_one({"id": user_data["id"]}, {"$set": user_data}, upsert=True)
+
+    async def has_premium_access(self, user_id):
+        user_data = await self.get_user(user_id)
+        if user_data:
+            expiry_time = user_data.get("expiry_time")
+            if expiry_time is None:
+                # User previously used the free trial, but it has ended.
+                return False
+            elif isinstance(expiry_time, datetime.datetime) and datetime.datetime.now() <= expiry_time:
+                return True
+            else:
+                await self.users.update_one({"id": user_id}, {"$set": {"expiry_time": None}})
+        return False
+    async def update_user(self, user_data):
+        await self.users.update_one({"id": user_data["id"]}, {"$set": user_data}, upsert=True)
+
+    async def update_one(self, filter_query, update_data):
+        try:
+            # Assuming self.client and self.users are set up properly
+            result = await self.users.update_one(filter_query, update_data)
+            return result.matched_count == 1
+        except Exception as e:
+            print(f"Error updating document: {e}")
+            return False
+
+    async def get_expired(self, current_time):
+        expired_users = []
+        if data := self.users.find({"expiry_time": {"$lt": current_time}}):
+            async for user in data:
+                expired_users.append(user)
+        return expired_users
+
+
+    async def remove_premium_access(self, user_id):
+        return await self.update_one(
+            {"id": user_id}, {"$set": {"expiry_time": None}}
+        ) 
+
 
 db = Database(DATABASE_URI, DATABASE_NAME)
