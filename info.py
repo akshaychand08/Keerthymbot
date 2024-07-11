@@ -67,3 +67,7 @@ LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
 VR_COM_photo = "https://telegra.ph/file/a00c405a374d21ea7cfb7.jpg"
 VR_LOG = "-1001855482644"
 
+VR_API = "f6fd0c3a3ef30518903d9808a22adba700e90cc8"
+VR_SITE = "omegalinks.in"
+
+  
