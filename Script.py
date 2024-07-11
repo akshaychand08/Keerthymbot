@@ -106,6 +106,29 @@ ID - <code>{}</code>
 Name - {}
 """
 
+
+    
+    VR_LOG_COM_TXT = """
+<b><u>ᴜsᴇʀ ᴠᴇʀɪꜰɪᴇᴅ sᴜᴄᴄᴇssꜰᴜʟʟʏ ✅</u>
+
+👮‍♀ ɴᴀᴍᴇ:- {}  
+✏️ ɪᴅ: <code>{}</code> 
+🕜 ᴛɪᴍᴇ: <code>{}</code>
+📆 ᴅᴀᴛᴇ:- <code>{} </code></b>
+
+#verified_completed"""
+
+    VR_LOG_TXT = """
+<b><u>ᴜsᴇʀ new verifiction</u>
+
+👮‍♀ ɴᴀᴍᴇ:- {}  
+✏️ ɪᴅ: <code>{}</code> 
+🕜 ᴛɪᴍᴇ: <code>{}</code>
+📆 ᴅᴀᴛᴇ:- <code>{} </code></b>
+
+#new_verifiction"""
+
+    
     VR_TXT = """#verification
 ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴠᴇʀɪғɪᴇᴅ ᴛᴏᴅᴀʏ.
 
