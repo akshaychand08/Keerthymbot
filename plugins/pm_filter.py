@@ -59,29 +59,12 @@ async def next_page(bot, query):
 
     if not files:
         return
-    settings = await get_settings(query.message.chat.id)
-    if settings['button']:
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                ),
-            ]
-            for file in files
-        ]
-    else:
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=f"{file.file_name}", callback_data=f'files#{file.file_id}'
-                ),
-                InlineKeyboardButton(
-                    text=f"{get_size(file.file_size)}",
-                    callback_data=f'files_#{file.file_id}',
-                ),
-            ]
-            for file in files
-        ]
+
+    btn = []
+    for file in files:        
+        btn.append([
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {file.file_name}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}')
+        ])
 
     if 0 < offset <= 10:
         off_set = 0
