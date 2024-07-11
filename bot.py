@@ -7,6 +7,9 @@ logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("imdbpy").setLevel(logging.ERROR)
 
+from asyncio import sleep 
+from datetime import datetime
+from pytz import timezone
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 from database.ia_filterdb import Media
@@ -15,6 +18,28 @@ from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR
 from utils import temp
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
+
+async def check_expired_premium(client):
+    while 1:
+        data = await db.get_expired(datetime.now())
+        print(data)
+        for user in data:
+            user_id = user["id"]
+            await db.remove_premium_access(user_id)
+            try:
+                user = await client.get_users(user_id)
+                await client.send_photo(
+                    photo="https://telegra.ph/file/aa465ccf0d0ac5c8e415e.jpg",
+                    chat_id=user_id,
+                    caption=f"<b>Hay {user.mention}\n\nʏᴏᴜʀ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇss ʜᴀs ᴇxᴘɪʀᴇᴅ :\nᴛʜᴀɴᴋ ʏᴏᴜ ꜰᴏʀ ᴜsɪɴɢ ᴏᴜʀ sᴇʀᴠɪᴄᴇ 😊\n\nIf you want to take the premium again, then click on the /plan for the details of the plans</b>"
+                )
+            except Exception as e:
+                print(e)
+            await sleep(0.5)
+        await sleep(1)
+
+
+
 
 class Bot(Client):
 
@@ -40,6 +65,7 @@ class Bot(Client):
         temp.U_NAME = me.username
         temp.B_NAME = me.first_name
         self.username = '@' + me.username
+        self.loop.create_task(check_expired_premium(self))
         logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
         logging.info(LOG_STR)
 
