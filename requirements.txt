@@ -13,3 +13,4 @@ uvloop
 dnspython==2.3.0
 fuzzywuzzy
 aiocache
+aiohttp
