@@ -145,6 +145,32 @@ async def start(client:Client, message):
         file_id = data
         pre = ""
 
+    user_id = m.from_user.id
+    if await db.has_premium_access(user_id):
+        pass	    
+    else:
+        verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
+        await db.create_verify_id(user_id, verify_id)
+        url = await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}_{file_id}")
+        buttons = [[InlineKeyboardButton(text="🔹 Click hare to Verify 🔹", url=url),], [InlineKeyboardButton(text="🌀 How to verify 🌀", url=TUTORIAL_LINK)]]
+        reply_markup=InlineKeyboardMarkup(buttons)
+        if not await db.is_user_verified(user_id): 
+            temp.F_ID[message.from_user.id] = f"https://t.me/{temp.U_NAME}?start={message.command[1]}"
+            stats='group'
+            time_zone = datetime.now(pytz.timezone("Asia/Kolkata")) 
+            current_date = time_zone.strftime("%d-%m-%Y")  
+            current_time = time_zone.strftime("%I:%M:%S %p")      
+            await client.send_message(LOG_CHANNEL2, script.VR_TXT.format(m.from_user.mention, user_id, current_time, current_date, stats)) 		
+            dmb = await m.reply_text(
+                text=(MALIK2.format(message.from_user.mention)),
+                protect_content = True,
+                reply_markup=reply_markup,
+                parse_mode=enums.ParseMode.HTML
+            )
+            await asyncio.sleep(120) 
+            await dmb.delete()	
+            return
+    
     files_ = await get_file_details(file_id)           
     if not files_:
         return await message.reply('No such file exist.')
