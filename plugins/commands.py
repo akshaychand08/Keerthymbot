@@ -14,7 +14,7 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
-from info import VR_photo, VR_LOG, CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
+from info import VR_photo, VR_COM_photo, VR_LOG, CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
@@ -46,7 +46,7 @@ async def start(client:Client, message):
         time_zone = datetime.now(pytz.timezone("Asia/Kolkata")) 
         current_date = time_zone.strftime("%d-%m-%Y") 
         current_time = time_zone.strftime("%I:%M:%S %p")     
-        await client.send_message(VR_LOG, script.VERIFIED_TXT.format(m.from_user.mention, user_id, current_time, current_date)) 
+        await client.send_message(VR_LOG, VR_COM_photo.VERIFIED_TXT.format(m.from_user.mention, user_id, current_time, current_date)) 
 
         dmm = await m.reply_photo(
         photo=(VR_photo), 
