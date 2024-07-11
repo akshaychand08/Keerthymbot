@@ -1,6 +1,12 @@
 import os
+import string
+import pytz
+from datetime import datetime
 import logging
+from database.verify_db import save_verification
+from .pm_filter import auto_filter 
 import random
+import contextlib
 import asyncio
 from Script import script
 from pyrogram import Client, filters, enums
@@ -8,7 +14,7 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
-from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
+from info import VR_photo, VR_LOG, CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
@@ -19,7 +25,35 @@ logger = logging.getLogger(__name__)
 BATCH_FILES = {}
 
 @Client.on_message(filters.command("start") & filters.incoming)
-async def start(client, message):
+async def start(client:Client, message):
+    m = message
+    user_id = m.from_user.id
+    if len(m.command) == 2 and m.command[1].startswith('notcopy'):
+        user_id = int(m.command[1].split("_")[1])
+        verify_id = m.command[1].split("_")[2]
+        file_id = m.command[1].split("_")[3] if len(m.command[1].split("_")) > 3 else None
+        ist_timezone = pytz.timezone('Asia/Kolkata')
+        verify_id_info = await db.get_verify_id_info(user_id, verify_id)
+        if not verify_id_info or verify_id_info["verified"]:
+            await message.reply("Invalid link. Link has already verified or has wrong hash. Try Again")
+            return
+        await db.update_notcopy_user(user_id, {"last_verified":datetime.now(tz=ist_timezone)})
+        await db.update_verify_id_info(user_id, verify_id, {"verified":True})     
+        url = temp.F_ID.get(user_id)
+        buttons = [[InlineKeyboardButton("🚶 ʙᴀᴄᴋ ᴛᴏ ɢʀᴏᴜᴘ 🚶",url="https://t.me/+9G1Tx8tQ05pkNjU1"),]]
+        if file_id:
+            buttons.insert(0, [InlineKeyboardButton("♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ɢᴇᴛ ғɪʟᴇ ♻️", url=url)])
+        time_zone = datetime.now(pytz.timezone("Asia/Kolkata")) 
+        current_date = time_zone.strftime("%d-%m-%Y") 
+        current_time = time_zone.strftime("%I:%M:%S %p")     
+        await client.send_message(VR_LOG, script.VERIFIED_TXT.format(m.from_user.mention, user_id, current_time, current_date)) 
+
+        dmm = await m.reply_photo(
+        photo=(VR_photo), 
+        caption=(script.COM_TXT.format(message.from_user.mention)), 
+        reply_markup=InlineKeyboardMarkup(buttons),parse_mode=enums.ParseMode.HTML)
+        save_verification(user_id)	    
+        return
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [
             [
