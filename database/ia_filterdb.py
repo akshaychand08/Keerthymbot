@@ -41,7 +41,7 @@ class Media(Document):
         collection_name = COLLECTION_NAME
 
 async def send_msg(bot, filename, caption): 
-   # try:
+    try:
         year_match = re.search(r"\b(19|20)\d{2}\b", caption)
         year = year_match.group(0) if year_match else None 
             
@@ -100,8 +100,8 @@ async def send_msg(bot, filename, caption):
           btn = [[InlineKeyboardButton('🎬 Get files', url=f"https://t.me/{temp.U_NAME}?start=getfile-{filenames}")]]              
           await bot.send_message(chat_id=update_channel, text=text, reply_markup=InlineKeyboardMarkup(btn))
 
-    #except:
-       # pass
+    except:
+        pass
 
 async def get_qualities(text, qualities: list):
     """Get all Quality from text"""
