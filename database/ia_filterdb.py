@@ -15,6 +15,11 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
+def remove_username(text):
+    # Use a regular expression to remove @username
+    return re.sub(r'@\w+', '', text)
+
+
 client = AsyncIOMotorClient(DATABASE_URI)
 db = client[DATABASE_NAME]
 instance = Instance.from_db(db)
