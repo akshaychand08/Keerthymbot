@@ -172,10 +172,9 @@ async def start(client:Client, message):
             await dmb.delete()	
             return 
     settings = await get_settings(int(grp_id))
+    premium = await db.has_premium_access(m.from_user.id):
     type_, grp_id, file_id = data.split("_", 2)
-    if type_ != 'shortlink' and not settings.get("Short_mode"):
-        if await db.has_premium_access(m.from_user.id):
-          pass
+    if type_ != 'shortlink' and not settings.get("Short_mode") and not premium:
         tz = pytz.timezone('Asia/Colombo')
         time = datetime.now(tz)
         now = time.strftime("%H")    
