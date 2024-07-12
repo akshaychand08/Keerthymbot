@@ -715,8 +715,9 @@ async def auto_filter(client, msg, sts, spoll=False):
 
     cap = f"Here is what i found for your query {search}"
 
-    await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
-    
+    dl = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
+    await asyncio.sleep(300)
+    await dl.delete()  
 
 async def advantage_spell_chok(msg, sts):
     query = re.sub(
