@@ -76,7 +76,7 @@ TUTORIAL_LINK = "https://t.me/"
 API = "f6fd0c3a3ef30518903d9808a22adba700e90cc8"
 SITE = "omegalinks.in"
 
-SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "False")), False)
+SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 
 update_channel = "-1002055241593"
 
