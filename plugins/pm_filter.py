@@ -33,8 +33,9 @@ SPELL_CHECK = {}
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
     k = await manual_filters(client, message)
-    if k == False:
-        await auto_filter(client, message)
+    if k == False: 
+        sts = await message.reply_text("searching...")
+        await auto_filter(client, message, sts)
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
@@ -114,9 +115,10 @@ async def advantage_spoll_choker(bot, query):
     k = await manual_filters(bot, query.message, text=movie)
     if k == False:
         files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
-        if files:
+        if files: 
+            sts = await message.reply_text("searching...")
             k = (movie, files, offset, total_results)
-            await auto_filter(bot, query, k)
+            await auto_filter(bot, query, sts, k)
         else:
             k = await query.message.edit('This Movie Not Found In DataBase')
             await asyncio.sleep(10)
@@ -588,7 +590,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     await query.answer('Piracy Is Crime')
 
 
-async def auto_filter(client, msg, spoll=False):
+async def auto_filter(client, msg, sts, spoll=False):
     if not spoll:
         message = msg
         settings = await get_settings(message.chat.id)
@@ -600,7 +602,7 @@ async def auto_filter(client, msg, spoll=False):
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
                 if settings.get("spell_check"):
-                    return await advantage_spell_chok(msg)
+                    return await advantage_spell_chok(msg, sts)
                 else:
                     return
         else:
@@ -631,13 +633,13 @@ async def auto_filter(client, msg, spoll=False):
 
     cap = f"Here is what i found for your query {search}"
 
-    await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+    await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
         
     if spoll:
         await msg.message.delete()
 
 
-async def advantage_spell_chok(msg):
+async def advantage_spell_chok(msg, sts):
     query = re.sub(
         r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|br((o|u)h?)*|^h(e|a)?(l)*(o)*|mal(ayalam)?|t(h)?amil|file|that|find|und(o)*|kit(t(i|y)?)?o(w)?|thar(u)?(o)*w?|kittum(o)*|aya(k)*(um(o)*)?|full\smovie|any(one)|with\ssubtitle(s)?)",
         "", msg.text, flags=re.IGNORECASE)  # plis contribute some common words
@@ -646,7 +648,7 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        k = await msg.reply("I couldn't find any movie in that name.")
+        k = await sts.edit("I couldn't find any movie in that name.")
         await asyncio.sleep(8)
         await k.delete()
         return
@@ -676,10 +678,11 @@ async def advantage_spell_chok(msg):
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
     movielist = [:5]
     if not movielist:
-        k = await msg.reply("I couldn't find anything related to that. Check your spelling")
+        k = await sts.edit("I couldn't find anything related to that. Check your spelling")
         await asyncio.sleep(8)
         await k.delete()
         return
+    await sts.delete()
     SPELL_CHECK[msg.id] = movielist
     btn = [[
         InlineKeyboardButton(
