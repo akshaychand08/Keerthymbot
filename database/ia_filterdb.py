@@ -94,7 +94,7 @@ async def send_msg(bot, filename, caption):
         text = "#𝗡𝗘𝗪_𝗙𝗜𝗟𝗘𝗦_𝗔𝗗𝗗𝗘𝗗 ✅\n\n🖥 𝙁𝙞𝙡𝙚 𝙣𝙖𝙢𝙚: `{}`\n\n🩻 𝙌𝙪𝙖𝙡𝙞𝙩𝙮: {}\n\n🌍 𝘼𝙪𝙙𝙞𝙤: {}"
         text = text.format(replace_username(filename), quality, language)
         if await add_name(905710386, filename):
-          filenames = replace_username(filename).replace(" ", '-')
+          filenames = remove_username(filename).replace(" ", '-')
           btn = [[InlineKeyboardButton('🎬 Get files', url=f"https://t.me/movies_house_789_bot?start=getfile-{filenames}")]]              
           await bot.send_message(chat_id=channel, text=text, reply_markup=InlineKeyboardMarkup(btn))
 
