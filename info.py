@@ -72,8 +72,6 @@ TUTORIAL_LINK = "https://t.me/"
 API = "f6fd0c3a3ef30518903d9808a22adba700e90cc8"
 SITE = "omegalinks.in"
 
-verify = True 
-shortlink = False
+SHORT_MODE = is_enabled((environ.get('SINGLE_BUTTON', "False")), False)
 
-SHORT_MODE =  shortlink
 
