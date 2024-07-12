@@ -7,7 +7,9 @@ from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
 from marshmallow.exceptions import ValidationError
-from info import DATABASE_URI, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER
+from info import CAPTION_LANGUAGES, DATABASE_URI, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER
+from database.users_chats_db import add_name
+from utils import temp
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -31,8 +33,81 @@ class Media(Document):
         indexes = ('$file_name', )
         collection_name = COLLECTION_NAME
 
+async def send_msg(bot, filename, caption): 
+    try:
+        year_match = re.search(r"\b(19|20)\d{2}\b", caption)
+        year = year_match.group(0) if year_match else None 
+            
+        pattern = r"(?i)(?:s|season)0*(\d{1,2})"
+        season_match = re.search(pattern, caption)
+        if not season_match:
+            season_match = re.search(pattern, filename)
+        
+        season = season_match.group(1) if season_match else None
+        
+        if year and season:
+            year_pos = filename.find(year) + 4
+            season_str = f"s{int(season):02}"  # Ensure season is formatted as s01, s02, ..., s10, etc.
+            season_pos = filename.lower().find(season_str)
+            if season_pos != -1 and season_pos > year_pos:
+                filename = filename[:season_pos + len(season_str)]
+            else:
+                filename = filename[:year_pos]
+        elif year:
+            filename = filename[:filename.find(year) + 4]
+        elif season:
+            season_str = f"s{int(season):02}"
+            season_pos = filename.lower().find(season_str)
+            if season_pos != -1:
+                filename = filename[:season_pos + len(season_str)]
+                                        
+        # Extract language from caption if it exists in the list of possible languages
+        qualities = ["ORG", "org", "hdcam", "HDCAM", "HQ", "hq", "HDRip", "hdrip", "camrip", "CAMRip", "hdtc", "predvd", "DVDscr", "dvdscr", "dvdrip", "dvdscr", "HDTC", "dvdscreen", "HDTS", "hdts"]
+        quality = await get_qualities(caption.lower(), qualities) or "HDRip"
+        if not year and not season:
+            quali = ["240p", "360p", "480p", "560p", "720p", "1080p", "2160p", "4k"]
+            for q in quali:
+                quality_pos = filename.lower().find(q.lower())
+                if quality_pos != -1:
+                    filename = filename[:quality_pos + len(q)]
+                    break
+                    
+        language = set()
+        for abbr, full_name in CAPTION_LANGUAGES.items():
+            if re.search(rf'\b{abbr.lower()}\b', filename.lower()) or re.search(rf'\b{abbr.lower()}\b', caption.lower()):
+                language.add(full_name)
+            elif re.search(rf'\b{full_name.lower()}\b', filename.lower()) or re.search(rf'\b{full_name.lower()}\b', caption.lower()):
+                language.add(full_name)    
+                
+        if not language:
+            language = "𝙄 𝙙𝙤𝙣'𝙩 𝙠𝙣𝙤𝙬 😄"
+        else:
+            language = ', '.join(sorted(list(language)))
 
-async def save_file(media):
+        filename = re.sub(r'[(){}\[\]:;\'!-$%?]', '', filename)
+        
+        text = "#𝗡𝗘𝗪_𝗙𝗜𝗟𝗘𝗦_𝗔𝗗𝗗𝗘𝗗 ✅\n\n🖥 𝙁𝙞𝙡𝙚 𝙣𝙖𝙢𝙚: `{}`\n\n🩻 𝙌𝙪𝙖𝙡𝙞𝙩𝙮: {}\n\n🌍 𝘼𝙪𝙙𝙞𝙤: {}"
+        text = text.format(replace_username(filename), quality, language)
+        if await add_name(905710386, filename):
+          filenames = replace_username(filename).replace(" ", '-')
+          btn = [[InlineKeyboardButton('🎬 Get files', url=f"https://t.me/movies_house_789_bot?start=getfile-{filenames}")]]              
+          await bot.send_message(chat_id=channel, text=text, reply_markup=InlineKeyboardMarkup(btn))
+
+    except:
+        pass
+
+async def get_qualities(text, qualities: list):
+    """Get all Quality from text"""
+    quality = []
+    for q in qualities:
+        if q in text:
+            quality.append(q)
+    quality = ", ".join(quality)
+    return quality[:-2] if quality.endswith(", ") else quality
+
+
+
+async def save_file(bot, media):
     """Save file in database"""
 
     # TODO: Find better way to get same file_id for same media to avoid duplicates
@@ -62,6 +137,7 @@ async def save_file(media):
             return False, 0
         else:
             logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
+            await send_msg(bot, file.file_name, file.caption)
             return True, 1
 
 
@@ -79,12 +155,12 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
     elif ' ' not in query:
         raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
     else:
-        raw_pattern = query.replace(' ', r'.*[\s\.\+\-_]')
-    
+        raw_pattern = query.replace(' ', r'.*[\s\.\+\-_\(\)\[\]]')
+
     try:
         regex = re.compile(raw_pattern, flags=re.IGNORECASE)
-    except:
-        return []
+    except Exception:
+        return [], ''
 
     if USE_CAPTION_FILTER:
         filter = {'$or': [{'file_name': regex}, {'caption': regex}]}
