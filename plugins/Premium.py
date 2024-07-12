@@ -2,7 +2,7 @@ from datetime import timedelta
 import pytz
 from Script import script
 import datetime, time
-from info import ADMINS, PREMIUM_PIC
+from info import ADMINS, PREMIUM_PIC, USERNAME
 from utils import get_seconds
 from database.users_chats_db import db, delete_all_msg
 from pyrogram import Client, filters 
@@ -30,7 +30,7 @@ async def remove_premium(client, message):
     else:
         await message.reply_text("Usage: /remove_premium user_id")
 
-#testing 
+ 
 
 @Client.on_message(filters.command("myplan"))
 async def myplan(client, message):
@@ -168,7 +168,7 @@ async def plan(client, message):
     else:
         user_info = f"{message.from_user.mention}"
     btn = [[
-            InlineKeyboardButton('☎ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ᴘʀᴏᴏꜰ ☎', url="https//")
+            InlineKeyboardButton('☎ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ᴘʀᴏᴏꜰ ☎', url=USERNAME)
             ],[
             InlineKeyboardButton('✂️ ᴄʟᴏsᴇ ᴛʜɪs ᴘᴀɢᴇ ✂️', callback_data='close_data')            
      ]]
