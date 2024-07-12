@@ -148,9 +148,8 @@ async def start(client:Client, message):
     user_id = m.from_user.id
     if await db.has_premium_access(user_id):
         pass	 
-    elif not settings.get("Short_mode"):
-       pass 
     else:
+      if not settings.get("Short_mode"):
         verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
         await db.create_verify_id(user_id, verify_id)
         url = await get_shortlinks(f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}_{file_id}")
