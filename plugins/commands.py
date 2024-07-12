@@ -148,7 +148,7 @@ async def start(client:Client, message):
     user_id = m.from_user.id
     if await db.has_premium_access(user_id):
         pass	 
-    elif not settings.get("Short_mode"):
+    elif settings.get("Short_mode"):
        pass 
     else:
         verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
@@ -191,7 +191,7 @@ async def start(client:Client, message):
         files = files_[0]
         how_to_download = TUTORIAL_LINK       
         g = await get_shortlinks(f"https://telegram.me/{temp.U_NAME}?start=shortlink_{user}_{file_id}")
-        am = await client.send_message(chat_id=user,text=f"Hay {user_name}. {status}\n\n<b>▶️ File Name: <code>{replace_username(files.file_name)}</code> \n\n⌛️ Size: {get_size(files.file_size)}\n\n📂 File Link: {g}\n\n<i>Note: This message is deleted in 3 mins to avoid copyrights. Save the link to Somewhere else</i></b>", protect_content=True, reply_markup=InlineKeyboardMarkup(
+        am = await client.send_message(chat_id=user,text=f"Hay {user_name}. {status}\n\n<b>▶️ File Name: <code>{files.file_name}</code> \n\n⌛️ Size: {get_size(files.file_size)}\n\n📂 File Link: {g}\n\n<i>Note: This message is deleted in 3 mins to avoid copyrights. Save the link to Somewhere else</i></b>", protect_content=True, reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton('📂 Dᴏᴡɴʟᴏᴀᴅ Nᴏᴡ 📂', url=g)
