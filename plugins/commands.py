@@ -174,7 +174,7 @@ async def start(client:Client, message):
     settings = await get_settings(int(grp_id))
     type_, grp_id, file_id = data.split("_", 2)
     if type_ != 'shortlink' and not settings.get("Short_mode"):
-        if await db.has_premium_access(user_id):
+        if await db.has_premium_access(m.from_user.id):
           pass
         tz = pytz.timezone('Asia/Colombo')
         time = datetime.now(tz)
