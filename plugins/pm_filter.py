@@ -599,7 +599,7 @@ async def auto_filter(client, msg, spoll=False):
             search = message.text
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
-                if settings["spell_check"]:
+                if settings.get("spell_check"):
                     return await advantage_spell_chok(msg)
                 else:
                     return
@@ -674,6 +674,7 @@ async def advantage_spell_chok(msg):
                 movielist += [movie.get('title') for movie in imdb_s]
     movielist += [(re.sub(r'(\-|\(|\)|_)', '', i, flags=re.IGNORECASE)).strip() for i in gs_parsed]
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
+    movielist = [:5]
     if not movielist:
         k = await msg.reply("I couldn't find anything related to that. Check your spelling")
         await asyncio.sleep(8)
