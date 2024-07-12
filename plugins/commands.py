@@ -8,6 +8,7 @@ from .pm_filter import auto_filter
 import random
 import contextlib
 import asyncio
+from .Premium import add_premium
 from Script import script
 from pyrogram import Client, filters, enums
 from pyrogram.errors import ChatAdminRequired, FloodWait
@@ -71,6 +72,38 @@ async def start(client:Client, message):
             await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown"))       
             await db.add_chat(message.chat.id, message.chat.title)
         return 
+    if len(message.command) == 2 and message.command[1].startswith("reff_"):
+        try:
+            user_id = int(message.command[1].split("_")[1])
+        except ValueError:
+            await message.reply_text("𝘐𝘯𝘷𝘢𝘭𝘪𝘥 𝘙𝘦𝘧𝘦𝘳...")
+            return
+        if user_id == message.from_user.id:
+            await message.reply_text("𝘠𝘰𝘶 𝘊𝘰𝘯𝘯𝘰𝘵 𝘙𝘦𝘧𝘦𝘳 𝘠𝘰𝘶𝘳𝘚𝘦𝘭𝘧...")
+            return
+        if referdb.is_user_in_list(message.from_user.id):
+            await message.reply_text("𝘠𝘰𝘶 𝘏𝘢𝘷𝘦 𝘉𝘦𝘦𝘯 𝘈𝘭𝘳𝘦𝘢𝘥𝘺 𝘐𝘯𝘷𝘪𝘵𝘦𝘥...")
+            return
+        if await db.is_user_exist(message.from_user.id): 
+            await message.reply_text("𝘠𝘰𝘶 𝘏𝘢𝘷𝘦 𝘉𝘦𝘦𝘯 𝘈𝘭𝘳𝘦𝘢𝘥𝘺 𝘐𝘯𝘷𝘪𝘵𝘦𝘥...")
+            return            
+        try:
+            uss = await client.get_users(user_id)
+        except Exception:
+            return
+        referdb.add_user(message.from_user.id)
+        fromuse = referdb.get_refer_points(user_id) + 10
+        if fromuse == 100:
+            referdb.add_refer_points(user_id, 0) 
+            await message.reply_text(f"𝘠𝘰𝘶 𝘏𝘢𝘷𝘦 𝘉𝘦𝘦𝘯 𝘚𝘶𝘤𝘤𝘦𝘴𝘴𝘧𝘶𝘭𝘭𝘺 𝘐𝘯𝘷𝘪𝘵𝘦𝘥 𝘉𝘺 {uss.mention}!") 
+            await client.send_message(user_id, text=f"𝘠𝘰𝘶 𝘏𝘢𝘷𝘦 𝘉𝘦𝘦𝘯 𝘚𝘶𝘤𝘤𝘦𝘴𝘴𝘧𝘶𝘭𝘭𝘺 𝘐𝘯𝘷𝘪𝘵𝘦𝘥 𝘉𝘺 {message.from_user.mention}!") 
+            await add_premium(client, user_id, uss)
+        else:
+            referdb.add_refer_points(user_id, fromuse)
+            await message.reply_text(f"𝘠𝘰𝘶 𝘏𝘢𝘷𝘦 𝘚𝘶𝘤𝘤𝘦𝘴𝘴𝘧𝘶𝘭𝘭𝘺 𝘐𝘯𝘷𝘪𝘵𝘦𝘥 𝘉𝘺 {uss.mention}!")
+            await client.send_message(user_id, f"𝘠𝘰𝘶 𝘏𝘢𝘷𝘦 𝘚𝘶𝘤𝘤𝘦𝘴𝘴𝘧𝘶𝘭𝘭𝘺 𝘐𝘯𝘷𝘪𝘵𝘦𝘥 𝘉𝘺 {message.from_user.mention}!")
+        return
+    
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
@@ -83,6 +116,9 @@ async def start(client:Client, message):
             ],[
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
+            ],[
+            InlineKeyboardButton('= 🌘 ᴀᴅs ꜰʀᴇᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ 🌘 =', callback_data='buy_premium'),
+            InlineKeyboardButton('✨ ʀᴇꜰᴇʀ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data='reffff'),  
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -137,6 +173,9 @@ async def start(client:Client, message):
             ],[
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
+            ],[
+            InlineKeyboardButton('= 🌘 ᴀᴅs ꜰʀᴇᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ 🌘 =', callback_data='buy_premium'),
+            InlineKeyboardButton('✨ ʀᴇꜰᴇʀ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data='reffff')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
