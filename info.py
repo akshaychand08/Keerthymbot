@@ -74,6 +74,9 @@ SITE = "omegalinks.in"
 
 SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "False")), False)
 
+SEND_MSG = True 
+
+
 CAPTION_LANGUAGES = {
     "Eng": "English", "Hin": "Hindi", "Tam": "Tamil", "Tel": "Telugu", 
     "Mal": "Malayalam", "Kan": "Kannada", "Ben": "Bengali", 
