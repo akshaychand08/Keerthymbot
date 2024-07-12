@@ -468,16 +468,20 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
         ], [
+            InlineKeyboardButton('= 🌘 ᴀᴅs ꜰʀᴇᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ 🌘 =', callback_data='buy_premium')
+        ], [
            InlineKeyboardButton('✨ ʀᴇꜰᴇʀ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data='reffff')        
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
+        await client.edit_message_media(
+          query.message.chat.id,
+          query.message.id,
+          InputMediaPhoto("https://telegra.ph/file/5163c0bdf94b969624873.jpg"))        
         await query.message.edit_text(
-            text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
+            text=script.START_TXT.format(query.from_user.mention, get_status()),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
-        )
-        await query.answer('Piracy Is Crime')
-        
+        )     
     elif query.data == "ref_point":
         await query.answer(f'You Have: {referdb.get_refer_points(query.from_user.id)} Refferal points.', show_alert=True)
 
