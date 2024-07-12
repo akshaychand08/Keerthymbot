@@ -74,6 +74,8 @@ SITE = "omegalinks.in"
 
 SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "False")), False)
 
+update_channel = "-1002055241593"
+
 SEND_MSG = True 
 
 
