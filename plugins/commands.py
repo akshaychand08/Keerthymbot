@@ -390,7 +390,7 @@ async def settings(client, message):
                     callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{grp_id}',
                 ),
                 InlineKeyboardButton(
-                    'verification' if settings["button"] else 'Shortlink',
+                    'verification' if settings.get("Short_mode") else 'Shortlink',
                     callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{grp_id}',
                 ),
             ],
