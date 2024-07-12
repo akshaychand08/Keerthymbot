@@ -1,5 +1,6 @@
 from datetime import timedelta
 import pytz
+from Script import script
 import datetime, time
 from info import ADMINS
 from utils import get_seconds
@@ -153,3 +154,37 @@ async def premium_user(client, message):
         with open('usersplan.txt', 'w+') as outfile:
             outfile.write(new)
         await message.reply_document('usersplan.txt', caption="Paid Users:")
+
+@Client.on_message(filters.command('plan') & filters.incoming)
+async def plan(client, message):
+    user_id = message.from_user.id
+    if message.from_user.username:
+        user_info = f"@{message.from_user.username}"
+    else:
+        user_info = f"{message.from_user.mention}"
+    btn = [[
+            InlineKeyboardButton('☎ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ᴘʀᴏᴏꜰ ☎', url=USERNAME)
+            ],[
+            InlineKeyboardButton('✂️ ᴄʟᴏsᴇ ᴛʜɪs ᴘᴀɢᴇ ✂️', callback_data='close_data')            
+     ]]
+    await message.reply_photo(
+        photo=(PREMIUM_PIC),
+        caption=script.PREMIUM_TEXT, 
+        reply_markup=InlineKeyboardMarkup(btn))
+
+
+async def add_premium(client, user_id, uss):
+    seconds = 2592000
+    if seconds > 0:
+        expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+        user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
+        await db.update_user(user_data)  # Use the update_user method to update or insert user data                    
+        await client.send_message(
+        chat_id=user_id,
+        text=f"🙋‍♂ <b>Hey {uss.mention}\n\nCongratulations you have received 1 month premium subscription for referring 20 users", disable_web_page_preview=True,              
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔰 ᴍᴏᴠɪᴇ ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ 🔰", url=f"https://t.me/+KP3OcudPwQczZDBl")]]))
+        for admin in ADMINS:
+            await client.send_message(chat_id=admin, text=f"Successfully completed task by this:\n\nuser: {uss.mention}\n\nuser id: {uss.id}!")
+
+
+
