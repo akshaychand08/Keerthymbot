@@ -69,7 +69,7 @@ VR_LOG = "-1001855482644"
 
 TUTORIAL_LINK = "https://t.me/"
 
-VR_API = "f6fd0c3a3ef30518903d9808a22adba700e90cc8"
-VR_SITE = "omegalinks.in"
+API = "f6fd0c3a3ef30518903d9808a22adba700e90cc8"
+SITE = "omegalinks.in"
 
   
