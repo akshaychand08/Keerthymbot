@@ -15,7 +15,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
 from info import TUTORIAL_LINK, VR_COM_photo, VR_LOG, CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
-from utils import get_vr_shortlink, get_settings, get_size, is_subscribed, save_group_settings, temp
+from utils import get_shortlinks, get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
 import json
@@ -140,7 +140,7 @@ async def start(client:Client, message):
         return
     data = message.command[1]
     try:
-        pre, file_id = data.split('_', 1)
+        pre, grp_id, file_id = data.split('_', 2)
     except:
         file_id = data
         pre = ""
@@ -151,7 +151,7 @@ async def start(client:Client, message):
     else:
         verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
         await db.create_verify_id(user_id, verify_id)
-        url = await get_vr_shortlink(f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}_{file_id}")
+        url = await get_shortlinks(f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}_{file_id}")
         buttons = [[InlineKeyboardButton(text="🔹 Click hare to Verify 🔹", url=url),], [InlineKeyboardButton(text="🌀 How to verify 🌀", url=TUTORIAL_LINK)]]
         reply_markup=InlineKeyboardMarkup(buttons)
         if not await db.is_user_verified(user_id): 
@@ -169,6 +169,41 @@ async def start(client:Client, message):
             await asyncio.sleep(120) 
             await dmb.delete()	
             return
+    type_, grp_id file_id = data.split("_", 2)
+    if type_ != 'shortlink' and not settings.get("Short_mode"):
+        if await db.has_premium_access(user_id):
+          pass
+        tz = pytz.timezone('Asia/Colombo')
+        time = datetime.now(tz)
+        now = time.strftime("%H")    
+        if now < "12":
+            status = "ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌞"
+        elif now < "18":
+            status = "ɢᴏᴏᴅ ᴀꜰᴛᴇʀɴᴏᴏɴ 🌗"
+        else:
+            status = "ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌘"        
+        user_name = message.from_user.mention 
+        user = message.from_user.id
+        files_ = await get_file_details(file_id)
+        files = files_[0]
+        how_to_download = TUTORIAL_LINK       
+        g = await get_shortlinks(f"https://telegram.me/{temp.U_NAME}?start=shortlink_{user}_{file_id}")
+        am = await client.send_message(chat_id=user,text=f"Hay {user_name}. {status}\n\n<b>▶️ File Name: <code>{replace_username(files.file_name)}</code> \n\n⌛️ Size: {get_size(files.file_size)}\n\n📂 File Link: {g}\n\n<i>Note: This message is deleted in 3 mins to avoid copyrights. Save the link to Somewhere else</i></b>", protect_content=True, reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton('📂 Dᴏᴡɴʟᴏᴀᴅ Nᴏᴡ 📂', url=g)
+                    ], [
+                        InlineKeyboardButton("🔸 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ 🔸", url=how_to_download),
+        
+                    ]
+                ]
+            )
+        )
+        async def del_func():
+            await asyncio.sleep(180)
+            await am.delete()
+        await asyncio.create_task(del_func())
+        return
     
     files_ = await get_file_details(file_id)           
     if not files_:
@@ -355,8 +390,8 @@ async def settings(client, message):
                     callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{grp_id}',
                 ),
                 InlineKeyboardButton(
-                    'verify mode' if settings["button"] else 'Shortlink mode',
-                    callback_data=f'setgs#Short_mode#{settings.get("button")}#{grp_id}',
+                    'verification' if settings["button"] else 'Shortlink',
+                    callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{grp_id}',
                 ),
             ],
             [
