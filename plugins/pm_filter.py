@@ -459,7 +459,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
         await query.answer('Piracy Is Crime')
     elif query.data == "rf_start":
-      buttons = [[
+        buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
             InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat=''),
@@ -468,8 +468,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
         ], [
-           InlineKeyboardButton('✨ ʀᴇꜰᴇʀ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data='reffff')
-          
+           InlineKeyboardButton('✨ ʀᴇꜰᴇʀ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data='reffff')        
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
