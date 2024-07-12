@@ -169,7 +169,7 @@ async def start(client:Client, message):
             await asyncio.sleep(120) 
             await dmb.delete()	
             return
-    type_, grp_id file_id = data.split("_", 2)
+    type_, grp_id, file_id = data.split("_", 2)
     if type_ != 'shortlink' and not settings.get("Short_mode"):
         if await db.has_premium_access(user_id):
           pass
