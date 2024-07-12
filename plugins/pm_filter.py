@@ -3,12 +3,13 @@ import asyncio
 import re
 import ast
 import math
+from database.reffer import referdb
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
-from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
+from info import PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
     SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters, enums
@@ -123,6 +124,27 @@ async def advantage_spoll_choker(bot, query):
             k = await query.message.edit('This Movie Not Found In DataBase')
             await asyncio.sleep(10)
             await k.delete()
+
+@Client.on_callback_query(filters.regex(r"^reffff"))
+async def refercall(bot, query):
+    btn = [[
+        InlineKeyboardButton(f'Refer Point {referdb.get_refer_points(query.from_user.id)}📍', callback_data='ref_point'),
+        InlineKeyboardButton('Share Link', url=f'https://telegram.me/share/url?url=https://t.me/{bot.me.username}?start=reff_{query.from_user.id}&text=Hello%21%20Experience%20a%20bot%20that%20offers%20a%20vast%20library%20of%20unlimited%20movies%20and%20series.%20%F0%9F%98%83'),
+    ],[
+        InlineKeyboardButton('⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋', callback_data='rf_start')
+    ]]
+    reply_markup = InlineKeyboardMarkup(btn)
+    await bot.edit_message_media(
+        query.message.chat.id,
+        query.message.id,
+        InputMediaPhoto("https://graph.org/file/372c98c53839539955d4d.jpg"))	    
+    await query.message.edit_text(
+        text=f'<b>𝘏𝘦𝘭𝘭𝘰 {query.from_user.mention} 𝘠𝘰𝘶𝘳 𝘙𝘦𝘧𝘦𝘳 𝘓𝘪𝘯𝘬 :\n\nhttps://t.me/{bot.me.username}?start=reff_{query.from_user.id}\n\n🔋 ꜰᴏʀ ᴇᴠᴇʀʏ ɴᴇᴡ ᴜsᴇʀ ᴡʜᴏ sᴛᴀʀᴛs ᴛʜᴇ ʙᴏᴛ ᴜsɪɴɢ ᴛʜɪs ʟɪɴᴋ, ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ 10 ᴘᴏɪɴᴛs...\n\n‼️ ᴏɴᴄᴇ ʏᴏᴜ ʀᴇᴀᴄʜ 100 ᴘᴏɪɴᴛs, ʏᴏᴜ ᴡɪʟʟ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ɢᴇᴛ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇss. ꜰᴏʀ 𝟷𝟻 ᴅᴀʏs</b>',
+        reply_markup=reply_markup,
+        parse_mode=enums.ParseMode.HTML
+    )    
+    await query.answer()
+
 
 
 @Client.on_callback_query()
@@ -385,6 +407,38 @@ async def cb_handler(client: Client, query: CallbackQuery):
             caption=f_caption,
             protect_content=True if ident == 'checksubp' else False
         )
+
+    elif query.data == "buy_premium":
+        btn = [[
+            InlineKeyboardButton('☎ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ᴘʀᴏᴏꜰ ☎', url=USERNAME)
+        ],[
+            InlineKeyboardButton('⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋', callback_data='rf_start')            
+        ]]
+        reply_markup = InlineKeyboardMarkup(btn)
+        await client.edit_message_media(
+            query.message.chat.id,
+            query.message.id,
+            InputMediaPhoto(PREMIUM_PIC))	    
+        await query.message.edit_text(
+            text=script.PREMIUM_TEXT,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+
+    elif query.data == "rf_premium":
+        btn = [[
+            InlineKeyboardButton('☎ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ᴘʀᴏᴏꜰ ☎', url=USERNAME)
+        ],[
+            InlineKeyboardButton('✂️ ᴄʟᴏsᴇ ᴛʜɪs ᴘᴀɢᴇ ✂️', callback_data='close_data')            
+        ]]
+        reply_markup = InlineKeyboardMarkup(btn)
+        await query.message.reply_photo(
+            photo=(PREMIUM_PIC),
+            caption=script.PREMIUM_TEXT,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )    
+    
     elif query.data == "pages":
         await query.answer()
     elif query.data == "start":
