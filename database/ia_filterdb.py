@@ -7,7 +7,7 @@ from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
 from marshmallow.exceptions import ValidationError
-from info import SEND_MSG, CAPTION_LANGUAGES, DATABASE_URI, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER
+from info import update_channel, SEND_MSG, CAPTION_LANGUAGES, DATABASE_URI, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER
 from database.users_chats_db import add_name
 from utils import temp
 
@@ -97,7 +97,7 @@ async def send_msg(bot, filename, caption):
         if await add_name(905710386, filename):
           filenames = remove_username(filename).replace(" ", '-')
           btn = [[InlineKeyboardButton('🎬 Get files', url=f"https://t.me/movies_house_789_bot?start=getfile-{filenames}")]]              
-          await bot.send_message(chat_id=channel, text=text, reply_markup=InlineKeyboardMarkup(btn))
+          await bot.send_message(chat_id=update_channel, text=text, reply_markup=InlineKeyboardMarkup(btn))
 
     except:
         pass
