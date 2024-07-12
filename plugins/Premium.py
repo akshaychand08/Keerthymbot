@@ -1,5 +1,6 @@
 from datetime import timedelta
 import pytz
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from Script import script
 import datetime, time
 from info import ADMINS, PREMIUM_PIC, USERNAME
