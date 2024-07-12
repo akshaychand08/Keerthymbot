@@ -2,6 +2,7 @@ import logging
 from struct import pack
 import re
 import base64
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.file_id import FileId
 from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
