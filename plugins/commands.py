@@ -148,7 +148,8 @@ async def start(client:Client, message):
     user_id = m.from_user.id
     if await db.has_premium_access(user_id):
         pass 
-    elif not settings.get("Short_mode"):
+    elif not settings.get("Short_mode"): 
+        pass
     else:
         verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
         await db.create_verify_id(user_id, verify_id)
