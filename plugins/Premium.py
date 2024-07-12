@@ -2,7 +2,7 @@ from datetime import timedelta
 import pytz
 from Script import script
 import datetime, time
-from info import ADMINS
+from info import ADMINS, PREMIUM_PIC
 from utils import get_seconds
 from database.users_chats_db import db, delete_all_msg
 from pyrogram import Client, filters 
@@ -168,7 +168,7 @@ async def plan(client, message):
     else:
         user_info = f"{message.from_user.mention}"
     btn = [[
-            InlineKeyboardButton('☎ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ᴘʀᴏᴏꜰ ☎', url=USERNAME)
+            InlineKeyboardButton('☎ sᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ᴘʀᴏᴏꜰ ☎', url="https//")
             ],[
             InlineKeyboardButton('✂️ ᴄʟᴏsᴇ ᴛʜɪs ᴘᴀɢᴇ ✂️', callback_data='close_data')            
      ]]
