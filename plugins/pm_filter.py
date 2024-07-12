@@ -11,7 +11,7 @@ from database.connections_mdb import active_connection, all_connections, delete_
     make_inactive
 from info import PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
     SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
 from utils import get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
@@ -688,10 +688,7 @@ async def auto_filter(client, msg, sts, spoll=False):
     cap = f"Here is what i found for your query {search}"
 
     await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
-        
-    if spoll:
-        await msg.message.delete()
-
+    
 
 async def advantage_spell_chok(msg, sts):
     query = re.sub(
@@ -736,7 +733,7 @@ async def advantage_spell_chok(msg, sts):
         await asyncio.sleep(8)
         await k.delete()
         return
-    await sts.delete()
+    
     SPELL_CHECK[msg.id] = movielist
     btn = [[
         InlineKeyboardButton(
@@ -747,7 +744,7 @@ async def advantage_spell_chok(msg, sts):
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
     await msg.reply("I couldn't find anything related to that\nDid you mean any one of these?",
                     reply_markup=InlineKeyboardMarkup(btn))
-
+    await sts.delete()
 
 async def manual_filters(client, message, text=False):
     group_id = message.chat.id
