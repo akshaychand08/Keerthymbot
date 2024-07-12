@@ -66,7 +66,7 @@ LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
 
 PREMIUM_PIC = "https://telegra.ph/file/85afdef1df9578c315e76.jpg"
 
-USERNAME = "https://"
+USERNAME = "https://t.me/"
 
 VR_COM_photo = "https://telegra.ph/file/a00c405a374d21ea7cfb7.jpg"
 VR_LOG = "-1001855482644"
