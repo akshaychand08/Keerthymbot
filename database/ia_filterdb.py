@@ -7,9 +7,10 @@ from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
 from marshmallow.exceptions import ValidationError
-from info import CAPTION_LANGUAGES, DATABASE_URI, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER
+from info import SEND_MSG, CAPTION_LANGUAGES, DATABASE_URI, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER
 from database.users_chats_db import add_name
 from utils import temp
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -142,7 +143,8 @@ async def save_file(bot, media):
             return False, 0
         else:
             logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
-            await send_msg(bot, file.file_name, file.caption)
+            if SEND_MSG:
+                await send_msg(bot, file.file_name, file.caption)
             return True, 1
 
 
