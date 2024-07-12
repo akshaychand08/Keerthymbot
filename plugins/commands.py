@@ -277,7 +277,7 @@ async def start(client:Client, message):
         file_id=file_id,
         caption=f_caption,
         protect_content=True if pre == 'filep' else False,
-        )
+	    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⚡️ fast 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 watch online ⚡️", callback_data=f"stream_link:{files.file_id}:{message.from_user.id}")],]),)
                     
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
