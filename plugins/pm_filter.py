@@ -478,7 +478,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
           query.message.id,
           InputMediaPhoto("https://telegra.ph/file/5163c0bdf94b969624873.jpg"))        
         await query.message.edit_text(
-            text=script.START_TXT.format(query.from_user.mention),
+            text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )     
