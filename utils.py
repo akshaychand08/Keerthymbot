@@ -1,6 +1,6 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import VR_API, VR_SITE, AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM
+from info import API, SITE, AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM
 from imdb import Cinemagoer
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
@@ -413,9 +413,8 @@ async def get_seconds(time_string):
     else:
         return 0
 
-async def get_vr_shortlink(url):
-    api, site = VR_API, VR_SITE
-    shortzy = Shortzy(api, site)
+async def get_shortlinks(url):
+    shortzy = Shortzy(API, SITE)
     try:
         url = await shortzy.convert(url)
     except Exception as e:
