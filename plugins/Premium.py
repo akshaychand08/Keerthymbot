@@ -4,10 +4,15 @@ from Script import script
 import datetime, time
 from info import ADMINS
 from utils import get_seconds
-from database.users_chats_db import db 
+from database.users_chats_db import db, delete_all_msg
 from pyrogram import Client, filters 
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong
 
+@Client.on_message(filters.command("del_msg") & filters.user(ADMINS))
+async def del_msg(client, message):
+    user_id = message.from_user.id
+    await delete_all_msg(user_id)
+    await message.reply_text('deleted')
 
 @Client.on_message(filters.command("remove_premium") & filters.user(ADMINS))
 async def remove_premium(client, message):
