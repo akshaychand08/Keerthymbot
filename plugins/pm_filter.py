@@ -59,11 +59,11 @@ async def next_page(bot, query):
 
     if not files:
         return
-
+    grp_id = query.message.chat.id
     btn = []
     for file in files:        
         btn.append([
-            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {file.file_name}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}')
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {file.file_name}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')
         ])
 
     if 0 < offset <= 10:
@@ -562,7 +562,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 [
                     InlineKeyboardButton('Shortlink mode',
                                          callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{str(grp_id)}'),
-                    InlineKeyboardButton('verification' if settings["button"] else 'Shortlink',
+                    InlineKeyboardButton('verification' if settings.get("Short_mode") else 'Shortlink',
                                          callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{str(grp_id)}')
                 ],
                 [
@@ -610,10 +610,11 @@ async def auto_filter(client, msg, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
     pre = 'filep' if settings['file_secure'] else 'file'
+    grp_id = message.chat.id
     btn = []
     for file in files:        
         btn.append([
-            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {file.file_name}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}')
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {file.file_name}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')
         ])
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
