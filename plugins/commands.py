@@ -144,12 +144,12 @@ async def start(client:Client, message):
     except:
         file_id = data
         pre = ""
-    settings = await get_settings(grp_id)
+    settings = await get_settings(int(grp_id))
     user_id = m.from_user.id
     if await db.has_premium_access(user_id):
-        pass	 
+        pass 
+    elif not settings.get("Short_mode"):
     else:
-      if not settings.get("Short_mode"):
         verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
         await db.create_verify_id(user_id, verify_id)
         url = await get_shortlinks(f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}_{file_id}")
@@ -170,7 +170,7 @@ async def start(client:Client, message):
             await asyncio.sleep(120) 
             await dmb.delete()	
             return 
-    settings = await get_settings(grp_id)
+    settings = await get_settings(int(grp_id))
     type_, grp_id, file_id = data.split("_", 2)
     if type_ != 'shortlink' and not settings.get("Short_mode"):
         if await db.has_premium_access(user_id):
