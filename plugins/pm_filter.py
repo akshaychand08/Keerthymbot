@@ -31,10 +31,14 @@ BUTTONS = {}
 SPELL_CHECK = {}
 
 
-@Client.on_message(filters.group & filters.text & filters.incoming)
+@Client.on_message(filters.group & filters.text & filters.text & filters.incoming)
 async def give_filter(client, message):
     k = await manual_filters(client, message)
     if k == False: 
+        if msg.text.startswith("/"): return
+        if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", msg.text): 
+            await message.delete()
+            return 
         sts = await message.reply_text("searching...")
         await auto_filter(client, message, sts)
 
@@ -117,7 +121,7 @@ async def advantage_spoll_choker(bot, query):
     if k == False:
         files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
         if files: 
-            sts = await query.message.edit("searching...")
+            sts = await query.message.reply_text("searching...")
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, sts, k)
         else:
@@ -713,8 +717,7 @@ async def auto_filter(client, msg, sts, spoll=False):
             [InlineKeyboardButton(text="🗓 1/1", callback_data="pages")]
         )
 
-    cap = f"Here is what i found for your query {search}"
-
+    cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: <a href=https://t.me/{temp.U_NAME}>{temp.B_NAME}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
     dl = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(300)
     await dl.delete()  
@@ -770,7 +773,7 @@ async def advantage_spell_chok(msg, sts):
     ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
     dll = await msg.reply_text(text=f"<b>Hey, {msg.from_user.mention}...😎\n\nᴄʜᴇᴄᴋ ᴀɴᴅ sᴇʟᴇᴄᴛ ᴛʜᴇ ᴍᴏᴠɪᴇ ғʀᴏᴍ ᴛʜᴇ ɢɪᴠᴇɴ ʟɪsᴛ.. \n\n दी गई सूची में अपनी फिल्म देखें और अपनी फिल्म चुनें 👇👇👇</b>",
-                    reply_markup=InlineKeyboardMarkup(btn))
+                    reply_markup=InlineKeyboardMarkup(btn), reply_to_message_id=msg.id)
     await asyncio.sleep(180)
     await dll.delete()   
 
