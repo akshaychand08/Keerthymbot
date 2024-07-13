@@ -201,7 +201,7 @@ async def start(client:Client, message):
         pass 	
     elif not settings.get("is_short"): 
         pass	    
-    elif not settings.get("Short_mode") not settings.get("is_short"): 
+    elif not settings.get("Short_mode"): 
         pass
     else:
         verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
