@@ -439,11 +439,11 @@ async def settings(client, message):
             [
                 InlineKeyboardButton(
                     'Shortlink',
-                    callback_data=f'setgs#short#{settings.get("is_short")}#{grp_id}',
+                    callback_data=f'setgs#is_short#{settings.get("is_short")}#{grp_id}',
                 ),
                 InlineKeyboardButton(
                     'enable' if settings.get("is_short") else 'disable',
-                    callback_data=f'setgs#short#{settings.get("is_short")}#{grp_id}',
+                    callback_data=f'setgs#is_short#{settings.get("is_short")}#{grp_id}',
                 ),
             ],
             [
