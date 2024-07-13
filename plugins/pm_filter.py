@@ -31,7 +31,7 @@ BUTTONS = {}
 SPELL_CHECK = {}
 
 
-@Client.on_message(filters.group & filters.text & filters.text & filters.incoming)
+@Client.on_message(filters.group | filters.private filters.text & filters.text & filters.incoming)
 async def give_filter(client, message):
     k = await manual_filters(client, message)
     if k == False: 
@@ -121,10 +121,10 @@ async def advantage_spoll_choker(bot, query):
     if k == False:
         files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
         if files: 
-            await query.message.delete()
             sts = await query.message.reply_text("searching...")
             k = (movie, files, offset, total_results)
-            await auto_filter(bot, query, sts, k)
+            await auto_filter(bot, query, sts, k) 
+            await query.message.delete()
         else:
             k = await query.message.edit('This Movie Not Found In DataBase')
             await asyncio.sleep(10)
