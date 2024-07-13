@@ -84,6 +84,11 @@ SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 # Add the ID of the update channel where new file updates will be sent
 update_channel = "-1002055241593"
 
+BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", "")) 
+GEN_URL = os.environ.get("GEN_URL", "") # https://example.com/
+
+
+
 # If you want to send messages to the update channel, keep it as True
 SEND_MSG = True
 
