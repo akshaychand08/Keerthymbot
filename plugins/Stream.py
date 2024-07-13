@@ -5,11 +5,9 @@ import os, asyncio
 from database.users_chats_db import db 
 from utils import temp
 from typing import Any
+from info import BIN_CHANNEL, GEN_URL
 from urllib.parse import quote_plus
 
-
-BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", "-1002071839580")) 
-GEN_URL = os.environ.get("GEN_URL", "https://filetolink2-filetolinkbot2.koyeb.app/") # https://example.com/
 
 def get_media_from_message(message: "Message") -> Any:
     media_types = (
