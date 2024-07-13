@@ -1,36 +1,50 @@
 from datetime import timedelta, datetime
 from pymongo import MongoClient
-import os
-from info import DATABASE_NAME, DATABASE_URI
-from os import environ
 import pytz
+from info import DATABASE_NAME, DATABASE_URI
 
-client = MongoClient(DATABASE_URI)
-datab = client[f"{DATABASE_NAME}"]
-db = datab.verifications
-kolkata_timezone = pytz.timezone('Asia/Kolkata')
+class VR_db:
+    def __init__(self, db_url, db_name, timezone):
+        self.client = MongoClient(db_url)
+        self.db = self.client[db_name]
+        self.collection = self.db.verifications
+        self.timezone = pytz.timezone(timezone)
 
-def save_verification(user_id):
-    now = datetime.now(pytz.timezone('Asia/Kolkata'))
-    verification = {"user_id": user_id, "verified_at": now}
-    collection = db["verifications"]
-    collection.insert_one(verification)
+    async def save_verification(self, user_id):
+        now = datetime.now(self.timezone)
+        verification = {"user_id": user_id, "verified_at": now}
+        self.collection.insert_one(verification)
 
-def get_verifications_count(time_period):
-    collection = db[f"verifications"]
-    if time_period == 'today':
-        start_datetime = datetime.now(kolkata_timezone).replace(hour=0, minute=0, second=0, microsecond=0)
-        end_datetime = datetime.now(kolkata_timezone)
-    elif time_period == 'yesterday':
-        start_datetime = datetime.now(kolkata_timezone).replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
-        end_datetime = start_datetime + timedelta(days=1)
-    elif time_period == 'this_week':
-        start_datetime = datetime.now(kolkata_timezone).replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=datetime.now(kolkata_timezone).weekday())
-        end_datetime = datetime.now(kolkata_timezone)
-    elif time_period == 'this_month':
-        start_datetime = datetime.now(kolkata_timezone).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        end_datetime = datetime.now(kolkata_timezone)
-    else:
-        raise ValueError("Invalid time period")
-    count = collection.count_documents({'verified_at': {'$gt': start_datetime, '$lt': end_datetime}})
-    return count
+    def get_start_end_dates(self, time_period):
+        now = datetime.now(self.timezone)
+        
+        if time_period == 'today':
+            start_datetime = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            end_datetime = now
+        elif time_period == 'yesterday':
+            start_datetime = (now - timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+            end_datetime = start_datetime + timedelta(days=1)
+        elif time_period == 'this_week':
+            start_datetime = now - timedelta(days=now.weekday())
+            start_datetime = start_datetime.replace(hour=0, minute=0, second=0, microsecond=0)
+            end_datetime = now
+        elif time_period == 'this_month':
+            start_datetime = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            end_datetime = now
+        elif time_period == 'last_month':
+            first_day_of_current_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            last_month_end_datetime = first_day_of_current_month - timedelta(microseconds=1)
+            start_datetime = last_month_end_datetime.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            end_datetime = last_month_end_datetime
+        else:
+            raise ValueError("Invalid time period")
+        
+        return start_datetime, end_datetime
+
+    async def get_vr_count(self, time_period):
+        start_datetime, end_datetime = self.get_start_end_dates(time_period)
+        count = self.collection.count_documents({'verified_at': {'$gt': start_datetime, '$lt': end_datetime}})
+        return count
+
+# Instantiate the VerificationDatabase class with appropriate parameters
+vr_db = VR_db(DATABASE_URI, DATABASE_NAME, 'Asia/Kolkata')
