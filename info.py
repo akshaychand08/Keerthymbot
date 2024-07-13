@@ -67,22 +67,22 @@ LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
 PREMIUM_PIC = "https://telegra.ph/file/85afdef1df9578c315e76.jpg"
 
 # add your username 
-USERNAME = "https://t.me/"
+USERNAME = "https://t.me/akshatsinghgaur"
 
 VR_COM_photo = "https://telegra.ph/file/a00c405a374d21ea7cfb7.jpg"
-VR_LOG = "-1001855482644"
+VR_LOG = "-1001358710535"
 
 TUTORIAL_LINK = "https://t.me/"
 
-API = "f6fd0c3a3ef30518903d9808a22adba700e90cc8"
-SITE = "omegalinks.in"
+API = "e9a86e1141cff6ebac20cf9479781d6078259d0d"
+SITE = "zipshort.net"
 
 IS_SHORTLINK = is_enabled((environ.get('IS_SHORTLINK', "True")), True)
 
 SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 
 # Add the ID of the update channel where new file updates will be sent
-update_channel = "-1002055241593"
+update_channel = "-1002236763731"
 
 BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", "")) 
 GEN_URL = os.environ.get("GEN_URL", "") # https://example.com/
