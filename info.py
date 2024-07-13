@@ -66,6 +66,7 @@ LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
 
 PREMIUM_PIC = "https://telegra.ph/file/85afdef1df9578c315e76.jpg"
 
+# add your username 
 USERNAME = "https://t.me/"
 
 VR_COM_photo = "https://telegra.ph/file/a00c405a374d21ea7cfb7.jpg"
@@ -78,10 +79,11 @@ SITE = "omegalinks.in"
 
 SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 
+# Add the ID of the update channel where new file updates will be sent
 update_channel = "-1002055241593"
 
-SEND_MSG = True 
-
+# If you want to send messages to the update channel, keep it as True
+SEND_MSG = True
 
 CAPTION_LANGUAGES = {
     "Eng": "English", "Hin": "Hindi", "Tam": "Tamil", "Tel": "Telugu", 
