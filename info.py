@@ -77,6 +77,8 @@ TUTORIAL_LINK = "https://t.me/"
 API = "f6fd0c3a3ef30518903d9808a22adba700e90cc8"
 SITE = "omegalinks.in"
 
+IS_SHORTLINK = is_enabled((environ.get('IS_SHORTLINK', "True")), True)
+
 SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 
 # Add the ID of the update channel where new file updates will be sent
