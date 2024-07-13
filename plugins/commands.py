@@ -198,7 +198,7 @@ async def start(client:Client, message):
     user_id = m.from_user.id
     if await db.has_premium_access(user_id):
         pass 
-    elif not settings.get("Short_mode") and not settings.get("is_short"): 
+    elif not settings.get("Short_mode") not settings.get("is_short"): 
         pass
     else:
         verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
@@ -224,7 +224,7 @@ async def start(client:Client, message):
     settings = await get_settings(int(grp_id))
     premium = await db.has_premium_access(m.from_user.id)
     type_, grp_id, file_id = data.split("_", 2)
-    if type_ != 'shortlink' and not settings.get("Short_mode") and not settings.get("is_short") and not premium:
+    if type_ != 'shortlink' and not settings.get("Short_mode") not settings.get("is_short") and not premium:
         tz = pytz.timezone('Asia/Colombo')
         time = datetime.now(tz)
         now = time.strftime("%H")    
