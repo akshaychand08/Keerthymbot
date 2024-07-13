@@ -44,13 +44,11 @@ async def stream_link(client, query):
      stream = f"{GEN_URL}watch/{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
      download = f"{GEN_URL}{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
      if await db.has_premium_access(int(user_id)): 
-         #await client.send_message(chat_id=-1002009342435, text=f"#new_premium_users\n\nuser id: `{user_id}`\n\nclick stream link\n\nBot: <a href=https://t.me/{temp.U_NAME}>{temp.B_NAME}</a>", disable_web_page_preview=True)         
          btn = [InlineKeyboardButton("⚡️ғᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ ⚡️", url=download,), InlineKeyboardButton("🖥 ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥", url=stream,),
          ],[InlineKeyboardButton("ᴡᴀᴛᴄʜ ɪɴ ᴡᴇʙ ᴀᴘᴘ", web_app=WebAppInfo(url=stream))]
          return await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
      else:
          await query.answer("processing...") 
-         #await client.send_message(chat_id=-1002009342435, text=f"#not_premium_users click stream link\n\nBot: <a href=https://t.me/{temp.U_NAME}>{temp.B_NAME}</a>", disable_web_page_preview=True)
          msg = await query.message.reply(f"Hay bro this features only available in Premium user\n\nYou can go premium if you want access to it.\n\nClick on the /plan to know the premium price")
          await asyncio.sleep(120)
          await msg.delete()
