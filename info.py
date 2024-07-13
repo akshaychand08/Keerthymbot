@@ -72,7 +72,7 @@ USERNAME = "https://t.me/akshatsinghgaur"
 VR_COM_photo = "https://telegra.ph/file/a00c405a374d21ea7cfb7.jpg"
 VR_LOG = "-1001358710535"
 
-TUTORIAL_LINK = "https://t.me/"
+TUTORIAL_LINK = "https://t.me/+dixHOgqWxoQwZDBl"
 
 API = "e9a86e1141cff6ebac20cf9479781d6078259d0d"
 SITE = "zipshort.net"
