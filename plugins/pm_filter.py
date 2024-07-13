@@ -637,7 +637,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
         if str(grp_id) != str(grpid):
             await query.message.edit("Your Active Connection Has Been Changed. Go To /settings.")
             return await query.answer('Piracy Is Crime')
-
+        if set_type == 'short' and query.from_user.id not in ADMINS:
+            return await query.answer(text=f"ʜᴇʏ, {query.from_user.first_name}\n\nʏᴏᴜ ᴄᴀɴ'ᴛ ᴛᴜʀɴ ᴏғғ ᴛʜɪꜱ ꜱʜᴏʀᴛʟɪɴᴋ", show_alert=True)
+            
         if status == "True":
             await save_group_settings(grpid, set_type, False)
         else:
@@ -647,6 +649,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
         if settings is not None:
             buttons = [
+                [
+                    InlineKeyboardButton('Shortlink',
+                                         callback_data=f'setgs#short#{settings.get("is_short")}#{str(grp_id)}'),
+                    InlineKeyboardButton('eneble' if settings.get("is_short") else 'diseble',
+                                         callback_data=f'setgs#short#{settings.get("is_short")}#{str(grp_id)}')
+                ],
                 [
                     InlineKeyboardButton('Shortlink mode',
                                          callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{str(grp_id)}'),
