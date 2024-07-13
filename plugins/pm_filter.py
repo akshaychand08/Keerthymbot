@@ -123,8 +123,7 @@ async def advantage_spoll_choker(bot, query):
         if files: 
             sts = await query.message.reply_text("searching...")
             k = (movie, files, offset, total_results)
-            await auto_filter(bot, query, sts, k) 
-            await query.message.delete()
+            await auto_filter(bot, query, sts, k)
         else:
             k = await query.message.edit('This Movie Not Found In DataBase')
             await asyncio.sleep(10)
@@ -697,6 +696,7 @@ async def auto_filter(client, msg, sts, spoll=False):
     else:
         settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
+        await msg.message.delete()
         search, files, offset, total_results = spoll
     pre = 'filep' if settings['file_secure'] else 'file'
     grp_id = message.chat.id
