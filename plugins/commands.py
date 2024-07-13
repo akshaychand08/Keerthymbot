@@ -547,3 +547,19 @@ async def save_template(client, message):
     template = message.text.split(" ", 1)[1]
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"Successfully changed template for {title} to\n\n{template}")
+
+
+@Client.on_message(filters.command("refer"))
+async def refer(bot, message):
+    username = message.from_user.mention 
+    btn = [[
+        InlineKeyboardButton(f'Refer Point {referdb.get_refer_points(message.from_user.id)}📍', callback_data='ref_point'),
+        InlineKeyboardButton('Share Link', url=f'https://telegram.me/share/url?url=https://t.me/{bot.me.username}?start=reff_{message.from_user.id}&text=Hello%21%20Experience%20a%20bot%20that%20offers%20a%20vast%20library%20of%20unlimited%20movies%20and%20series.%20%F0%9F%98%83'),
+    ],[
+        InlineKeyboardButton('⇋ ᴄʟᴏsᴇ ⇋', callback_data='close_data')
+    ]]
+    await message.reply_photo(
+        photo="https://graph.org/file/372c98c53839539955d4d.jpg",
+        caption=f'<b>𝘏𝘦𝘭𝘭𝘰 {username} 𝘠𝘰𝘶𝘳 𝘙𝘦𝘧𝘦𝘳 𝘓𝘪𝘯𝘬 :\n\nhttps://t.me/{bot.me.username}?start=reff_{message.from_user.id}\n\n🔋 ꜰᴏʀ ᴇᴠᴇʀʏ ɴᴇᴡ ᴜsᴇʀ ᴡʜᴏ sᴛᴀʀᴛs ᴛʜᴇ ʙᴏᴛ ᴜsɪɴɢ ᴛʜɪs ʟɪɴᴋ, ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ 10 ᴘᴏɪɴᴛs...\n\n‼️ ᴏɴᴄᴇ ʏᴏᴜ ʀᴇᴀᴄʜ 100 ᴘᴏɪɴᴛs, ʏᴏᴜ ᴡɪʟʟ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ɢᴇᴛ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇss. ꜰᴏʀ 𝟷𝟻 ᴅᴀʏs</b>',      
+    reply_markup = InlineKeyboardMarkup(btn))    
+
