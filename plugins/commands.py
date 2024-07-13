@@ -4,7 +4,7 @@ import pytz
 from database.reffer import referdb
 from datetime import datetime
 import logging
-from database.verify_db import save_verification
+from database.verify_db import vr_db
 from .pm_filter import auto_filter 
 import random
 import contextlib
@@ -54,7 +54,7 @@ async def start(client:Client, message):
         photo=(VR_COM_photo), 
         caption=(script.COM_TXT.format(message.from_user.mention)), 
         reply_markup=InlineKeyboardMarkup(buttons),parse_mode=enums.ParseMode.HTML)
-        save_verification(user_id)	    
+        await vr_db.save_verification(message.from_user.id)	    
         return
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [
