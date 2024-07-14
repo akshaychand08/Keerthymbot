@@ -563,3 +563,15 @@ async def refer(bot, message):
         caption=f'<b>𝘏𝘦𝘭𝘭𝘰 {username} 𝘠𝘰𝘶𝘳 𝘙𝘦𝘧𝘦𝘳 𝘓𝘪𝘯𝘬 :\n\nhttps://t.me/{bot.me.username}?start=reff_{message.from_user.id}\n\n🔋 ꜰᴏʀ ᴇᴠᴇʀʏ ɴᴇᴡ ᴜsᴇʀ ᴡʜᴏ sᴛᴀʀᴛs ᴛʜᴇ ʙᴏᴛ ᴜsɪɴɢ ᴛʜɪs ʟɪɴᴋ, ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ 10 ᴘᴏɪɴᴛs...\n\n‼️ ᴏɴᴄᴇ ʏᴏᴜ ʀᴇᴀᴄʜ 100 ᴘᴏɪɴᴛs, ʏᴏᴜ ᴡɪʟʟ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ɢᴇᴛ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇss. ꜰᴏʀ 𝟷𝟻 ᴅᴀʏs</b>',      
     reply_markup = InlineKeyboardMarkup(btn))    
 
+@Client.on_message(filters.command('ref_user') & filters.user(ADMINS))
+async def refusers(client, message):
+    if len(message.command) == 2:
+        sts = await message.reply("Checking...")
+        try: 
+            user_id = int(message.command[1])  # Convert the user_id to integer
+            user = await client.get_users(user_id) 
+            await sts.edit(f'Name: {user.mention}\n\nPoint: {referdb.get_refer_points(user_id)}') 
+        except: 
+            await sts.edit('users not found')
+    else: 
+        await message.reply_text('use /ref_user users_id')
