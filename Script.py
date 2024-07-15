@@ -1,15 +1,19 @@
 class script(object):
-    START_TXT = """𝙷𝙴𝙻𝙾 {},
-𝙼𝚈 𝙽𝙰𝙼𝙴 𝙸𝚂 <a href=https://t.me/{}>{}</a>, 𝙸 𝙲𝙰𝙽 𝙿𝚁𝙾𝚅𝙸𝙳𝙴 𝙼𝙾𝚅𝙸𝙴𝚂, 𝙹𝚄𝚂𝚃 𝙰𝙳𝙳 𝙼𝙴 𝚃𝙾 𝚈𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿 𝙰𝙽𝙳 𝙴𝙽𝙹𝙾𝚈 😍"""
+    START_TXT = """👋 HELLO {},  
+I'M <a href=https://t.me/{}>{}</a>! 🌟  
+YOUR GO-TO BOT FOR FREE MOVIES 🎬  
+
+✨ SIMPLY SEND ME THE NAME OF A MOVIE AND ENJOY IT FOR FREE! 😍"""
     HELP_TXT = """𝙷𝙴𝚈 {}
 𝙷𝙴𝚁𝙴 𝙸𝚂 𝚃𝙷𝙴 𝙷𝙴𝙻𝙿 𝙵𝙾𝚁 𝙼𝚈 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂."""
-    ABOUT_TXT = """✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: {}
-✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: <a href=https://t.me/TeamEvamaria>Team Eva Maria</a>
-✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: 𝙿𝚈𝚁𝙾𝙶𝚁𝙰𝙼
-✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹
-✯ 𝙳𝙰𝚃𝙰 𝙱𝙰𝚂𝙴: 𝙼𝙾𝙽𝙶𝙾 𝙳𝙱
-✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: 𝙷𝙴𝚁𝙾𝙺𝚄
-✯ 𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂: v1.0.1 [ 𝙱𝙴𝚃𝙰 ]"""
+    ABOUT_TXT = """🌟 <b>𝙼𝚈 𝙽𝙰𝙼𝙴:</b> {}
+👥 <b>𝙲𝚁𝙴𝙰𝚃𝙾𝚁:</b> <a href="https://t.me/cinemica">Cinemica</a>
+📘 <b>𝙻𝙸𝙱𝚁𝙰𝚁𝚈:</b> 𝙿𝚈𝚁𝙾𝙶𝚁𝙰𝙼
+🌍 <b>𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴:</b> 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹
+📅 <b>𝙳𝙰𝚃𝙰 𝙱𝙰𝚂𝙴:</b> 𝙼𝙾𝙽𝙶𝙾 𝙳𝙱
+🛠️ <b>𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁:</b> 𝙷𝙴𝚁𝙾𝙺𝚄
+ℹ️ <b>𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂:</b> v1.0.1 [ 𝙱𝙴𝚃𝙰 ]
+"""
     SOURCE_TXT = """<b>NOTE:</b>
 - Eva Maria is a open source project. 
 - Source - https://github.com/EvamariaTG/EvaMaria  
@@ -91,11 +95,11 @@ This module only works for my admins
 • /unban  - <code>to unban a user.</code>
 • /channel - <code>to get list of total connected channels</code>
 • /broadcast - <code>to broadcast a message to all users</code>"""
-    STATUS_TXT = """★ 𝚃𝙾𝚃𝙰𝙻 𝙵𝙸𝙻𝙴𝚂: <code>{}</code>
-★ 𝚃𝙾𝚃𝙰𝙻 𝚄𝚂𝙴𝚁𝚂: <code>{}</code>
-★ 𝚃𝙾𝚃𝙰𝙻 𝙲𝙷𝙰𝚃𝚂: <code>{}</code>
-★ 𝚄𝚂𝙴𝙳 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱
-★ 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱"""
+    STATUS_TXT = """🎥 TOTAL FILES: <code>{}</code>
+👥 TOTAL USERS: <code>{}</code>
+💬 TOTAL CHATS: <code>{}</code>
+📦 USED STORAGE: <code>{}</code> MiB
+🗃️ FREE STORAGE: <code>{}</code> MiB"""
     LOG_TEXT_G = """#NewGroup
 Group = {}(<code>{}</code>)
 Total Members = <code>{}</code>
@@ -104,6 +108,8 @@ Added By - {}
     LOG_TEXT_P = """#NewUser
 ID - <code>{}</code>
 Name - {}
+<b>USERNAME - @{}</b>
+
 """
 
 
@@ -130,55 +136,61 @@ Name - {}
 
     
     VR_TXT = """#verification
-ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴠᴇʀɪғɪᴇᴅ ᴛᴏᴅᴀʏ.
+🚫 You are not verified today.
 
-ᴘʟᴇᴀsᴇ ᴠᴇʀɪғʏ ᴀɴᴅ ɢᴇᴛ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴄᴄᴇss ғᴏʀ ᴏɴᴇ ᴅᴀʏ\n\n<b>इस बॉट को इस्तेमाल करने के लिए आपको रोजाना 1 बार verify करना होगा नहीं तो आप इसका इस्तेमाल नहीं कर पाएंगे</b>\n\nɪғ ʏᴏᴜ ᴀʀᴇ ʜᴀᴠɪɴɢ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ ᴡɪᴛʜ ᴠᴇʀɪғɪᴄᴀᴛɪᴏɴ, ꜱᴇɴᴅ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ/ꜱᴄʀᴇᴇɴ-ʀᴇᴄᴏʀᴅɪɴɢ ꜱʜᴏᴡɪɴɢ ᴛʜᴇ ᴘʀᴏʙʟᴇᴍ ᴛᴏ @sahidmalik789_bot ᴀɴᴅ ᴀꜱᴋ ғᴏʀ ʜᴇʟᴘ
+🔑 Please verify to get unlimited access for one day.
 
-<b>अगर आप वेरिफाई नहीं करना चाहते हैं तो आप प्रीमियम ले सकते हैं फिर आप अनलिमिटेड फिल्में ले पाएंगे वेरिफाई करने की कोई जरूरत नहीं है.. plans details के लिए click करें</b> /plan
+🆘 If you are having any problem with verification, send a screenshot or screen recording showing the problem to @Cinemica_supportbot and ask for help.
 
-If you want not to verify then you can take premium then you will be able to take unlimited movies no need to verify.. Click for plan details /plan
+🌟 If you don't want to verify daily, you can subscribe to our premium plan to enjoy unlimited movies without the need for daily verification. Click for plan details: /plan
+
 """
 
-    COM_TXT = """Hay. {}. 
+    COM_TXT = """Hey {},
 
-ʏᴏᴜ ᴀʀᴇ ɴᴏᴡ ᴠᴇʀɪғɪᴇᴅ ғᴏʀ ᴛᴏɴɪɢʜᴛ 12:00ᴀᴍ ... ᴇɴɪᴏʏ ʏᴏᴜʀ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴄᴄᴇꜱꜱ ғᴏʀ ʏᴏᴜʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ🧑‍🎤 ...
+You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for your entertainment! 🎉🍿
 
-#Completed"""
+#Completed
+"""
 
 
 
-    PREMIUM_TEXT = """<b><i><u>- ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs - </u>
+    PREMIUM_TEXT = """<b><i><u>- 🌟 ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs - 🌟</u></i></b>
 
-1. Bronze - ₹50/1 Month 
-(Plan Benefits) ⬅️
+1. 🥉 <b>Bronze</b> - ₹50/1 Month  
+   (Plan Benefits) ⬅️
 
-1. Silver - ₹95/2 Month 
-(Plan Benefits) ⬅️
+2. 🥈 <b>Silver</b> - ₹95/2 Months  
+   (Plan Benefits) ⬅️
 
-2. Gold - ₹130/3 Months 
-(Plan Benefits) ⬅️
+3. 🥇 <b>Gold</b> - ₹130/3 Months  
+   (Plan Benefits) ⬅️
 
-3. Platinum - ₹240/6 Months 
-(Plan Benifits) ⬅️
+4. 🟣 <b>Platinum</b> - ₹240/6 Months  
+   (Plan Benefits) ⬅️
 
-4. Diamond - ₹450/1 Year 📣
-(Plan Benifits) ⬅️
+5. 💎 <b>Diamond</b> - ₹450/1 Year  
+   (Plan Benefits) ⬅️
 
-5. SuparMax Lifetime - ₹1199 ❤️‍🔥
+6. 🚀 <b>One Day Plan</b> - ₹7  
+   (Plan Benefits) ⬅️
+
+7. 🔥 <b>SuparMax Lifetime</b> - ₹1199  
+   (Plan Benefits) ❤️‍🔥
 
 <u>🎁 ᴘʀᴇᴍɪᴜᴍ ꜰᴇᴀᴛᴜʀᴇs 🎁</u>
 
-○ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴠᴇʀɪꜰʏ
-○ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋ
-○ ᴅɪʀᴇᴄᴛ ꜰɪʟᴇs   
-○ ᴀᴅ-ꜰʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
-○ ʜɪɢʜ-sᴘᴇᴇᴅ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ                         
-○ ᴍᴜʟᴛɪ-ᴘʟᴀʏᴇʀ sᴛʀᴇᴀᴍɪɴɢ ʟɪɴᴋs                           
-○ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs                                                                         
-○ ꜰᴜʟʟ ᴀᴅᴍɪɴ sᴜᴘᴘᴏʀᴛ                              
+- ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴠᴇʀɪꜰʏ
+- ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋ
+- ᴅɪʀᴇᴄᴛ ꜰɪʟᴇs   
+- ᴀᴅ-ꜰʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
+- ʜɪɢʜ-sᴘᴇᴇᴅ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ                         
+- ᴍᴜʟᴛɪ-ᴘʟᴀʏᴇʀ sᴛʀᴇᴀᴍɪɴɢ ʟɪɴᴋs                           
+- ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs                                                                         
+- ꜰᴜʟʟ ᴀᴅᴍɪɴ sᴜᴘᴘᴏʀᴛ                              
 
-✨ ᴜᴘɪ ɪᴅ - <code>add your upi</code>
+📞 <b>Contact Admin for Premium</b>  
+<i><b>Need a customized plan or more information? Click the button below to contact admin and get premium access!
+</i></b>
 
-💢 ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀꜰᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
-
-‼️ ᴀꜰᴛᴇʀ sᴇɴᴅɪɴɢ ᴀ sᴄʀᴇᴇɴsʜᴏᴛ ᴘʟᴇᴀsᴇ ɢɪᴠᴇ ᴜs sᴏᴍᴇ ᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴛʜᴇ ᴘʀᴇᴍɪᴜᴍ ʟɪsᴛ</i></b>"""
+"""
