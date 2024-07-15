@@ -1,6 +1,7 @@
 class script(object):
-    START_TXT = """👋 HELLO {},  
-I'M <a href=https://t.me/{}>{}</a>! 🌟  
+    START_TXT = """👋 Hello {},
+
+I'm <a href=https://t.me/{}>{}</a> 
 YOUR GO-TO BOT FOR FREE MOVIES 🎬  
 
 ✨ SIMPLY SEND ME THE NAME OF A MOVIE AND ENJOY IT FOR FREE! 😍"""
@@ -135,7 +136,7 @@ Name - {}
 #new_verifiction"""
 
     
-    VR_TXT = """#verification
+    VR_TXT = """
 🚫 You are not verified today.
 
 🔑 Please verify to get unlimited access for one day.
@@ -155,7 +156,7 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
 
 
 
-    PREMIUM_TEXT = """<b><i><u>- 🌟 ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs - 🌟</u></i></b>
+    PREMIUM_TEXT = """<b><i><u> 🌟 ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs 🌟</u></i></b>
 
 1. 🥉 <b>Bronze</b> - ₹50/1 Month  
    (Plan Benefits) ⬅️
