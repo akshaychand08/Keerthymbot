@@ -44,6 +44,7 @@ class temp(object):
     VR_ID = {}
     BATCH_FILES = {}
     ID = {}
+    GETALL = {}
 
 async def is_subscribed(bot, query):
     try:
