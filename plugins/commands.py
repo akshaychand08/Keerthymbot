@@ -1,6 +1,7 @@
 import os
 import string
 import pytz
+from .sendall import send_all_files
 from database.reffer import referdb
 from datetime import datetime
 import logging
@@ -224,6 +225,33 @@ async def start(client:Client, message):
             await asyncio.sleep(120) 
             await dmb.delete()	
             return 
+
+    if data.startswith("sendallfiles"):
+        _, chat_id, file_ids = data.split("_", 2) 
+        files = temp.GETALL.get(file_ids)
+        if not files:
+            return await message.reply_text("⚠️ Batch file not found ⚠️")   
+        settings = await get_settings(int(grp_id))
+        if await db.has_premium_access(user_id):
+            return await send_all_files(client, message, files, chat_id, grp_id)		    
+        elif settings.get("Short_mode"): 
+            return await send_all_files(client, message, files, chat_id, grp_id)
+        if not settings.get("is_short"): 
+            return await send_all_files(client, message, files, chat_id, grp_id) 
+        else:
+            g = await get_shortlinks(f"https://telegram.me/{temp.U_NAME}?start=sendfiles_{chat_id}_{file_ids}")
+            am = await message.reply_text(f"Hay {message.from_user.mention}.\n\nYour all in one file ready\n\nFile link: {g}\n\n<i>Note: This message is deleted in 5 mins to avoid copyrights. Save the link to Somewhere else</i></b>", reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton('📂 Dᴏᴡɴʟᴏᴀᴅ Nᴏᴡ 📂', url=g)], [
+                InlineKeyboardButton("🔸 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ 🔸", url=TUTORIAL_LINK),]]))
+            return 
+		
+    if data and data.startswith("sendfiles"):
+        _, chat_id, file_ids = data.split("_", 2)
+        files = temp.GETALL.get(file_ids)
+        if not files:
+            return await message.reply_text("⚠️ Batch file not found ⚠️") 
+        return await send_all_files(client, message, files, chat_id, grp_id)
+	
     settings = await get_settings(int(grp_id))
     premium = await db.has_premium_access(m.from_user.id)
     type_, grp_id, file_id = data.split("_", 2)
