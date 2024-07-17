@@ -66,6 +66,10 @@ async def next_page(bot, query):
     if not files:
         return
     grp_id = query.message.chat.id
+    batch_ids = files
+    temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.message.from_user.id}"          
+    
     btn = []
     for file in files:        
         btn.append([
@@ -97,7 +101,7 @@ async def next_page(bot, query):
             ],
         )
     btn.insert(0,
-        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),])        
+        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("send all", callback_data=batch_link)])        
     try:
         await query.edit_message_reply_markup(
             reply_markup=InlineKeyboardMarkup(btn)
@@ -193,7 +197,10 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     if not files:
         await query.answer(f"sᴏʀʀʏ '{lang.title()}' ʟᴀɴɢᴜᴀɢᴇ ꜰɪʟᴇs ɴᴏᴛ ꜰᴏᴜɴᴅ 😕", show_alert=1)
         return
-    grp_id = query.message.chat.id        
+    grp_id = query.message.chat.id 
+    batch_ids = files
+    temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.message.from_user.id}"          
     btn = []
     for file in files:        
         btn.append([
@@ -205,7 +212,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
              InlineKeyboardButton(text="ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{l_offset}#{offset}")]
         )
     btn.insert(0,
-        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),])  
+        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("send all", callback_data=batch_link)])  
     
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
     
@@ -231,7 +238,10 @@ async def lang_next_page(bot, query):
         n_offset = int(n_offset)
     except:
         n_offset = 0
-    grp_id = query.message.chat.id
+    grp_id = query.message.chat.id 
+    batch_ids = files
+    temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.message.from_user.id}"              
     btn = []
     for file in files:        
         btn.append([
@@ -262,7 +272,7 @@ async def lang_next_page(bot, query):
         ) 
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
     btn.insert(0,
-        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),])      
+        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("send all", callback_data=batch_link)])      
     await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
                                           
 @Client.on_callback_query()
@@ -821,7 +831,11 @@ async def auto_filter(client, msg, sts, spoll=False):
         await msg.message.delete()
         search, files, offset, total_results = spoll
     pre = 'filep' if settings['file_secure'] else 'file'
-    grp_id = message.chat.id
+    grp_id = message.chat.id 
+    batch_ids = files
+    temp.GETALL[f"{message.chat.id}-{message.id}"] = batch_ids
+    batch_link = f"batchfiles#{message.chat.id}#{message.id}#{message.from_user.id}"  
+    
     btn = []
     for file in files:        
         btn.append([
@@ -843,7 +857,7 @@ async def auto_filter(client, msg, sts, spoll=False):
     req = message.from_user.id if message.from_user else 0 
     BUTTONS[key] = search   
     btn.insert(0,
-        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),])        
+        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("send all", callback_data=batch_link)])        
 
     cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: <a href=https://t.me/{temp.U_NAME}>{temp.B_NAME}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
     dl = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
