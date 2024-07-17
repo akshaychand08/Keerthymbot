@@ -805,6 +805,18 @@ async def cb_handler(client: Client, query: CallbackQuery):
             ]
             reply_markup = InlineKeyboardMarkup(buttons)
             await query.message.edit_reply_markup(reply_markup)
+
+    elif query.data.startswith("batchfiles"):
+        ident, group_id, message_id, user = query.data.split("#")
+        chat_id = query.message.chat.id
+        group_id = int(group_id)
+        message_id = int(message_id)
+        user = int(user)
+        if user != query.from_user.id:
+            return await query.answer("🥷 ᴛʜᴀᴛ ɪꜱ ɴᴏᴛ ғᴏʀ ʏᴏᴜʀ ᴘʟᴢ ꜱᴇᴀʀᴄʜ ʏᴏᴜʀ",show_alert=True)
+        link = f"https://telegram.me/{temp.U_NAME}?start=sendallfiles_{query.message.chat.id}_{group_id}-{message_id}"
+        return await query.answer(url=link)
+    
     await query.answer('Piracy Is Crime')
 
 
