@@ -68,7 +68,7 @@ async def next_page(bot, query):
     grp_id = query.message.chat.id
     batch_ids = files
     temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
-    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.message.from_user.id}"          
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.from_user.id}"          
     
     btn = []
     for file in files:        
@@ -200,7 +200,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     grp_id = query.message.chat.id 
     batch_ids = files
     temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
-    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.message.from_user.id}"          
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.from_user.id}"          
     btn = []
     for file in files:        
         btn.append([
@@ -241,7 +241,7 @@ async def lang_next_page(bot, query):
     grp_id = query.message.chat.id 
     batch_ids = files
     temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
-    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.message.from_user.id}"              
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.from_user.id}"              
     btn = []
     for file in files:        
         btn.append([
