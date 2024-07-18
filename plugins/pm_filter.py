@@ -41,6 +41,9 @@ async def give_filter(client, message):
             return 
         sts = await message.reply_text("searching...")
         await auto_filter(client, message, sts)
+
+
+
 @Client.on_message(filters.text & filters.incoming &~ filters.chat(REQ_GRP))
 async def give_filter(client, message):
     k = await manual_filters(client, message)
