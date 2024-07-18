@@ -1,8 +1,8 @@
-from utils import get_size, temp
+from utils import get_size, temp, replace_username
 from database.users_chats_db import db 
 from info import CUSTOM_FILE_CAPTION
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
+from Script import FILE_CAP
 
 async def send_all_files(client, message, files, chat_id, grp_id):
     for file in files: 
@@ -20,7 +20,7 @@ async def send_all_files(client, message, files, chat_id, grp_id):
         await client.send_cached_media(
             chat_id=message.from_user.id,
             file_id=file.file_id,
-            caption=f_caption,   
+            caption=replace_username(FILE_CAP.format(title, size, message.from_user.mention, temp.U_NAME, temp.B_NAME)),   
             protect_content=False,
 	        reply_markup=InlineKeyboardMarkup(
             [
