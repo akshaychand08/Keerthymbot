@@ -19,7 +19,7 @@ BOT_TOKEN = environ.get('BOT_TOKEN', '6391607401:AAEOV2zUpSIPF8jLLGgw8OGmRQ4XVTN
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
-PICS = (environ.get('PICS', 'https://telegra.ph/file/68feb51ce9c55c31d3265.png')).split()
+PICS = (environ.get('PICS', 'https://te.legra.ph/file/f772c17d89ab263940aa9.jpg https://te.legra.ph/file/f7f89f94312f465bc1619.jpg https://te.legra.ph/file/bca46ec3f862653984ac3.jpg https://te.legra.ph/file/51df2197b3c81fb5c74bb.jpg https://te.legra.ph/file/e0204c7c62be495bd3757.jpg https://te.legra.ph/file/7e4fb5aaebcfbb491d94b.jpg https://te.legra.ph/file/cac00041d6815ae72c636.jpg https://te.legra.ph/file/aa11112a7008f0c2cfa86.jpg https://te.legra.ph/file/964aadd2b69cbfdbc747b.jpg https://te.legra.ph/file/e20f06f2db0a5cdbadc6b.jpg https://te.legra.ph/file/dfb17b7113756689d1157.jpg https://te.legra.ph/file/e2c6398a9405104ee54a2.jpg https://te.legra.ph/file/8fb297d8d87113955e13a.jpg https://te.legra.ph/file/9305b907779de8d073ac2.jpg https://te.legra.ph/file/8934a9e779a7f21e44290.jpg')).split()
 
 # Admins, Channels & Users
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5721673207').split()]
