@@ -14,7 +14,7 @@ from info import PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, RQST_CHANNEL, REQ_
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto, Message
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
-from utils import get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
+from utils import replace_words, get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
 from database.users_chats_db import db
 from database.ia_filterdb import remove_username, Media, get_file_details, get_search_results
 from database.filters_mdb import (
@@ -1046,7 +1046,7 @@ async def auto_filter(client, msg, sts, spoll=False):
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
         if 2 < len(message.text) < 100:
-            search = message.text
+            search = await replace_words(message.text)            
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
                 if settings.get("spell_check"):
