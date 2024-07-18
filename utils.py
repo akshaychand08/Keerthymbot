@@ -423,3 +423,9 @@ async def get_shortlinks(url):
     except Exception as e:
         url = await shortzy.get_quick_link(url)
     return url
+
+async def replace_words(string):
+    prohibitedWords = REPLACE_WORDS
+    big_regex = re.compile(r'(\s?(' + '|'.join(map(re.escape, prohibitedWords)) + r')\b\s?)|(\s?\b(' + '|'.join(map(re.escape, prohibitedWords)) + r')\s?)')
+    formatted = big_regex.sub(lambda match: match.group().replace(match.group(2) or match.group(4), ""), string)
+    return formatted.replace("-"," ")
