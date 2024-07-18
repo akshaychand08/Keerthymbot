@@ -109,3 +109,8 @@ RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1001682547846'))
 PHTT = environ.get("PHTT", "https://te.legra.ph/file/35fa6c385e82acbc6f91d.jpg")
 AK_AKSHAY1 = environ.get("AK_AKSHAY1", "https://te.legra.ph/file/5e5642bd79e75bb519ea3.jpg")
 
+# Welcome area
+NEWGRP = environ.get('NEWGRP',"https://telegra.ph/file/80dc73a6d73bed659cda5.jpg")
+GRP_LNK = environ.get('GRP_LNK',"https://t.me/iPapcornPrimeGroup")
+CHNL_LNK = environ.get('CHNL_LNK',"https://t.me/arsOfficial10")
+
