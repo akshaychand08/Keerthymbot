@@ -3,15 +3,16 @@ import asyncio
 import re
 import ast
 import math
+from .Reqst import badreqst, usreqst
 from database.reffer import referdb
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
-from info import PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
+from info import REQ_GRP, PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
     SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto, Message 
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
 from utils import replace_words, get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
@@ -31,7 +32,7 @@ BUTTONS = {}
 SPELL_CHECK = {}
 
 
-@Client.on_message(filters.group | filters.private & filters.text & filters.incoming)
+@Client.on_message(filters.group | filters.private & filters.text & filters.incoming & filters.chat(REQ_GRP))
 async def give_filter(client, message):
     k = await manual_filters(client, message)
     if k == False: 
@@ -41,6 +42,51 @@ async def give_filter(client, message):
             return 
         sts = await message.reply_text("searching...")
         await auto_filter(client, message, sts)
+
+@Client.on_message(filters.text & filters.group & filters.incoming & filters.chat(REQ_GRP))
+async def reqgrp_results(client, msg):  
+    if msg.text.startswith("/"): return
+    if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", msg.text):
+        return
+    files = None
+    if 2 < len(msg.text) < 100:
+        search = msg.text
+        files, offset, total_results = await get_search_results(search.lower())     
+    if not files: 
+        search = msg.text
+        try:
+            movies = await get_poster(search, bulk=True)
+        except Exception as e:
+            logger.exception(e)    
+            await badreqst(msg, search, client)
+            return             
+        movielist = [] 
+        if not movies:   
+            await badreqst(msg, search, client)
+            return 
+        movielist += [movie.get('title') for movie in movies]
+        movielist += [f"{movie.get('title')} {movie.get('year')}" for movie in movies]
+        org_names = movielist[:1]
+        org_name = org_names[0]
+        btn = [[InlineKeyboardButton("Close", callback_data="close_data")]]
+        sts = await client.send_message(RQST_CHANNEL, text=f"not click\n\nmovie {msg.text}", reply_markup=InlineKeyboardMarkup(btn))        
+        temp.STS[msg.from_user.id] = sts        
+        try:
+            imdb = await get_poster(search)
+            if imdb:
+                release_date=imdb['release_date']
+            else:
+                pass
+        except:
+            pass
+        # request movie from admin
+
+        await usreqst(msg, search, client, release_date, org_name)
+        return 
+    search = search.replace(" ", '-')
+    await msg.reply(f'<b>Dear.</b> {msg.from_user.mention}  \n\n👉 <code>{total_results}</code> 👈 <b>results are already available for your request</b> 👉 <code>{search}</code> 👈 <b>in our bot..\n\n plz Go back our bot and type movie name</b> 👇',  reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔹 Get movies 🔹",url=f"https://t.me/{temp.U_NAME}?start=getfile-{search}"),]]),parse_mode=enums.ParseMode.HTML),
+
+
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
@@ -794,6 +840,116 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup = InlineKeyboardMarkup(buttons)
             await query.message.edit_reply_markup(reply_markup)
 
+    elif query.data.startswith("rq"):
+        _, status, message_id, user_query = query.data.split("#", maxsplit=3)
+        dict_info = {"town": "Type only web series name don't type season", "nah":"Not available in Hindi", "nak":"Not available in Kannada", "tomn":"Type only movie Name", "natm":"Not available in Tamil", "nam":"Not available in Malayalam", "nak":"Not available in kannada", "nat":"Not available in Telugu", "simd":"Send imdb link\n\nClick here to generate  imdb link 🔻", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "not":"Not released OTT yet", "nry":"Not released yet", "na":"Not available"}
+
+        user_message = await client.get_messages(REQ_GRP, int(message_id))
+        try:
+            user_id = user_message.from_user.id 
+        except:
+            await query.answer('user deleted messages', show_alert=True)
+            await asyncio.sleep(2)
+            await query.message.delete()        
+        user_id = user_message.from_user.id
+        user_mention = (await client.get_users(user_message.from_user.id)).mention
+        search = user_query        
+        text = f"Hey {user_mention}... \n\nYour movie 👉 {dict_info[status]}"
+        if status == "up":  
+          btn = [[
+            InlineKeyboardButton('🔹 search 🔹', url=f"https://t.me/movies_house_789_bot")
+          ]]
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()
+            
+        elif status == "au":        
+            reply = search.replace("Kannada", " ").replace("hindi", " ").replace("Malayalam", " ").replace("dubbed", " ").replace("telugu", " ").replace("tamil", " ").replace(" ", "+")
+            google_search_link = f'https://www.google.com/search?q={reply}+movie'
+            text = f"Hey {user_mention}... \n\nYour movie 👉 {dict_info[status].replace('https://www.google.com', google_search_link)}"
+            btn = [[
+                InlineKeyboardButton('🔸 Google 🔸', url=google_search_link)
+            ]]
+            await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))
+            bbb = await query.edit_message_text("Request has been updated")
+            await asyncio.sleep(20)
+            await bbb.delete()   
+            
+        elif status == "nry":    
+          reply = search.replace("Kannada", " ").replace("hindi", " ").replace("Malayalam", " ").replace("dubbed", " ").replace("telugu", " ").replace("tamil", " ").replace(" ", "+")
+          btn = [[
+            InlineKeyboardButton('🔸 Check Release Date 🔸', url=f'https://www.google.com/search?q={reply}+movie+release+date')
+          ]]
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()    
+            
+        elif status == "town":    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()   
+            
+        elif status == "simd":    
+          reply = search.replace("Kannada", " ").replace("hindi", " ").replace("Malayalam", " ").replace("dubbed", " ").replace("telugu", " ").replace("tamil", " ").replace(" ", "+")
+          btn = [[
+            InlineKeyboardButton('▪️ generate imdb link ▪️', url=f'https://m.imdb.com/find/?q={reply}')
+          ]]
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))    
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()
+            
+        elif status == "nat":    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()              
+            
+        elif status == "town":    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()   
+            
+        elif status == "not":    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()   
+            
+        elif status == "nam":    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()   
+            
+        elif status == "natm":    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()   
+            
+        elif status == "tomn":    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()   
+            
+        elif status == "nak":    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()   
+            
+        else:    
+          await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))
+          bbb = await query.edit_message_text("Request has been updated")
+          await asyncio.sleep(20)
+          await bbb.delete()   
+    
     elif query.data.startswith("batchfiles"):
         ident, group_id, message_id, user = query.data.split("#")
         chat_id = query.message.chat.id
