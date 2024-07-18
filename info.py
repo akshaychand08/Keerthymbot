@@ -102,3 +102,9 @@ CAPTION_LANGUAGES = {
     "Rus": "Russian", "Jap": "Japanese", "Odi": "Odia", 
     "Ass": "Assamese", "Urd": "Urdu"
 }
+
+# movie request 
+REQ_GRP = int(environ.get('REQ_GRP', '-1001878519368'))
+RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1001682547846'))
+PHTT = environ.get("PHTT", "https://te.legra.ph/file/35fa6c385e82acbc6f91d.jpg")
+
