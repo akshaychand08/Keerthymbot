@@ -82,7 +82,7 @@ IS_SHORTLINK = is_enabled((environ.get('IS_SHORTLINK', "True")), True)
 SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 
 # Add the ID of the update channel where new file updates will be sent
-update_channel = "-1002236763731"
+update_channel = "-1002148324943"
 
 BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", "-1002228911934")) 
 GEN_URL = os.environ.get("GEN_URL", "https://troubled-lianne-ettest-bcdcdb8d.koyeb.app/") # https://example.com/
