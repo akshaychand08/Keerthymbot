@@ -12,9 +12,9 @@ def is_enabled(value, default):
 
 # Bot information
 SESSION = environ.get('SESSION', 'Media_search')
-API_ID = int(environ.get('API_ID', '14013342'))
-API_HASH = environ.get('API_HASH', 'c3e1d740fd207c7ae1b373a7546e8a62')
-BOT_TOKEN = environ.get('BOT_TOKEN', '5489251921:AAErspZvDjpYarN391qs48oY2brj_JSX7WY')
+API_ID = int(environ.get('API_ID', '22301351'))
+API_HASH = environ.get('API_HASH', '3035f2bbd92a9c5174d174d92b52b25b')
+BOT_TOKEN = environ.get('BOT_TOKEN', '6391607401:AAEOV2zUpSIPF8jLLGgw8OGmRQ4XVTNg3Rc')
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
@@ -22,11 +22,11 @@ USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
 PICS = (environ.get('PICS', 'https://telegra.ph/file/68feb51ce9c55c31d3265.png')).split()
 
 # Admins, Channels & Users
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '1128389435 5277484262 1353788579 1163343128 905710386').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001513265226 -1001653468210 -1001784666427').split()]
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5721673207').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001859046902 -1002108230565').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
-auth_channel = environ.get('AUTH_CHANNEL', '-1001562923101')
+auth_channel = environ.get('AUTH_CHANNEL', '-1001858640905')
 auth_grp = environ.get('AUTH_GROUP')
 AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
@@ -37,8 +37,8 @@ DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 # Others
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001655296599'))
-SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'cinemica')
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001942599034'))
+SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'iPapdiscussion')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "False")), False)
 IMDB = is_enabled((environ.get('IMDB', "True")), True)
 SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "False")), False)
@@ -67,15 +67,15 @@ LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
 PREMIUM_PIC = "https://telegra.ph/file/85afdef1df9578c315e76.jpg"
 
 # add your username 
-USERNAME = "https://t.me/akshatsinghgaur"
+USERNAME = "https://t.me/akshaychand08"
 
 VR_COM_photo = "https://telegra.ph/file/a00c405a374d21ea7cfb7.jpg"
-VR_LOG = "-1001358710535"
+VR_LOG = "-1001504153078"
 
-TUTORIAL_LINK = "https://t.me/+dixHOgqWxoQwZDBl"
+TUTORIAL_LINK = "https://t.me/HoW_ToOpEn/42"
 
-API = "e9a86e1141cff6ebac20cf9479781d6078259d0d"
-SITE = "zipshort.net"
+API = "16fe63613f0c168ed1cd899307368200c968b963"
+SITE = "publicearn.com"
 
 IS_SHORTLINK = is_enabled((environ.get('IS_SHORTLINK', "True")), True)
 
