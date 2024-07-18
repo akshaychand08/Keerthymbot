@@ -112,16 +112,14 @@ async def start(client:Client, message):
     if len(message.command) != 2:
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-            ],[
-            InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/TeamEvamaria')
-            ],[
-            InlineKeyboardButton('ℹ️ Help', callback_data='help'),
-            InlineKeyboardButton('😊 About', callback_data='about')
-            ],[
-            InlineKeyboardButton('= 🌘 ᴀᴅs ꜰʀᴇᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ 🌘 =', callback_data='buy_premium'),
-            ], [
-            InlineKeyboardButton('✨ ʀᴇꜰᴇʀ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data='reffff'),  
+        ], [
+            InlineKeyboardButton('ᴄʜᴀɴɴᴇʟ', url='https://t.me/+VSL-2W-eQFJlNGJl'),
+            InlineKeyboardButton('ɢʀᴏᴜᴘ', url='https://t.me/+7p7DwzUq5WdmYWU1')
+        ], [
+            InlineKeyboardButton('ℹ️ ʜᴇʟᴘ', callback_data='help'),
+            InlineKeyboardButton('😊 ᴀʙᴏᴜᴛ', callback_data='about')
+        ], [
+            InlineKeyboardButton('🏅 ᴘʀᴇᴍɪᴜᴍ 🏅', callback_data='buy_premium')        
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -170,16 +168,14 @@ async def start(client:Client, message):
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-            ],[
-            InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/TeamEvamaria')
-            ],[
-            InlineKeyboardButton('ℹ️ Help', callback_data='help'),
-            InlineKeyboardButton('😊 About', callback_data='about')
-            ],[
-            InlineKeyboardButton('= 🌘 ᴀᴅs ꜰʀᴇᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ 🌘 =', callback_data='buy_premium')
-            ], [
-            InlineKeyboardButton('✨ ʀᴇꜰᴇʀ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data='reffff')
+        ], [
+            InlineKeyboardButton('ᴄʜᴀɴɴᴇʟ', url='https://t.me/+VSL-2W-eQFJlNGJl'),
+            InlineKeyboardButton('ɢʀᴏᴜᴘ', url='https://t.me/+7p7DwzUq5WdmYWU1')
+        ], [
+            InlineKeyboardButton('ℹ️ ʜᴇʟᴘ', callback_data='help'),
+            InlineKeyboardButton('😊 ᴀʙᴏᴜᴛ', callback_data='about')
+        ], [
+            InlineKeyboardButton('🏅 ᴘʀᴇᴍɪᴜᴍ 🏅', callback_data='buy_premium')        
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
