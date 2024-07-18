@@ -122,3 +122,9 @@ REPLACE_WORDS = (
 
 REPLACE_WORDS=["movies", "Movies", ",", "episode", "Episode", "episodes", "Episodes", "south indian", "South Indian", "web-series", "punjabi", "marathi", "gujrati", "combined", "!", "kro", "jaldi", "bhai", "Audio", "audio", "movi", "language", "Language", "Hollywood", "All", "all", "bollywood", "Bollywood", "South", "south", "hd", "karo", "Karo", "fullepisode", "please", "plz", "Please", "Plz", "send", "link", "Link", "#request", ":", "'", "full", "Full", "movie", "Movie", "dubb", "dabbed", "dubbed", "gujarati", "season", "Season", "web", "series", "Web", "Series", "webseries", "WebSeries", "upload", "HD", "Hd", "bhejo", "ful", "Send", "Bhejo"]
 
+BLACKLIST_WORDS = (
+    list(os.environ.get("BLACKLIST_WORDS").split(","))
+    if os.environ.get("BLACKLIST_WORDS")
+    else []
+)
+BLACKLIST_WORDS = ["[D&O]", "Telegram @  Studios", "[MM]", "[]", "[FC]", "[CF]", "LinkZz", "[DFBC]", "@malangmovie", "@AkPictureOfficial", "@mxplayer", "@New_Movie", "@Infinite_Movies2", "MM", "@R A R B G", "[F&T]", "[KMH]", "[DnO]", "[F&T]", "MLM", "@TM_LMO", "@x265_E4E", "@HEVC MoviesZ", "SSDMovies", "@MM Linkz", "[CC]", "@Mallu_Movies", "@DK Drama", "@luxmv_Linkz", "@Akw_links", "CK HEVC", "@Team_HDT", "[CP]", "www 1TamilMV men", "www TamilRockers", "@MM", "@mm", "[MW]", "@TN68 Linkzz", "@Clipmate_Movie", "[MASHOBUC]", "Official TheMoviesBoss", "www CineVez one", "www 7MovieRulz lv", "DCENIMAS", "Eliteflix Official", "@desimovies", "movieworldkdy", "www 1TamilMV vip"]
