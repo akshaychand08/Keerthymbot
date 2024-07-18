@@ -1,14 +1,18 @@
 class script(object):
-    START_TXT = """👋 Hello {},
+    START_TXT = """<b>ʜᴇʏ {}..💝
 
-I'm <a href=https://t.me/{}>{}</a> 
-YOUR GO-TO BOT FOR FREE MOVIES 🎬  
+ɪᴍ ⚡️ ᴘᴏᴡᴇʀғᴜʟ ᴀᴜᴛᴏ-ғɪʟᴛᴇʀ ʙᴏᴛ...
+😎 ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴍᴇ ᴀs ᴀ ᴀᴜᴛᴏ-ғɪʟᴛᴇʀ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ ....
+ɪᴛs ᴇᴀsʏ ᴛᴏ ᴜsᴇ ᴍᴇ: ᴊᴜsᴛ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴀs ᴀᴅᴍɪɴ, ᴛʜᴀᴛs ᴀʟʟ, ɪ ᴡɪʟʟ ᴘʀᴏᴠɪᴅᴇ ᴍᴏᴠɪᴇs ᴛʜᴇʀᴇ...😎
 
-✨ SIMPLY SEND ME THE NAME OF A MOVIE AND ENJOY IT FOR FREE! 😍"""
+⚠️ ᴍᴏʀᴇ ʜᴇʟᴘ ᴄʜᴇᴄᴋ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ..
+
+©ᴍᴀɴᴛᴀɪɴᴇᴅ ʙʏ: ᴀᴋꜱʜᴀʏ ᴄʜᴀɴᴅ ✌️</b>"""
+    
     HELP_TXT = """𝙷𝙴𝚈 {}
 𝙷𝙴𝚁𝙴 𝙸𝚂 𝚃𝙷𝙴 𝙷𝙴𝙻𝙿 𝙵𝙾𝚁 𝙼𝚈 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂."""
     ABOUT_TXT = """🌟 <b>𝙼𝚈 𝙽𝙰𝙼𝙴:</b> {}
-👥 <b>𝙲𝚁𝙴𝙰𝚃𝙾𝚁:</b> <a href="https://t.me/cinemica">Cinemica</a>
+👥 <b>𝙲𝚁𝙴𝙰𝚃𝙾𝚁:</b> <a href="https://t.me/Akshaychand08">Akshay Chand</a>
 📘 <b>𝙻𝙸𝙱𝚁𝙰𝚁𝚈:</b> 𝙿𝚈𝚁𝙾𝙶𝚁𝙰𝙼
 🌍 <b>𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴:</b> 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹
 📅 <b>𝙳𝙰𝚃𝙰 𝙱𝙰𝚂𝙴:</b> 𝙼𝙾𝙽𝙶𝙾 𝙳𝙱
@@ -139,9 +143,11 @@ Name - {}
 
 🔑 Please verify to get unlimited access for one day.
 
-🆘 If you are having any problem with verification, send a screenshot or screen recording showing the problem to @Cinemica_supportbot and ask for help.
+🆘 If you are having any problem with verification, send a screenshot or screen recording showing the problem to @ARS_official10 and ask for help.
 
-🌟 If you don't want to verify daily, you can subscribe to our premium plan to enjoy unlimited movies without the need for daily verification. Click for plan details: /plan
+🌟 If you don't want to verify daily, you can subscribe to our premium plan to enjoy unlimited movies without the need for daily verification. 
+
+🔔 Click for plan details: /plan
 
 """
 
@@ -156,25 +162,25 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
 
     PREMIUM_TEXT = """<b><i><u> 🌟 ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs 🌟</u></i></b>
 
-1. 🥉 <b>Bronze</b> - ₹50/1 Month  
+1.   🚀 <b>One Day Plan</b> - ₹15  
    (Plan Benefits) ⬅️
 
-2. 🥈 <b>Silver</b> - ₹95/2 Months  
+2. 🥉 <b>Bronze</b> - ₹50/1 Month  
    (Plan Benefits) ⬅️
 
-3. 🥇 <b>Gold</b> - ₹130/3 Months  
+3. 🥈 <b>Silver</b> - ₹99/2 Months  
    (Plan Benefits) ⬅️
 
-4. 🟣 <b>Platinum</b> - ₹240/6 Months  
+4. 🥇 <b>Gold</b> - ₹150/3 Months  
    (Plan Benefits) ⬅️
 
-5. 💎 <b>Diamond</b> - ₹450/1 Year  
+5. 🟣 <b>Platinum</b> - ₹299/6 Months  
    (Plan Benefits) ⬅️
 
-6. 🚀 <b>One Day Plan</b> - ₹7  
+6. 💎 <b>Diamond</b> - ₹499/1 Year  
    (Plan Benefits) ⬅️
 
-7. 🔥 <b>SuparMax Lifetime</b> - ₹1199  
+7. 🔥 <b>SuparMax Lifetime</b> - ₹1299  
    (Plan Benefits) ❤️‍🔥
 
 <u>🎁 ᴘʀᴇᴍɪᴜᴍ ꜰᴇᴀᴛᴜʀᴇs 🎁</u>
@@ -189,7 +195,7 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
 - ꜰᴜʟʟ ᴀᴅᴍɪɴ sᴜᴘᴘᴏʀᴛ                              
 
 📞 <b>Contact Admin for Premium</b>  
-<i><b>Need a customized plan or more information? Click the button below to contact admin and get premium access!
+<i><b>Need a customized plan or more information? Click the button below to contact Owner and get premium access!
 </i></b>
 
 """
