@@ -57,7 +57,7 @@ async def start(client:Client, message):
         reply_markup=InlineKeyboardMarkup(buttons),parse_mode=enums.ParseMode.HTML)
         await vr_db.save_verification(message.from_user.id)	    
         return
-     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+    if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [[
                     InlineKeyboardButton('ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
                   ],[
