@@ -64,7 +64,7 @@ LOG_STR += ("Spell Check Mode Is Enabled, bot will be suggesting related movies 
 LOG_STR += (f"MAX_LIST_ELM Found, long list will be shortened to first {MAX_LIST_ELM} elements\n" if MAX_LIST_ELM else "Full List of casts and crew will be shown in imdb template, restrict them by adding a value to MAX_LIST_ELM\n")
 LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
 
-PREMIUM_PIC = "https://telegra.ph/file/85afdef1df9578c315e76.jpg"
+PREMIUM_PIC = "https://te.legra.ph/file/cce073dc85850f2c63bfa.jpg"
 
 # add your username 
 USERNAME = "https://t.me/akshaychand08"
@@ -106,8 +106,6 @@ CAPTION_LANGUAGES = {
 # movie request 
 REQ_GRP = int(environ.get('REQ_GRP', '-1002212545592'))
 RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1001682547846'))
-PHTT = environ.get("PHTT", "https://te.legra.ph/file/35fa6c385e82acbc6f91d.jpg")
-AK_AKSHAY1 = environ.get("AK_AKSHAY1", "https://te.legra.ph/file/5e5642bd79e75bb519ea3.jpg")
 
 # Welcome area
 NEWGRP = environ.get('NEWGRP',"https://telegra.ph/file/80dc73a6d73bed659cda5.jpg")
