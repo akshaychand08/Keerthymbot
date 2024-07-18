@@ -311,8 +311,26 @@ async def start(client:Client, message):
         file_id=file_id,
         caption=f_caption,
         protect_content=True if pre == 'filep' else False,
-	    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⚡️ fast 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 watch online ⚡️", callback_data=f"stream_link:{files.file_id}:{message.from_user.id}")],]),)
-                    
+	    reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "⚡️ 𝙁𝙖𝙨𝙩 𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙 / 𝙒𝙖𝙩𝙘𝙝 𝙊𝙣𝙡𝙞𝙣𝙚 ⚡️", callback_data=f"stream_link:{files.file_id}:{message.from_user.id}"
+                    )
+                ],
+                [            
+                   InlineKeyboardButton( 
+                       "🔸 𝗝𝗼𝗶𝗻 𝗠𝗼𝘃𝗶𝗲 𝗚𝗿𝗼𝘂𝗽 🔸", url="https://t.me/iPapcornPrimeGroup"
+                   )
+                ],
+                [
+                    InlineKeyboardButton(
+                        "🔹𝗙𝗼𝗹𝗹𝗼𝘄 𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺🔹", url="https://www.instagram.com/akshaychand10?igsh=OGQ5ZDc2ODk2ZA=="
+                    )
+                ],
+            ]
+        ),
+    )                    
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
@@ -470,26 +488,6 @@ async def settings(client, message):
 
     if settings is not None:
         buttons = [
-            [
-                InlineKeyboardButton(
-                    'Shortlink',
-                    callback_data=f'setgs#is_short#{settings.get("is_short")}#{grp_id}',
-                ),
-                InlineKeyboardButton(
-                    'enable' if settings.get("is_short") else 'disable',
-                    callback_data=f'setgs#is_short#{settings.get("is_short")}#{grp_id}',
-                ),
-            ],
-            [
-                InlineKeyboardButton(
-                    'Shortlink mode',
-                    callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{grp_id}',
-                ),
-                InlineKeyboardButton(
-                    'verification' if settings.get("Short_mode") else 'Shortlink',
-                    callback_data=f'setgs#Short_mode#{settings.get("Short_mode")}#{grp_id}',
-                ),
-            ],
             [
                 InlineKeyboardButton(
                     'File Secure',
