@@ -208,3 +208,14 @@ CAPTION = """
 @Gojo_AutoFMbot 💙⃤
 ━━━━━━━━━━━━━</a></b>"""
 
+FILE_CAP = """
+ғɪʟᴇ ɴᴀᴍᴇ:- <code>{}</code>
+
+ғɪʟᴇ ꜱɪᴢᴇ:- {}.
+
+┏━━━━•❅•°•❈•°•❅••━━━━┓\n✰👑 <b>𝐉𝐨𝐢𝐧 <a href=https://t.me/iPapcornPrimeGroup>𝙈𝙤𝙫𝙞𝙚𝙨 𝙂𝙧𝙤𝙪𝙥</a></b>  👑✰\n┗━━━━•❅•°•❈•°•❅•━━━━┛
+
+ʀᴇǫᴜᴇꜱᴛᴇᴅ ʙʏ:- {}
+
+ᴘᴏᴡᴇʀᴇᴅ ʙʏ: <spoiler><a href=https://t.me/{}>{}</a></spoiler>
+"""
