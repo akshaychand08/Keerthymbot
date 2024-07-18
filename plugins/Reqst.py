@@ -46,6 +46,7 @@ async def usreqst(msg, search, client, release_date, org_name):
         user_query = msg.text
         reply = search.replace('hindi', '').replace('telugu', '').replace('Kannada', '').replace("tamil", '').replace(" ", '+')
         reply_markup1 = [[
+                InlineKeyboardButton("🔔 Movies Cheking Group 🌀", url=f"https://t.me/+2xBSNHJ8h4xjZmM1"),],[
                 InlineKeyboardButton("🔍 Check sapling", url=f"https://www.google.com/search?q={reply}+movie"),
                 InlineKeyboardButton("🔍 Release date", url=f"https://www.google.com/search?q={reply}+release+date"),],[
                 InlineKeyboardButton("Updated  ✅",callback_data=f'rq#up#{msg_id}#{user_query}',),
@@ -63,9 +64,9 @@ async def usreqst(msg, search, client, release_date, org_name):
                 InlineKeyboardButton("Not available",callback_data=f'rq#na#{msg_id}#{user_query}',),],[
                 InlineKeyboardButton("Close",callback_data="close_data"),],] 
         try:
-            await client.send_message(RQST_CHANNEL, text=f"my bot 👉 <a href=https://t.me/movies_house_789_bot>Click Here</a>\n\nBot 👉 <a href=https://t.me/TPE_Kakashi_Bot>Click Here</a> Bot 2 👉 <a href=https://t.me/ProSearch6Bot>Click Here</a>\n\nGroup 👉 <a href=https://t.me/>Click Here</a>\n\nUser <b>{user_name}</b>\n\nGoogle: <code>{org_name}</code>\n\nRelease: `{release_date}`\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/foxybotzsupport/{msg_id}>Click Here</a>\n😎", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(reply_markup1)) 
+            await client.send_message(RQST_CHANNEL, text=f"my bot 👉 <a href=https://t.me/iPapcornPrimeBot>Click Here</a>\n\nGroup 👉 <a href=https://t.me/+2xBSNHJ8h4xjZmM1>Click Here</a>\n\nUser <b>{user_name}</b>\n\nGoogle: <code>{org_name}</code>\n\nRelease: `{release_date}`\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/iPapdiscussion/{msg_id}>Click Here</a>\n😎", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(reply_markup1)) 
         except: 
-            await client.send_message(RQST_CHANNEL, text=f"my bot 👉 <a href=https://t.me/movies_house_789_bot>Click Here</a>\n\nBot 👉 <a href=https://t.me/TPE_Kakashi_Bot>Click Here</a> Bot 2 👉 <a href=https://t.me/ProSearch6Bot>Click Here</a>\n\nGroup 👉 <a href=https://t.me/>Click Here</a>\n\nUser <b>{user_name}</b>\n\nGoogle: <code>{org_name}</code>\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/foxybotzsupport/{msg_id}>Click Here</a>\n😎", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(reply_markup1)) 
+            await client.send_message(RQST_CHANNEL, text=f"my bot 👉 <a href=https://t.me/iPapcornPrimeBot>Click Here</a>\n\nGroup 👉 <a href=https://t.me/+2xBSNHJ8h4xjZmM1>Click Here</a>\n\nUser <b>{user_name}</b>\n\nGoogle: <code>{org_name}</code>\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/iPapdiscussion/{msg_id}>Click Here</a>\n😎", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(reply_markup1)) 
             return await req_spell_chok(msg)
         await req_spell_chok(msg) # req_grp spell check 
         return
@@ -80,6 +81,7 @@ async def badreqst(msg, search, client):
         user_query = msg.text
         reply = search.replace('hindi', '').replace(" ", '+')
         reply_markup1 = [[
+                InlineKeyboardButton("🔔 Movies Cheking Group 🌀", url=f"https://t.me/+2xBSNHJ8h4xjZmM1"),],[
                 InlineKeyboardButton("🔍 Check sapling", url=f"https://www.google.com/search?q={reply}+movie"),
                 InlineKeyboardButton("🔍 Release date", url=f"https://www.google.com/search?q={reply}+release+date"),],[
                 InlineKeyboardButton("Updated  ✅",callback_data=f'rq#up#{msg_id}#{user_query}',),
@@ -97,7 +99,7 @@ async def badreqst(msg, search, client):
                 InlineKeyboardButton("Not available",callback_data=f'rq#na#{msg_id}#{user_query}',),],[
                 InlineKeyboardButton("Close",callback_data="close_data"),],] 
 
-        await client.send_message(RQST_CHANNEL, text=f"my bot 👉 <a href=https://t.me/>Click Here</a>\n\nBot 👉 <a href=https://t.me/TPE_Kakashi_Bot>Click Here</a> Bot 2 👉 <a href=https://t.me/ProSearch6Bot>Click Here</a>\n\nGroup 👉 <a href=https://t.me/>Click Here</a>\n\nUser <b>{user_name}</b>\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/foxybotzsupport/{msg_id}>Click Here</a>\n😎", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(reply_markup1))
+        await client.send_message(RQST_CHANNEL, text=f"my bot 👉 <a href=https://t.me/iPapcornPrimeBot>Click Here</a>\n\nGroup 👉 <a href=https://t.me/+2xBSNHJ8h4xjZmM1>Click Here</a>\n\nUser <b>{user_name}</b>\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/iPapdiscussion/{msg_id}>Click Here</a>\n😎", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(reply_markup1))
 
 
 #req_grp spell_check 
