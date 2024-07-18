@@ -193,3 +193,9 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
 </i></b>
 
 """
+
+AK_AKSHAY = """<b>⚠️ 𝐇𝐞𝐲, {}!..</b> 
+<b>sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs ᴡᴇʀᴇ ꜰᴏᴜɴᴅ
+ᴄʜᴇᴄᴋ ʏᴏᴜʀ sᴘᴇʟʟɪɴɢ ɪɴ ɢᴏᴏɢʟᴇ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ
+ʀᴇᴀᴅ ɪɴsᴛʀᴜᴄᴛɪᴏɴs ꜰᴏʀ ʙᴇᴛᴛᴇʀ ʀᴇsᴜʟᴛs ☟</b>"""
+
