@@ -5,11 +5,11 @@ import ast
 import math
 from database.reffer import referdb
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
-from Script import script
+from Script import script, AK_AKSHAY
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
-from info import PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
+from info import PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, RQST_CHANNEL, REQ_GRP, AK_AKSHAY1, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
     SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
 from pyrogram import Client, filters, enums
@@ -41,7 +41,121 @@ async def give_filter(client, message):
             return 
         sts = await message.reply_text("searching...")
         await auto_filter(client, message, sts)
+@Client.on_message(filters.text & filters.incoming &~ filters.chat(REQ_GRP))
+async def give_filter(client, message):
+    k = await manual_filters(client, message)
+    if k == False:
+        await auto_filter(client, message)
 
+@Client.on_message(filters.text & filters.group & filters.incoming & filters.chat(REQ_GRP))
+async def req_grp_results(bot, msg: Message):
+    if msg.text.startswith("/"): return
+    if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", msg.text):
+        return
+    files = None
+    if 2 < len(msg.text) < 100:
+        search = msg.text.replace('movie', '').replace('gujarati', '').replace('gujrati', '').replace('punjabi', '').replace('marathi', '').replace('season', '').replace('web', '').replace('series', '').replace('movies', '').replace('episode', '').replace('Episods', '').replace('dubbed', '').replace('dubb', '').replace('!', '').replace('(', '').replace(')', '').replace(':', '').replace(',', '').replace('dabbed', '') 
+        files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
+
+    if not files:
+
+        # request movie from admin
+        msg_id = msg.id
+        user_id = msg.from_user.id
+        user_name = msg.from_user.mention
+        user_query = msg.text
+        reply = search.replace('hindi', '').replace(" ", '+')
+        reply_markup1 = [
+            [
+                InlineKeyboardButton("🔍 Click here to Check Spilling ✅", url=f"https://www.google.com/search?q={reply}+movie"
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Updated  ✅",
+                    callback_data=f'rq2#up#{msg_id}#{user_query}',
+                ),
+                InlineKeyboardButton(
+                    text="Check Google ✅",
+                    callback_data=f'rq1#au#{msg_id}#{user_query}',
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Not released in OTT yet",
+                    callback_data=f'rq#nr#{msg_id}#{user_query}',
+                ),            
+                InlineKeyboardButton(
+                    text="Not Available in hindi",
+                    callback_data=f'rq#ntaih#{msg_id}#{user_query}',
+                ),    
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Not Dubb in hindi",
+                    callback_data=f'rq#ntdih#{msg_id}#{user_query}',
+                ), 
+                InlineKeyboardButton(
+                    text="original audio",
+                    callback_data=f'rq#ntaik#{msg_id}#{user_query}',
+                ),                       
+
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Already uploaded ✅",
+                    callback_data=f'rq#alupd#{msg_id}#{user_query}',
+                ),
+                InlineKeyboardButton(
+                    text="Go to Google check your spelling",
+                    callback_data=f'rq#cysp#{msg_id}#{user_query}',
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Not released yet",
+                    callback_data=f'rq3#nry#{msg_id}#{user_query}',
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Send imdb Link",
+                    callback_data=f'rq4#simd#{msg_id}#{user_query}',
+                ),
+                InlineKeyboardButton(
+                    text="Not available",
+                    callback_data=f'rq#na#{msg_id}#{user_query}',
+                ),
+            ],
+             [
+                InlineKeyboardButton(
+                    text="Close",
+                    callback_data="close_data"          
+                ),
+            ],
+        ]
+        await bot.send_message(RQST_CHANNEL, text=f"#MW_Request #MovieRequest\n\nGroup 1 👉 <a href=https://t.me/+kXz6EM6q9tMwZjA1>Click Here</a>\n\nGroup 2 👉 <a href=https://t.me/+NuVCnwIihDc5NzY1>Click Here</a>\n\nUser <b>{user_name}</b>\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/iPapdiscussion/{msg_id}>Click Here</a>\n😎", reply_markup=InlineKeyboardMarkup(reply_markup1))
+        user_info = USER_SPELL_CHECK.get(msg.from_user.id)
+        if not user_info or time.time() - user_info >= 60:
+            USER_SPELL_CHECK[msg.from_user.id] = time.time()
+            reply = search.replace('hindi', '').replace(" ", '+')
+            reply_markup = InlineKeyboardMarkup([[
+            InlineKeyboardButton("ɪɴsᴛʀᴜᴄᴛɪᴏɴs", callback_data='inst'),
+            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url="https://t.me/+VSL-2W-eQFJlNGJl")
+            ],[
+            InlineKeyboardButton("🔍 ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴇᴄᴋ sᴘɪʟʟɪɴɢ ✅", url=f"https://www.google.com/search?q={reply}+movie")
+            ]]  
+            )
+            a = await msg.reply_photo(
+                photo=(AK_AKSHAY1),
+                caption=(AK_AKSHAY.format(msg.from_user.mention, search)),
+                reply_markup=reply_markup                 
+            )
+            await asyncio.sleep(30)
+            await a.delete()
+        return
+
+    await msg.reply(f'<b>Dear.</b> {msg.from_user.mention}  \n\n👉 <code>{total_results}</code> 👈 <b>results are already available for your request</b> 👉 <code>{search}</code> 👈 <b>in our bot..\n\n plz Go back our bot and type movie name</b> 👇',  reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔹 Movies Bot 🔹",url="https://t.me/iPapcornPrimeBot"),]]),parse_mode=enums.ParseMode.HTML),
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
@@ -820,6 +934,114 @@ async def cb_handler(client: Client, query: CallbackQuery):
         return await query.answer(url=link)
     
     await query.answer('Piracy Is Crime')
+
+elif query.data.startswith("rq#"):
+        _, status, message_id, user_query = query.data.split("#", maxsplit=3)
+        dict_info = {"alupd":"Already uploaded ✅\n\nplease Bro Search Only movie/Web series Name 🙏\n\nEx. Jawan\nJawan 2023\nLeo 2023\nLeo 2023 Hindi,Tamil\n\nweb series\nLoki S02\nLoki S02E02\nLoki S02 complete,Combined\n\nNot Search 🙏\nin Hindi language\nMovie,season,All Season, web series", "nry":"Not released yet\n\n🙄release hone se pahle dekhega ke chhore🤨", "ntaik":"Hi BRO, I could not find the dubbed file of the language you told me, but we have found its original audio file, we have updated it.", "ntaih":"Not available in Hindi", "ntdih":"Not Dubb in Hindi", "cysp":"Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "simd":"Send imdb link", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "nr":"Not released OTT yet", "na":"Not available"}
+
+        user_message = await client.get_messages(REQ_GRP, int(message_id))
+        user_id = user_message.from_user.id
+        user_mention = (await client.get_users(user_message.from_user.id)).mention
+        search = user_query
+        text = f"Hey {user_mention}... \n\nYour movie 👉 {dict_info[status]}"
+        #reply = search.replace("Kannada", " ").replace("hindi", " ").replace("Malayalam", " ").replace("dubbed", " ").replace("telugu", " ").replace("tamil", " ").replace(" ", "+")
+        #btn = [[
+            #InlineKeyboardButton('testing', url=f'https://www.google.com/search?q={reply}')
+        #]]
+        await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id))  #, reply_markup=InlineKeyboardMarkup(btn))
+        bbb = await query.edit_message_text("Request has been updated")
+        await asyncio.sleep(20)
+        await bbb.delete()    
+
+    elif query.data.startswith("rq1#"):
+        _, status, message_id, user_query = query.data.split("#", maxsplit=3)
+        dict_info = {"au":"Already uploaded ✅\n\nHey bro your movie Already uploaded go to Google check spelling 🔻\n\nCopy the name from Google and paste it in the group"}
+
+        user_message = await client.get_messages(REQ_GRP, int(message_id))
+        user_id = user_message.from_user.id
+        user_mention = (await client.get_users(user_message.from_user.id)).mention
+        search = user_query
+        text = f"Hey {user_mention}... \n\nYour movie 👉 {dict_info[status]}"
+        reply = search.replace("Kannada", " ").replace("hindi", " ").replace("Malayalam", " ").replace("dubbed", " ").replace("telugu", " ").replace("tamil", " ").replace(" ", "+")
+        btn = [[
+            InlineKeyboardButton('🔸 Google 🔸', url=f'https://www.google.com/search?q={reply}+movie')
+        ]]
+        await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))
+        bbb = await query.edit_message_text("Request has been updated")
+        await asyncio.sleep(20)
+        await bbb.delete()      
+
+    elif query.data.startswith("rq2#"):
+        _, status, message_id, user_query = query.data.split("#", maxsplit=3)
+        dict_info = {"alupd":"Already uploaded ✅", "nry":"Not released yet", "ntaik":"Not available in kannada", "ntaih":"Not available in Hindi", "ntdih":"Not Dubb in Hindi", "cysp":"Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "simd":"Send imdb link", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅\n\nHey bro your movie uploaded go to Group and type movie name 🔻", "nr":"Not released OTT yet", "na":"Not available"}
+
+        user_message = await client.get_messages(REQ_GRP, int(message_id))
+        user_id = user_message.from_user.id
+        user_mention = (await client.get_users(user_message.from_user.id)).mention
+        search = user_query
+        text = f"Hey {user_mention}... \n\nYour movie 👉 {dict_info[status]}"
+        
+        btn = [[
+            InlineKeyboardButton('🔹 Group 🔹', url='https://t.me/iPapcornPrimeGroup')
+        ]]
+        await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))
+        bbb = await query.edit_message_text("Request has been updated")
+        await asyncio.sleep(20)
+        await bbb.delete()
+
+    elif query.data.startswith("rq3#"):
+        _, status, message_id, user_query = query.data.split("#", maxsplit=3)
+        dict_info = {"alupd":"Already uploaded ✅", "nry":"Not released yet\n\n🙄 Release hone se pahle dekhega ke Chhore 🤨\n\nClick here to Check Release Date 🔻", "ntaik":"Not available in kannada", "ntaih":"Not available in Hindi", "ntdih":"Not Dubb in Hindi", "cysp":"Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "simd":"Send imdb link", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "nr":"Not released OTT yet", "na":"Not available"}
+
+        user_message = await client.get_messages(REQ_GRP, int(message_id))
+        user_id = user_message.from_user.id
+        user_mention = (await client.get_users(user_message.from_user.id)).mention
+        search = user_query
+        text = f"Hey {user_mention}... \n\nYour movie 👉 {dict_info[status]}"
+        reply = search.replace("Kannada", " ").replace("hindi", " ").replace("Malayalam", " ").replace("dubbed", " ").replace("telugu", " ").replace("tamil", " ").replace(" ", "+")
+        btn = [[
+            InlineKeyboardButton('🔸 Check Release Date 🔸', url=f'https://www.google.com/search?q={reply}+movie+release+date')
+        ]]
+        await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))
+        bbb = await query.edit_message_text("Request has been updated")
+        await asyncio.sleep(20)
+        await bbb.delete()    
+        
+    elif query.data.startswith("rq4#"):
+        _, status, message_id, user_query = query.data.split("#", maxsplit=3)
+        dict_info = {"alupd":"Already uploaded ✅", "nry":"Not released yet", "ntaik":"Not available in kannada", "ntaih":"Not available in Hindi", "ntdih":"Not Dubb in Hindi", "cysp":"Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "simd":"Send imdb link\n\nClick here to generate  imdb link 🔻", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "nr":"Not released OTT yet", "na":"Not available"}
+
+        user_message = await client.get_messages(REQ_GRP, int(message_id))
+        user_id = user_message.from_user.id
+        user_mention = (await client.get_users(user_message.from_user.id)).mention
+        search = user_query
+        text = f"Hey {user_mention}... \n\nYour movie 👉 {dict_info[status]}"
+        reply = search.replace("Kannada", " ").replace("hindi", " ").replace("Malayalam", " ").replace("dubbed", " ").replace("telugu", " ").replace("tamil", " ").replace(" ", "+")
+        btn = [[
+            InlineKeyboardButton('▪️ generate imdb link ▪️', url=f'https://m.imdb.com/find/?q={reply}')
+        ]]
+        await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))
+        bbb = await query.edit_message_text("Request has been updated")
+        await asyncio.sleep(20)
+        await bbb.delete()    
+
+    elif query.data.startswith("direct_gen"):
+        stream, download = await direct_gen_handler(query.message)
+        if download and stream:
+            buttons = [
+                    InlineKeyboardButton(
+                        "➕ ᴏᴘᴇɴ ꜱᴛʀᴇᴀᴍ & ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ ➕",
+                        url=stream,
+                    )
+                  ]  
+
+            query.message.reply_markup = query.message.reply_markup or []
+            # remove the first row
+            query.message.reply_markup.inline_keyboard.pop(0)
+            query.message.reply_markup.inline_keyboard.insert(0, buttons)
+            await query.message.edit_reply_markup(InlineKeyboardMarkup(query.message.reply_markup.inline_keyboard))
+                    
+    await query.answer("Piracy Is Crime")
 
 
 async def auto_filter(client, msg, sts, spoll=False):
