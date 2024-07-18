@@ -22,5 +22,23 @@ async def send_all_files(client, message, files, chat_id, grp_id):
             file_id=file.file_id,
             caption=f_caption,   
             protect_content=False,
-	        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⚡️ fast 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 watch online ⚡️", callback_data=f"stream_link:{file.file_id}:{message.from_user.id}")],]),)
-        
+	        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "⚡️ 𝙁𝙖𝙨𝙩 𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙 / 𝙒𝙖𝙩𝙘𝙝 𝙊𝙣𝙡𝙞𝙣𝙚 ⚡️", callback_data=f"stream_link:{files.file_id}:{message.from_user.id}"
+                    )
+                ],
+                [            
+                   InlineKeyboardButton( 
+                       "🔸 𝗝𝗼𝗶𝗻 𝗠𝗼𝘃𝗶𝗲 𝗚𝗿𝗼𝘂𝗽 🔸", url="https://t.me/iPapcornPrimeGroup"
+                   )
+                ],
+                [
+                    InlineKeyboardButton(
+                        "🔹𝗙𝗼𝗹𝗹𝗼𝘄 𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺🔹", url="https://www.instagram.com/akshaychand10?igsh=OGQ5ZDc2ODk2ZA=="
+                    )
+                ],
+            ]
+        ),
+    )        
