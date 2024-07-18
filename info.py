@@ -114,3 +114,11 @@ NEWGRP = environ.get('NEWGRP',"https://telegra.ph/file/80dc73a6d73bed659cda5.jpg
 GRP_LNK = environ.get('GRP_LNK',"https://t.me/iPapcornPrimeGroup")
 CHNL_LNK = environ.get('CHNL_LNK',"https://t.me/arsOfficial10")
 
+REPLACE_WORDS = (
+    list(os.environ.get("REPLACE_WORDS").split(","))
+    if os.environ.get("REPLACE_WORDS")
+    else []
+)
+
+REPLACE_WORDS=["movies", "Movies", ",", "episode", "Episode", "episodes", "Episodes", "south indian", "South Indian", "web-series", "punjabi", "marathi", "gujrati", "combined", "!", "kro", "jaldi", "bhai", "Audio", "audio", "movi", "language", "Language", "Hollywood", "All", "all", "bollywood", "Bollywood", "South", "south", "hd", "karo", "Karo", "fullepisode", "please", "plz", "Please", "Plz", "send", "link", "Link", "#request", ":", "'", "full", "Full", "movie", "Movie", "dubb", "dabbed", "dubbed", "gujarati", "season", "Season", "web", "series", "Web", "Series", "webseries", "WebSeries", "upload", "HD", "Hd", "bhejo", "ful", "Send", "Bhejo"]
+
