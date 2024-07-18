@@ -179,13 +179,15 @@ async def advantage_spoll_choker(bot, query):
     k = await manual_filters(bot, query.message, text=movie)
     if k == False:
         files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
-        if files: 
-            sts = await query.message.reply_text("searching...")
+        if files:
             k = (movie, files, offset, total_results)
-            await auto_filter(bot, query, sts, k)
-        else:
-            k = await query.message.edit('This Movie Not Found In DataBase')
-            await asyncio.sleep(10)
+            await auto_filter(bot, query, k)
+        else:                
+            btn = [[
+            InlineKeyboardButton('🎖️ ᴀᴅᴍɪɴ 🎖️', url="https://t.me/iPapdiscussion")
+        ]]        
+            k=await query.message.edit('<b>✯ sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs 📂 ᴡᴇʀᴇ ꜰᴏᴜɴᴅ\n\n👇 sᴇɴᴅ ʀᴇǫᴜᴇsᴛ 📩</b>', reply_markup=InlineKeyboardMarkup(btn))    
+            await asyncio.sleep(60)
             await k.delete()
 
 @Client.on_callback_query(filters.regex(r"^reffff"))
