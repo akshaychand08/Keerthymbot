@@ -932,8 +932,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             return await query.answer("🥷 ᴛʜᴀᴛ ɪꜱ ɴᴏᴛ ғᴏʀ ʏᴏᴜʀ ᴘʟᴢ ꜱᴇᴀʀᴄʜ ʏᴏᴜʀ",show_alert=True)
         link = f"https://telegram.me/{temp.U_NAME}?start=sendallfiles_{query.message.chat.id}_{group_id}-{message_id}"
         return await query.answer(url=link)
-    
-    await query.answer('Piracy Is Crime')
+        return
 
 elif query.data.startswith("rq#"):
         _, status, message_id, user_query = query.data.split("#", maxsplit=3)
