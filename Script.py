@@ -162,16 +162,16 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
 
     PREMIUM_TEXT = """<b><i><u> 🌟 ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs 🌟</u></i></b>
 
-1.   🚀 <b>One Day Plan</b> - ₹15  
+1.   🚀 <b>One Day Plan</b> - ₹9  
    (Plan Benefits) ⬅️
 
-2. 🥉 <b>Bronze</b> - ₹50/1 Month  
+2. 🥉 <b>Bronze</b> - ₹49/1 Month  
    (Plan Benefits) ⬅️
 
 3. 🥈 <b>Silver</b> - ₹99/2 Months  
    (Plan Benefits) ⬅️
 
-4. 🥇 <b>Gold</b> - ₹150/3 Months  
+4. 🥇 <b>Gold</b> - ₹149/3 Months  
    (Plan Benefits) ⬅️
 
 5. 🟣 <b>Platinum</b> - ₹299/6 Months  
@@ -199,14 +199,6 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
 </i></b>
 
 """
-
-CAPTION = """
-🗂 𝗙𝗶𝗹𝗲: <b><font class=smcp>{file_name}</font></b>
-📀 𝗦𝗶𝘇𝗲: <b><font class=smcp>{file_size}</font></b>
-
-<b>━━━━━━━━━━━━━
-@Gojo_AutoFMbot 💙⃤
-━━━━━━━━━━━━━</a></b>"""
 
 FILE_CAP = """
 ғɪʟᴇ ɴᴀᴍᴇ:- <code>{}</code>
