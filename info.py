@@ -104,7 +104,7 @@ CAPTION_LANGUAGES = {
 }
 
 # movie request 
-REQ_GRP = int(environ.get('REQ_GRP', '-1001878519368'))
+REQ_GRP = int(environ.get('REQ_GRP', '-1002212545592'))
 RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1001682547846'))
 PHTT = environ.get("PHTT", "https://te.legra.ph/file/35fa6c385e82acbc6f91d.jpg")
 AK_AKSHAY1 = environ.get("AK_AKSHAY1", "https://te.legra.ph/file/5e5642bd79e75bb519ea3.jpg")
