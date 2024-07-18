@@ -142,7 +142,7 @@ async def req_grp_results(bot, msg: Message):
             )
             a = await msg.reply_photo(
                 photo=(AK_AKSHAY1),
-                caption=script.AK_AKSHAY.format(msg.from_user.mention, search)),
+                caption=script.AK_AKSHAY.format(msg.from_user.mention, search),
                 reply_markup=reply_markup                 
             )
             await asyncio.sleep(30)
