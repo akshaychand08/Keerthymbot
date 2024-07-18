@@ -1024,7 +1024,7 @@ async def auto_filter(client, msg, sts, spoll=False):
     btn.insert(0,
         [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])        
 
-    cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: <a href=https://t.me/{temp.U_NAME}>{temp.B_NAME}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
+    cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: {message.chat.title}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
     dl = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
     
 async def advantage_spell_chok(msg, sts):
