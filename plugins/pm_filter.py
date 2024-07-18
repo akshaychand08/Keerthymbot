@@ -934,7 +934,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         return await query.answer(url=link)
         return
 
-elif query.data.startswith("rq#"):
+    elif query.data.startswith("rq#"):
         _, status, message_id, user_query = query.data.split("#", maxsplit=3)
         dict_info = {"alupd":"Already uploaded ✅\n\nplease Bro Search Only movie/Web series Name 🙏\n\nEx. Jawan\nJawan 2023\nLeo 2023\nLeo 2023 Hindi,Tamil\n\nweb series\nLoki S02\nLoki S02E02\nLoki S02 complete,Combined\n\nNot Search 🙏\nin Hindi language\nMovie,season,All Season, web series", "nry":"Not released yet\n\n🙄release hone se pahle dekhega ke chhore🤨", "ntaik":"Hi BRO, I could not find the dubbed file of the language you told me, but we have found its original audio file, we have updated it.", "ntaih":"Not available in Hindi", "ntdih":"Not Dubb in Hindi", "cysp":"Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "simd":"Send imdb link", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "nr":"Not released OTT yet", "na":"Not available"}
 
