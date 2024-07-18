@@ -42,7 +42,8 @@ async def stream_link(client, query):
      stream = f"{GEN_URL}watch/{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
      download = f"{GEN_URL}{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
      if await db.has_premium_access(int(user_id)): 
-         btn = [InlineKeyboardButton("⚡️ғᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ ⚡️", url=download,), InlineKeyboardButton("🖥 ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥", url=stream,)]
+         btn = [InlineKeyboardButton("⚡️ғᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ ⚡️", url=download,), InlineKeyboardButton("🖥 ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥", url=stream,),
+         ],[InlineKeyboardButton("ᴡᴀᴛᴄʜ ɪɴ ᴡᴇʙ ᴀᴘᴘ", web_app=WebAppInfo(url=stream))]
          return await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
      else:
          await query.answer("processing...") 
