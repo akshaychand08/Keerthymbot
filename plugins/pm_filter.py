@@ -31,6 +31,13 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 
+@Client.on_message(filters.private & filters.text & filters.incoming)
+async def pm_search(client, message):
+    manual = await manual_filters(client, message)
+    if manual == False: 
+        sts = await message.reply_text("searching...")
+        await auto_filter(client, message, sts)
+
 
 @Client.on_message(filters.group & filters.text & filters.incoming & ~filters.chat(REQ_GRP))
 async def give_filter(client, message):
