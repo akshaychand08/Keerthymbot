@@ -11,14 +11,14 @@ import random
 import contextlib
 import asyncio
 from .Premium import add_premium
-from Script import script
+from Script import script, FILE_CAP
 from pyrogram import Client, filters, enums
 from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
 from info import TUTORIAL_LINK, VR_COM_photo, VR_LOG, CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
-from utils import get_shortlinks, get_settings, get_size, is_subscribed, save_group_settings, temp
+from utils import replace_username, get_shortlinks, get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
 import json
@@ -309,7 +309,7 @@ async def start(client:Client, message):
     await client.send_cached_media(
         chat_id=message.from_user.id,
         file_id=file_id,
-        caption=f_caption,
+        caption=replace_username(FILE_CAP.format(title, size, message.from_user.mention, temp.U_NAME, temp.B_NAME)),
         protect_content=True if pre == 'filep' else False,
 	    reply_markup=InlineKeyboardMarkup(
             [
