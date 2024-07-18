@@ -130,9 +130,9 @@ async def req_grp_results(bot, msg: Message):
             ],
         ]
         await bot.send_message(RQST_CHANNEL, text=f"#MW_Request #MovieRequest\n\nGroup 1 👉 <a href=https://t.me/+kXz6EM6q9tMwZjA1>Click Here</a>\n\nGroup 2 👉 <a href=https://t.me/+NuVCnwIihDc5NzY1>Click Here</a>\n\nUser <b>{user_name}</b>\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/iPapdiscussion/{msg_id}>Click Here</a>\n😎", reply_markup=InlineKeyboardMarkup(reply_markup1))
-        user_info = USER_SPELL_CHECK.get(msg.from_user.id)
+        user_info = SPELL_CHECK.get(msg.from_user.id)
         if not user_info or time.time() - user_info >= 60:
-            USER_SPELL_CHECK[msg.from_user.id] = time.time()
+            SPELL_CHECK[msg.from_user.id] = time.time()
             reply = search.replace('hindi', '').replace(" ", '+')
             reply_markup = InlineKeyboardMarkup([[
             InlineKeyboardButton("ɪɴsᴛʀᴜᴄᴛɪᴏɴs", callback_data='inst'),
