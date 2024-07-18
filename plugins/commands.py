@@ -6,6 +6,7 @@ from database.reffer import referdb
 from datetime import datetime
 import logging
 from database.verify_db import vr_db 
+from .pm_filter import auto_filter
 import random
 import contextlib
 import asyncio
