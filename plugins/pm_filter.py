@@ -864,7 +864,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         text = f"Hey {user_mention}... \n\nYour movie 👉 {dict_info[status]}"
         if status == "up":  
           btn = [[
-            InlineKeyboardButton('🔹 search 🔹', url=f"https://t.me/movies_house_789_bot")
+            InlineKeyboardButton('🔹 search 🔹', url=f"https://t.me/iPapcornPrimeGroup")
           ]]
           await client.send_message(REQ_GRP, text, reply_to_message_id=int(message_id), reply_markup=InlineKeyboardMarkup(btn))
           bbb = await query.edit_message_text("Request has been updated")
@@ -1024,10 +1024,7 @@ async def auto_filter(client, msg, sts, spoll=False):
 
     cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: <a href=https://t.me/{temp.U_NAME}>{temp.B_NAME}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
     dl = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
-    await asyncio.sleep(300)
-    await dl.delete()  
-
-
+    
 async def advantage_spell_chok(msg, sts):
     user = msg.from_user.id if msg.from_user else 0
     query = re.sub(
