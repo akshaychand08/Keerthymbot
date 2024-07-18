@@ -200,8 +200,11 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
 
 """
 
-AK_AKSHAY = """<b>⚠️ 𝐇𝐞𝐲, {}!..</b> 
-<b>sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs ᴡᴇʀᴇ ꜰᴏᴜɴᴅ
-ᴄʜᴇᴄᴋ ʏᴏᴜʀ sᴘᴇʟʟɪɴɢ ɪɴ ɢᴏᴏɢʟᴇ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ
-ʀᴇᴀᴅ ɪɴsᴛʀᴜᴄᴛɪᴏɴs ꜰᴏʀ ʙᴇᴛᴛᴇʀ ʀᴇsᴜʟᴛs ☟</b>"""
+CAPTION = """
+🗂 𝗙𝗶𝗹𝗲: <b><font class=smcp>{file_name}</font></b>
+📀 𝗦𝗶𝘇𝗲: <b><font class=smcp>{file_size}</font></b>
+
+<b>━━━━━━━━━━━━━
+@Gojo_AutoFMbot 💙⃤
+━━━━━━━━━━━━━</a></b>"""
 
