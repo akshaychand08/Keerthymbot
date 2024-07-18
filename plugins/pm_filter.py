@@ -1018,23 +1018,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
         bbb = await query.edit_message_text("Request has been updated")
         await asyncio.sleep(20)
         await bbb.delete()    
-
-    elif query.data.startswith("direct_gen"):
-        stream, download = await direct_gen_handler(query.message)
-        if download and stream:
-            buttons = [
-                    InlineKeyboardButton(
-                        "➕ ᴏᴘᴇɴ ꜱᴛʀᴇᴀᴍ & ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ ➕",
-                        url=stream,
-                    )
-                  ]  
-
-            query.message.reply_markup = query.message.reply_markup or []
-            # remove the first row
-            query.message.reply_markup.inline_keyboard.pop(0)
-            query.message.reply_markup.inline_keyboard.insert(0, buttons)
-            await query.message.edit_reply_markup(InlineKeyboardMarkup(query.message.reply_markup.inline_keyboard))
-                    
     await query.answer("Piracy Is Crime")
 
 
