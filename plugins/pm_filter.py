@@ -10,7 +10,7 @@ from Script import script
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
-from info import REQ_GRP, PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
+from info import RQST_CHANNEL, REQ_GRP, PREMIUM_PIC, USERNAME, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
     SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto, Message 
 from pyrogram import Client, filters, enums
