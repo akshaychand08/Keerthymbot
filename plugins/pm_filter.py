@@ -5,7 +5,7 @@ import ast
 import math
 from database.reffer import referdb
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
-from Script import script AK_AKSHAY
+from Script import script 
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
@@ -142,7 +142,7 @@ async def req_grp_results(bot, msg: Message):
             )
             a = await msg.reply_photo(
                 photo=(AK_AKSHAY1),
-                caption=(AK_AKSHAY.format(msg.from_user.mention, search)),
+                caption=script.AK_AKSHAY.format(msg.from_user.mention, search)),
                 reply_markup=reply_markup                 
             )
             await asyncio.sleep(30)
