@@ -30,25 +30,16 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 
-
-@Client.on_message(filters.group | filters.private & filters.text & filters.incoming)
-async def give_filter(client, message):
-    k = await manual_filters(client, message)
-    if k == False: 
-        if message.text.startswith("/"): return
-        if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text): 
-            await message.delete()
-            return 
-        sts = await message.reply_text("searching...")
-        await auto_filter(client, message, sts)
-
-
-
 @Client.on_message(filters.text & filters.incoming &~ filters.chat(REQ_GRP))
 async def give_filter(client, message):
     k = await manual_filters(client, message)
     if k == False:
-        await auto_filter(client, message)
+        if message.text.startswith("/"): return
+        if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text): 
+            await message.delete()
+            return        
+        sts = await message.reply_text("searching...")
+        await auto_filter(client, message, sts)
 
 @Client.on_message(filters.text & filters.group & filters.incoming & filters.chat(REQ_GRP))
 async def req_grp_results(bot, msg: Message):
