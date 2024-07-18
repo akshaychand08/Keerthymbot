@@ -103,7 +103,7 @@ CAPTION_LANGUAGES = {
 }
 
 # movie request 
-REQ_GRP = int(environ.get('REQ_GRP', '-1002212545592'))
+REQ_GRP = int(environ.get('REQ_GRP', '-1001878519368'))
 RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1001682547846'))
 
 # Welcome area
