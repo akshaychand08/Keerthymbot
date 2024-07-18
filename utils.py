@@ -1,6 +1,6 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import API, SITE, AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, REPLACE_WORDS
+from info import BLACKLIST_WORDS, API, SITE, AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, REPLACE_WORDS
 from imdb import Cinemagoer
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
@@ -430,3 +430,14 @@ async def replace_words(string):
     big_regex = re.compile(r'(\s?(' + '|'.join(map(re.escape, prohibitedWords)) + r')\b\s?)|(\s?\b(' + '|'.join(map(re.escape, prohibitedWords)) + r')\s?)')
     formatted = big_regex.sub(lambda match: match.group().replace(match.group(2) or match.group(4), ""), string)
     return formatted.replace("-"," ")
+
+def replace_username(text):
+    prohibitedWords = BLACKLIST_WORDS
+    big_regex = re.compile('|'.join(map(re.escape, prohibitedWords)))
+    text = big_regex.sub("", text)
+
+    usernames = re.findall("([@][A-Za-z0-9_]+)", text)
+    for i in usernames:
+        text = text.replace(i, "")
+
+    return text
