@@ -31,7 +31,7 @@ async def send_all_files(client, message, files, chat_id, grp_id):
                 ],
                 [            
                    InlineKeyboardButton( 
-                       "🔸 𝗝𝗼𝗶𝗻 𝗠𝗼𝘃𝗶𝗲 𝗚𝗿𝗼𝘂𝗽 🔸", url="https://t.me/iPapcornPrimeGroup"
+                       "🔸Movies Update Channel🔸", url="https://t.me/+DkozCPNwxxJmMjFl"
                    )
                 ],
                 [
