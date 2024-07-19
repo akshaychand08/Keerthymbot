@@ -162,42 +162,37 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
 
     PREMIUM_TEXT = """<b><i><u> 🌟 ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs 🌟</u></i></b>
 
-1.   🚀 <b>One Day Plan</b> - ₹9  
-   (Plan Benefits) ⬅️
+* At Rs.9    -  1 day
+* At Rs.25   -  15 day
+* At Rs.49   -  1 month 
+* At Rs.99   -  2 months
+* At Rs.149  -  3 months
+* At Rs.199  -  4 months
+* At Rs.239  -  5 months
+* At Rs.299  -  6 months
 
-2. 🥉 <b>Bronze</b> - ₹49/1 Month  
-   (Plan Benefits) ⬅️
 
-3. 🥈 <b>Silver</b> - ₹99/2 Months  
-   (Plan Benefits) ⬅️
+* Premium Plan Benefits:
 
-4. 🥇 <b>Gold</b> - ₹149/3 Months  
-   (Plan Benefits) ⬅️
+*  No need verify
+*  fast download 
+*  watch online
+*  Movies (Original Prints And Theatre Prints)
+*  unlimited request for movies no limit 
+*  all Tv shows 
+*  direct files no links
 
-5. 🟣 <b>Platinum</b> - ₹299/6 Months  
-   (Plan Benefits) ⬅️
+click to check your activ plan- /myplan
 
-6. 💎 <b>Diamond</b> - ₹499/1 Year  
-   (Plan Benefits) ⬅️
+* Payment methods:
 
-7. 🔥 <b>SuparMax Lifetime</b> - ₹1299  
-   (Plan Benefits) ❤️‍🔥
+* UPI ID :  <code>akshaychand10@ybl</code>
 
-<u>🎁 ᴘʀᴇᴍɪᴜᴍ ꜰᴇᴀᴛᴜʀᴇs 🎁</u>
+* (Tap to Copy) [Supports All Apps Like Google pay, Phone pay, Paytm]
 
-- ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴠᴇʀɪꜰʏ
-- ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋ
-- ᴅɪʀᴇᴄᴛ ꜰɪʟᴇs   
-- ᴀᴅ-ꜰʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
-- ʜɪɢʜ-sᴘᴇᴇᴅ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ                         
-- ᴍᴜʟᴛɪ-ᴘʟᴀʏᴇʀ sᴛʀᴇᴀᴍɪɴɢ ʟɪɴᴋs                           
-- ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs & sᴇʀɪᴇs                                                                         
-- ꜰᴜʟʟ ᴀᴅᴍɪɴ sᴜᴘᴘᴏʀᴛ                              
+* Must Take a Screenshot after Payment and Send it to @akshaychand08 To Activate Your Subscription
 
-📞 <b>Contact Admin for Premium</b>  
-<i><b>Need a customized plan or more information? Click the button below to contact Owner and get premium access!
-</i></b>
-
+* Contact: @akshaychand08 for Any Doubts and Clarification
 """
 
 FILE_CAP = """
