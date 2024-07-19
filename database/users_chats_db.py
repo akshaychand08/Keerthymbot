@@ -278,5 +278,11 @@ class Database:
             {"id": user_id}, {"$set": {"expiry_time": None}}
         ) 
 
+    async def get_premium_users(self):
+        current_time = datetime.datetime.now()
+        premium_users = []
+        async for user in self.users.find({"expiry_time": {"$gt": current_time}}):
+            premium_users.append(user)
+        return premium_users
 
 db = Database(DATABASE_URI, DATABASE_NAME)
