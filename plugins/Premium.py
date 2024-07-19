@@ -123,28 +123,30 @@ async def give_premium_cmd_handler(client, message):
     else:
         await message.reply_text("Usage: /add_premium user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
 
+
 @Client.on_message(filters.command("premium_users") & filters.user(ADMINS))
 async def premium_user(client, message):
     aa = await message.reply_text("Fetching ...")  
-    users = await db.get_all_users()
-    users_list = []
-    async for user in users:
-        users_list.append(user)    
-    user_data = {user['id']: await db.get_user(user['id']) for user in users_list}    
+
+    premium_users = await db.get_premium_users()
+
     new_users = []
-    for user in users_list:
+    for user in premium_users:
         user_id = user['id']
-        data = user_data.get(user_id)
-        expiry = data.get("expiry_time") if data else None        
+        expiry = user.get("expiry_time")
+        
         if expiry:
             expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
-            expiry_str_in_ist = expiry_ist.strftime("%d-%m-%Y %I:%M:%S %p")          
+            expiry_str_in_ist = expiry_ist.strftime("%d-%m-%Y %I:%M:%S %p")
+            
             current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
             time_left = expiry_ist - current_time
             days, remainder = divmod(time_left.total_seconds(), 86400)
             hours, remainder = divmod(remainder, 3600)
-            minutes, _ = divmod(remainder, 60)            
-            time_left_str = f"{int(days)} days, {int(hours)} hours, {int(minutes)} minutes"            
+            minutes, _ = divmod(remainder, 60)
+            
+            time_left_str = f"{int(days)} days, {int(hours)} hours, {int(minutes)} minutes"
+            
             user_info = await client.get_users(user_id)
             user_str = (
                 f"{len(new_users) + 1}. User ID: {user_id}\n"
@@ -153,7 +155,9 @@ async def premium_user(client, message):
                 f"Expiry Time: {time_left_str}\n\n"
             )
             new_users.append(user_str)
-    new = "Paid Users - \n\n" + "\n".join(new_users)   
+    
+    new = "Paid Users - \n\n" + "\n".join(new_users)
+    
     try:
         await aa.edit_text(new)
     except MessageTooLong:
