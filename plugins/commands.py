@@ -320,7 +320,7 @@ async def start(client:Client, message):
                 ],
                 [            
                    InlineKeyboardButton( 
-                       "🔸 𝗝𝗼𝗶𝗻 𝗠𝗼𝘃𝗶𝗲 𝗚𝗿𝗼𝘂𝗽 🔸", url="https://t.me/iPapcornPrimeGroup"
+                       "🔸Movies Update Channel🔸", url="https://t.me/+DkozCPNwxxJmMjFl"
                    )
                 ],
                 [
