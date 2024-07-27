@@ -1012,7 +1012,7 @@ async def auto_filter(client, msg, sts, spoll=False):
         )
     else:
         btn.append(
-            [InlineKeyboardButton(text="🗓 1/1", callback_data="pages")]
+            [InlineKeyboardButton(text="📝 ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs ᴀᴠᴀɪʟᴀʙʟᴇ 🗒️", callback_data="pages")]
         )
     key = f"{message.chat.id}-{message.id}"
     req = message.from_user.id if message.from_user else 0 
