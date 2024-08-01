@@ -205,4 +205,6 @@ FILE_CAP = """
 ʀᴇǫᴜᴇꜱᴛᴇᴅ ʙʏ:- {}
 
 ᴘᴏᴡᴇʀᴇᴅ ʙʏ: <spoiler><a href=https://t.me/{}>{}</a></spoiler>
+
+🔔 Click for plan details: <b>/plan</b> To direct downloading link without ads.
 """
