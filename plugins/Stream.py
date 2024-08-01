@@ -3,7 +3,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 from urllib.parse import quote_plus
 import os, asyncio
 from database.users_chats_db import db 
-from utils import temp
+from utils import temp, get_shortlinks
 from typing import Any
 from info import BIN_CHANNEL, GEN_URL
 from urllib.parse import quote_plus
@@ -42,12 +42,11 @@ async def stream_link(client, query):
      stream = f"{GEN_URL}watch/{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
      download = f"{GEN_URL}{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
      if await db.has_premium_access(int(user_id)): 
-         btn = [InlineKeyboardButton("⚡️ғᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ ⚡️", url=download,), InlineKeyboardButton("🖥 ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥", url=stream,),
-         ],[InlineKeyboardButton("ᴡᴀᴛᴄʜ ɪɴ ᴡᴇʙ ᴀᴘᴘ", web_app=WebAppInfo(url=stream))]
-         return await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
+       download = download
+       stream = stream
      else:
-         await query.answer("processing...") 
-         msg = await query.message.reply(f"Hay bro this features only available in Premium user\n\nYou can go premium if you want access to it.\n\nClick on the /plan to know the premium price")
-         await asyncio.sleep(120)
-         await msg.delete()
-         return
+       stream = await get_shortlinks(stream, stream_url=True)
+       download = await get_shortlinks(download, stream_url=True) 
+     btn = [InlineKeyboardButton("⚡️ғᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ ⚡️", url=download,), InlineKeyboardButton("🖥 ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥", url=stream,),
+     ],[InlineKeyboardButton("ᴡᴀᴛᴄʜ ɪɴ ᴡᴇʙ ᴀᴘᴘ", web_app=WebAppInfo(url=stream))]
+     return await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
