@@ -1,6 +1,6 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import BLACKLIST_WORDS, API, SITE, AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, REPLACE_WORDS
+from info import STREAM_API, STREAM_SITE, BLACKLIST_WORDS, API, SITE, AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, REPLACE_WORDS
 from imdb import Cinemagoer
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
@@ -417,13 +417,21 @@ async def get_seconds(time_string):
     else:
         return 0
 
-async def get_shortlinks(url):
-    shortzy = Shortzy(API, SITE)
-    try:
+async def get_shortlinks(url, stream_url=False): 
+    if not stream_url:
+      shortzy = Shortzy(API, SITE)
+      try:
         url = await shortzy.convert(url)
-    except Exception as e:
+      except Exception as e:
         url = await shortzy.get_quick_link(url)
-    return url
+      return url
+    else:
+      shortzy = Shortzy(STREAM_API, STREAM_SITE)
+      try:
+        url = await shortzy.convert(url)
+      except Exception as e:
+        url = await shortzy.get_quick_link(url)
+      return url
 
 async def replace_words(string):
     prohibitedWords = REPLACE_WORDS
