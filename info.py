@@ -77,6 +77,9 @@ TUTORIAL_LINK = "https://t.me/HoW_ToOpEn/42"
 API = "16fe63613f0c168ed1cd899307368200c968b963"
 SITE = "publicearn.com"
 
+STREAM_API = ""
+STREAM_SITE = ""
+
 IS_SHORTLINK = is_enabled((environ.get('IS_SHORTLINK', "True")), True)
 
 SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
