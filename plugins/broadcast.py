@@ -46,19 +46,20 @@ async def verupikkals(bot, message):
     # Run the update_status coroutine concurrently with the broadcasting
     update_task = asyncio.create_task(update_status())
 
-    for res in await asyncio.gather(*tasks, return_exceptions=True):
-        if isinstance(res, Exception):
-            logging.error(f"Error in task: {res}")
-            continue
-        success1, blocked1, deleted1, failed1, done1 = res
-        done += done1
-        blocked += blocked1
-        deleted += deleted1
-        failed += failed1
-        success += success1
-
-    # Ensure the update_status task finishes
-    await update_task
+    try:
+        for res in await asyncio.gather(*tasks, return_exceptions=True):
+            if isinstance(res, Exception):
+                logging.error(f"Error in task: {res}")
+                continue
+            success1, blocked1, deleted1, failed1, done1 = res
+            done += done1
+            blocked += blocked1
+            deleted += deleted1
+            failed += failed1
+            success += success1
+    finally:
+        # Ensure the update_status task finishes
+        await update_task
 
     time_taken = datetime.timedelta(seconds=int(time.time() - start_time))
     await sts.edit(f"Broadcast Completed:\nCompleted in {time_taken} seconds.\n\nTotal Users {total_users}\nCompleted: {done} / {total_users}\nSuccess: {success}\nBlocked: {blocked}\nDeleted: {deleted}")
