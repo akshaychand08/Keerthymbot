@@ -179,9 +179,10 @@ async def advantage_spoll_choker(bot, query):
     k = await manual_filters(bot, query.message, text=movie)
     if k == False:
         files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
-        if files:
+        if files: 
+            sts = False
             k = (movie, files, offset, total_results)
-            await auto_filter(bot, query, k)
+            await auto_filter(bot, query, sts, k)
         else:                
             btn = [[
             InlineKeyboardButton('🎖️ ᴀᴅᴍɪɴ 🎖️', url="https://t.me/iPapdiscussion")
@@ -969,7 +970,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     await query.answer('Piracy Is Crime')
 
 
-async def auto_filter(client, msg, sts, spoll=False):
+async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     if not spoll:
         message = msg
         settings = await get_settings(message.chat.id)
@@ -989,7 +990,6 @@ async def auto_filter(client, msg, sts, spoll=False):
     else:
         settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
-        await msg.message.delete()
         search, files, offset, total_results = spoll
     pre = 'filep' if settings['file_secure'] else 'file'
     grp_id = message.chat.id 
@@ -1021,8 +1021,13 @@ async def auto_filter(client, msg, sts, spoll=False):
         [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])        
 
     cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: {message.chat.title}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
-    dl = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
-    
+    if edit_message:
+      await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+    else:
+      await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
+    if spoll:
+        await msg.message.delete()
+        
 async def advantage_spell_chok(msg, sts):
     user = msg.from_user.id if msg.from_user else 0
     query = re.sub(
