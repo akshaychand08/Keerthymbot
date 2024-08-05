@@ -70,7 +70,7 @@ PREMIUM_PIC = "https://te.legra.ph/file/cce073dc85850f2c63bfa.jpg"
 USERNAME = "https://t.me/akshaychand08"
 
 VR_COM_photo = "https://telegra.ph/file/a00c405a374d21ea7cfb7.jpg"
-VR_LOG = "-1001504153078"
+VR_LOG = "-1002199851318"
 
 TUTORIAL_LINK = "https://t.me/HoW_ToOpEn/42"
 
