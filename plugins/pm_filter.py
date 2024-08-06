@@ -182,7 +182,7 @@ async def advantage_spoll_choker(bot, query):
         if files: 
             sts = False
             k = (movie, files, offset, total_results)
-            await auto_filter(bot, query, sts, k)
+            await auto_filter(bot, query, sts, k, edit_message=query.message)
         else:                
             btn = [[
             InlineKeyboardButton('🎖️ ᴀᴅᴍɪɴ 🎖️', url="https://t.me/iPapdiscussion")
