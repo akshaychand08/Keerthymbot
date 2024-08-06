@@ -271,8 +271,11 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("send all", callback_data=batch_link)])  
     
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
-    
-    await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
+    try:    
+        await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
+    except MessageNotModified:
+        pass
+    await query.answer()
 
 @Client.on_callback_query(filters.regex(r"^lang_next"))
 async def lang_next_page(bot, query):
@@ -328,8 +331,12 @@ async def lang_next_page(bot, query):
         ) 
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
     btn.insert(0,
-        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])      
-    await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
+        [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)]) 
+    try:
+        await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
+    except MessageNotModified:
+        pass
+    await query.answer()
                                           
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
