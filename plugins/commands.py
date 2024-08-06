@@ -51,7 +51,7 @@ async def start(client:Client, message):
         current_time = time_zone.strftime("%I:%M:%S %p")     
         await client.send_message(VR_LOG, script.VR_LOG_COM_TXT.format(m.from_user.mention, user_id, current_time, current_date)) 
 
-        dmm = await m.reply_photo(
+        await m.reply_photo(
         photo=(VR_COM_photo), 
         caption=(script.COM_TXT.format(message.from_user.mention)), 
         reply_markup=InlineKeyboardMarkup(buttons),parse_mode=enums.ParseMode.HTML)
