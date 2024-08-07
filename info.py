@@ -130,3 +130,8 @@ BLACKLIST_WORDS = (
     else []
 )
 BLACKLIST_WORDS = ["[D&O]", "Telegram @  Studios", "[MM]", "[]", "[FC]", "[CF]", "LinkZz", "[DFBC]", "@malangmovie", "@AkPictureOfficial", "@mxplayer", "@New_Movie", "@Infinite_Movies2", "MM", "@R A R B G", "[F&T]", "[KMH]", "[DnO]", "[F&T]", "MLM", "@TM_LMO", "@x265_E4E", "@HEVC MoviesZ", "SSDMovies", "@MM Linkz", "[CC]", "@Mallu_Movies", "@DK Drama", "@luxmv_Linkz", "@Akw_links", "CK HEVC", "@Team_HDT", "[CP]", "www 1TamilMV men", "www TamilRockers", "@MM", "@mm", "[MW]", "@TN68 Linkzz", "@Clipmate_Movie", "[MASHOBUC]", "Official TheMoviesBoss", "www CineVez one", "www 7MovieRulz lv", "DCENIMAS", "Eliteflix Official", "@desimovies", "movieworldkdy", "www 1TamilMV vip"]
+
+NEWGRP = environ.get('NEWGRP',"https://telegra.ph/file/80dc73a6d73bed659cda5.jpg")
+GRP_LNK = environ.get('GRP_LNK',"https://t.me/iPapcornPrimeGroup")
+CHNL_LNK = environ.get('CHNL_LNK',"https://t.me/arsOfficial10")
+
