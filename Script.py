@@ -208,3 +208,20 @@ FILE_CAP = """
 
 🔔 Click for plan details: <b>/plan</b> To direct downloading link without ads.
 """
+
+ADMIN_STATUS_TXT = """
+➢ {}
+➢ {}
+➢ {}
+➢ {}
+➢ {}
+➢ {}"""
+
+UNBANP_LOG_TXT = """<b>⍟ UɴBᴀɴɴᴇᴅ Usᴇʀ Lᴏɢs ⍟</b>
+
+<b>Aᴅᴍɪɴ :</b> </b> <b>{}</b>
+
+<b>Nᴀᴍᴇ :</b> <b>{}</b>
+
+<b>⍟ #UnBannedUser ⍟</b>
+"""
