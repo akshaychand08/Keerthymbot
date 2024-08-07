@@ -209,13 +209,25 @@ FILE_CAP = """
 🔔 Click for plan details: <b>/plan</b> To direct downloading link without ads.
 """
 
-ADMIN_STATUS_TXT = """
-➢ {}
-➢ {}
-➢ {}
-➢ {}
-➢ {}
-➢ {}"""
+ADMIN_STATUS_TXT = """<b>⍟────[ ʙᴏᴛ sᴛᴀᴛᴜ𝗌 ]────⍟</b>
+
+<b>⏳ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ:</b> <code>{}</code>
+
+<b>☣️ ᴄᴘᴜ:</b> <code>{}%</code>
+
+<b>☢️ ʀᴀᴍ:</b> <code>{}%</code>
+
+<b>📊 ғɪʟᴇs sᴀᴠᴇᴅ:</b> <code>{}</code>
+
+<b>👤 ᴜsᴇʀs:</b> <code>{}</code>
+
+<b>👥 ɢʀᴏᴜᴘs:</b> <code>{}</code>
+
+<b>♻️ ᴛᴏᴛᴀʟ:</b> <code>512 MB</code>
+
+<b>🉐 ᴏᴄᴄᴜᴘɪᴇᴅ:</b> <code>{}</code>
+
+<b>🆓 ғʀᴇᴇ:</b> <code>{}</code>"""
 
 UNBANP_LOG_TXT = """<b>⍟ UɴBᴀɴɴᴇᴅ Usᴇʀ Lᴏɢs ⍟</b>
 
