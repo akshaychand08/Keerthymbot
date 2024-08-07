@@ -225,3 +225,14 @@ UNBANP_LOG_TXT = """<b>⍟ UɴBᴀɴɴᴇᴅ Usᴇʀ Lᴏɢs ⍟</b>
 
 <b>⍟ #UnBannedUser ⍟</b>
 """
+
+BANG_LOG_TXT = """<b>⍟ Bᴀɴɴᴇᴅ Gʀᴏᴜᴘ Lᴏɢs ⍟</b>
+
+<b>Cʜᴀᴛ ID :</b> <code>{}</code>
+
+<b>Rᴇᴀsᴏɴ :</b> <code>{}</code>
+
+<b>Aᴅᴍɪɴ :</b> </b> <b>{}</b>
+
+<b>⍟ #BannedGroup ⍟</b>
+"""
