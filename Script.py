@@ -206,7 +206,7 @@ FILE_CAP = """
 
 ᴘᴏᴡᴇʀᴇᴅ ʙʏ: <spoiler><a href=https://t.me/{}>{}</a></spoiler>
 
-🔔 Click for plan details: <b>/plan</b> To direct downloading link without ads.
+Fast Download and stream start the bot and forward Files and get Fast Download link  <b>Start <a href=https://t.me/MPlaylink_New_Storage_Bot>Stream bot </a></b>.
 """
 
 ADMIN_STATUS_TXT = """<b>⍟────[ ʙᴏᴛ sᴛᴀᴛᴜ𝗌 ]────⍟</b>
