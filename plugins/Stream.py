@@ -39,7 +39,7 @@ def get_name(media_msg: Message) -> str:
 async def stream_link(client, query):
      _, file_id, user_id = query.data.split(":")
      msg = await client.send_cached_media(chat_id=int(BIN_CHANNEL),file_id=file_id,) 
-     stream = f"{GEN_URL}watch/{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
+     stream = f"{GEN_URL}watch/{get_hash(log_msg)}{log_msg.id}"
      download = f"{GEN_URL}{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
      if await db.has_premium_access(int(user_id)): 
        download = download
@@ -47,6 +47,6 @@ async def stream_link(client, query):
      else:
        stream = await get_shortlinks(stream, stream_url=True)
        download = await get_shortlinks(download, stream_url=True) 
-     btn = [InlineKeyboardButton("⚡️ғᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ ⚡️", url=download,), InlineKeyboardButton("🖥 ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥", url=stream,),
+     btn = [InlineKeyboardButton("🖥 ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🖥", url=stream,)
      ],[InlineKeyboardButton("⏮️ How to open ⏭️", url="https://t.me/HoW_ToOpEn/42")]
      return await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
