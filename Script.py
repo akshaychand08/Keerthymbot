@@ -204,10 +204,7 @@ FILE_CAP = """
 
 ʀᴇǫᴜᴇꜱᴛᴇᴅ ʙʏ:- {}
 
-ᴘᴏᴡᴇʀᴇᴅ ʙʏ: <spoiler><a href=https://t.me/{}>{}</a></spoiler>
-
-Fast Download and stream start the bot and forward Files and get Fast Download link  <b>Start <a href=https://t.me/MPlaylink_New_Storage_Bot>Stream bot </a></b>.
-"""
+ᴘᴏᴡᴇʀᴇᴅ ʙʏ: <spoiler><a href=https://t.me/{}>{}</a></spoiler>"""
 
 ADMIN_STATUS_TXT = """<b>⍟────[ ʙᴏᴛ sᴛᴀᴛᴜ𝗌 ]────⍟</b>
 
