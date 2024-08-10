@@ -39,7 +39,7 @@ def get_name(media_msg: Message) -> str:
 async def stream_link(client, query):
      _, file_id, user_id = query.data.split(":")
      msg = await client.send_cached_media(chat_id=int(BIN_CHANNEL),file_id=file_id,) 
-     stream = f"{GEN_URL}watch/{get_hash(log_msg)}{log_msg.id}"
+     stream = f"{GEN_URL}watch/{get_hash(msg)}{msg.id}"
      download = f"{GEN_URL}{str(msg.id)}/{quote_plus(get_name(msg))}?hash={get_hash(msg)}"
      if await db.has_premium_access(int(user_id)): 
        download = download
