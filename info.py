@@ -89,7 +89,7 @@ SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 update_channel = "-1002148324943"
 
 BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", "-1002222888781")) 
-GEN_URL = os.environ.get("GEN_URL", "https://uncomfortable-courtney-akshaychand2002-81a8c398.koyeb.app/") # https://example.com/
+GEN_URL = os.environ.get("GEN_URL", "https://akshaystbot-f029322ed205.herokuapp.com/") # https://example.com/
 
 
 
