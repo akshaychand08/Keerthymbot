@@ -186,7 +186,7 @@ click to check your activ plan- /myplan
 
 * Payment methods:
 
-* UPI ID :  <code>akshaychand10@ybl</code>
+* UPI ID :  <code>akshaychand2004-1@okhdfcbank</code>
 
 * (Tap to Copy) [Supports All Apps Like Google pay, Phone pay, Paytm]
 
