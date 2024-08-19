@@ -1,4 +1,4 @@
-pyrofork
+pyrofork==2.3.41
 tgcrypto
 pymongo[srv]
 motor==3.5.1
