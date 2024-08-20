@@ -114,7 +114,7 @@ RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1002199347865'))
 # Welcome area
 NEWGRP = environ.get('NEWGRP',"https://telegra.ph/file/80dc73a6d73bed659cda5.jpg")
 GRP_LNK = environ.get('GRP_LNK',"https://t.me/iPapcornPrimeGroup")
-CHNL_LNK = environ.get('CHNL_LNK',"https://t.me/arsOfficial10")
+CHNL_LNK = environ.get('CHNL_LNK',"https://t.me/+LDtKhpufANk1MjJl")
 
 REPLACE_WORDS = (
     list(os.environ.get("REPLACE_WORDS").split(","))
