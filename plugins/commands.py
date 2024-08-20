@@ -61,7 +61,7 @@ async def start(client:Client, message):
         buttons = [[
                     InlineKeyboardButton('ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
                   ],[
-                    InlineKeyboardButton('ᴜᴘᴅᴀᴛᴇs', url='https://t.me/arsOfficial10'),
+                    InlineKeyboardButton('ᴜᴘᴅᴀᴛᴇs', url='https://t.me/+LDtKhpufANk1MjJl'),
                     InlineKeyboardButton('sᴜᴘᴘᴏʀᴛ', url='https://t.me/iPapdiscussion')
                   ],[
                     InlineKeyboardButton('ʜᴇʟᴘ', url=f"https://t.me/{temp.U_NAME}?start=help")
