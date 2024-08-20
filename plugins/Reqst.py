@@ -126,7 +126,7 @@ async def reqspolling(bot, query):
 
     else:
         btn = [[
-            InlineKeyboardButton('𝙟𝙤𝙞𝙣 𝙗𝙖𝙘𝙠𝙪𝙥 𝙘𝙝𝙖𝙣𝙣𝙚𝙡', url="https://t.me/arsOfficial10")
+            InlineKeyboardButton('𝙟𝙤𝙞𝙣 𝙗𝙖𝙘𝙠𝙪𝙥 𝙘𝙝𝙖𝙣𝙣𝙚𝙡', url="https://t.me/+LDtKhpufANk1MjJl")
         ]]
         await query.message.edit(f"ʜᴇʏ. {query.from_user.mention}\n\nᴛʜɪꜱ ᴍᴏᴠɪᴇ ɴᴏᴛ ғᴏᴜɴᴅ ᴍʏ ᴅᴀᴛᴀʙᴀꜱᴇ..\n\nʏᴏᴜʀ #ʀᴇǫᴜᴇꜱᴛ ʜᴀꜱ ʙᴇᴇɴ ᴀᴄᴄᴇᴘᴛᴇᴅ! ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ ғᴏʀ ᴏᴜʀ ᴀᴅᴍɪɴꜱ ᴛᴏ ʀᴇꜱᴘᴏɴᴅ..", reply_markup=InlineKeyboardMarkup(btn))  
         sts = temp.STS.get(query.from_user.id) 
