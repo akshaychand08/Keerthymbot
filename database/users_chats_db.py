@@ -41,7 +41,36 @@ class Database:
         self.misc = self.db.misc
         self.verify_id = self.db.verify_id
         self.users = self.db.uersz
+        self.shortlink_col = self.db.shortlinks
 
+    async def save_shortlink_data(self, api, site):
+        data = {
+            'api': api,
+            'site': site
+        }
+        await self.shortlink_col.update_one(
+            {'_id': 'shortlink_data'},
+            {'$set': data},
+            upsert=True
+        )
+
+    async def save_stream_data(self, stream_api, stream_site):
+        data = {
+            'stream_api': stream_api,
+            'stream_site': stream_site
+        }
+        await self.shortlink_col.update_one(
+            {'_id': 'stream_data'},
+            {'$set': data},
+            upsert=True
+        )
+
+    async def get_shortlink_data(self):
+        return await self.shortlink_col.find_one({'_id': 'shortlink_data'})
+
+    async def get_stream_data(self):
+        return await self.shortlink_col.find_one({'_id': 'stream_data'})
+        
 
     def new_user(self, id, name):
         return dict(
