@@ -417,16 +417,28 @@ async def get_seconds(time_string):
     else:
         return 0
 
-async def get_shortlinks(url, stream_url=False): 
+async def get_shortlinks(url, stream_url=False):
     if not stream_url:
-      shortzy = Shortzy(API, SITE)
+      shortlink_data =  await db.get_shortlink_data()
+      if shortlink_data:
+        api, site = shortlink_data.get('api'), shortlink_data.get('site')
+      else:
+        api, site = API, SITE
+                
+      shortzy = Shortzy(api, site)
       try:
         url = await shortzy.convert(url)
       except Exception as e:
         url = await shortzy.get_quick_link(url)
       return url
-    else:
-      shortzy = Shortzy(STREAM_API, STREAM_SITE)
+    else: 
+      stream_data = await db.get_stream_data()
+      if stream_data:
+        stream_api, stream_site = stream_data.get('stream_api'), stream_data.get('stream_site')
+      else:
+        stream_api, stream_site = STREAM_API, STREAM_SITE
+        
+      shortzy = Shortzy(stream_api, stream_site)
       try:
         url = await shortzy.convert(url)
       except Exception as e:
