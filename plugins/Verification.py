@@ -2,6 +2,8 @@ from pyrogram import *
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from database.verify_db import vr_db 
 from info import ADMINS
+from database.users_chats_db import db
+import info
 
 @Client.on_message(filters.command("verification") & filters.private & filters.user(ADMINS))
 async def vrfs(client, message):
@@ -74,4 +76,47 @@ async def vr_ref(client, query):
     ]]
     await query.message.edit("Total verified users", reply_markup=InlineKeyboardMarkup(btn))
     
+
+@Client.on_message(filters.command("set_shortlink") & filters.user(ADMINS))
+async def set_shortlink_data(client, message):
+    if len(message.command) < 3:
+        await message.reply("Usage: /set_shortlink API SITE")
+        return
     
+    site = message.command[1]
+    api = message.command[2]
+    
+    await db.save_shortlink_data(api, site)
+    await message.reply("Shortlink data saved successfully.")
+
+
+
+@Client.on_message(filters.command("set_streamlink") & filters.user(ADMINS))
+async def set_streamlink_data(client, message):
+    if len(message.command) < 3:
+        await message.reply("Usage: /set_streamlink STREAM_API STREAM_SITE")
+        return
+    
+    stream_site = message.command[1]
+    stream_api = message.command[2]
+    
+    await db.save_stream_data(stream_api, stream_site)
+    await message.reply("Stream link data saved successfully.")
+
+@Client.on_message(filters.command("add_url") & filters.user(ADMINS))
+async def changeauth(_: Client, m):
+    args = m.command[1:]
+    
+    if not args:
+        await m.reply_text("You need to provide a url link ")
+        return
+    info.GEN_URL = " ".join(args)
+    await m.reply_text("Changed!")
+    return
+
+
+@Client.on_message(filters.command("get_url") & filters.user(ADMINS))
+async def geturl(c, m):
+    url = info.GEN_URL
+    await m.reply_text(f"your url {url}")
+    return
