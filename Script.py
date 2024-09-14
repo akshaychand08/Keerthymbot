@@ -15,7 +15,6 @@ class script(object):
 📘 <b>ʟɪʙʀᴀʀʏ:</b> ᴘʏʀᴏɢʀᴀᴍ
 🌍 <b>ʟᴀɴɢᴜᴀɢᴇ:</b> ᴘʏᴛʜᴏɴ 𝟹
 📅 <b>ᴅᴀᴛᴀʙᴀꜱᴇ:</b> ᴍᴏɴɢᴏ ᴅʙ 
-🛠️ <b>ʙᴏᴛ ꜱᴇʀᴠᴇʀ:</b> VPS <a href="https://hostinger.in?REFERRALCODE=1AKSHAY104">ʜᴏꜱᴛɪɴɢᴇʀ</a>
 """
     SOURCE_TXT = """<b>NOTE:</b>
     Bot is not open source projects 
