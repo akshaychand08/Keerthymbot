@@ -11,16 +11,16 @@ def is_enabled(value, default):
         return default
 
 # Bot information
-PORT = environ.get("PORT", "8082")
+PORT = environ.get("PORT", "8080")
 SESSION = environ.get('SESSION', 'Media_search')
 API_ID = int(environ.get('API_ID', '22301351'))
 API_HASH = environ.get('API_HASH', '3035f2bbd92a9c5174d174d92b52b25b')
-BOT_TOKEN = environ.get('BOT_TOKEN', '1874185824:AAFVrFgf-xbCGzSV0x3WzA-OYYz5JqT-ie0')
+BOT_TOKEN = environ.get('BOT_TOKEN', '5790067344:AAFcjnHm8eI6SNabEAS8ap2sYp8sKOp35h8')
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = is_enabled((environ.get('USE_CAPTION_FILTER', 'True')), True)
-PICS = (environ.get('PICS' ,'https://graph.org/file/d2c20ed467fd8a101409f.jpg https://graph.org/file/9fbfa93142640fdaeaf80.jpg https://graph.org/file/e2fba097d69d27061b1e1.jpg https://graph.org/file/fed816c138a42cafc24bb.jpg https://graph.org/file/e6ecfe9f99030aebbbd05.jpg https://graph.org/file/941bae7b0584a16eb0fd2.jpg https://graph.org/file/3f38fa53398771d450c0f.jpg')).split()
+PICS = (environ.get('PICS', 'https://te.legra.ph/file/f772c17d89ab263940aa9.jpg https://te.legra.ph/file/f7f89f94312f465bc1619.jpg https://te.legra.ph/file/bca46ec3f862653984ac3.jpg https://te.legra.ph/file/51df2197b3c81fb5c74bb.jpg https://te.legra.ph/file/e0204c7c62be495bd3757.jpg https://te.legra.ph/file/7e4fb5aaebcfbb491d94b.jpg https://te.legra.ph/file/cac00041d6815ae72c636.jpg https://te.legra.ph/file/aa11112a7008f0c2cfa86.jpg https://te.legra.ph/file/964aadd2b69cbfdbc747b.jpg https://te.legra.ph/file/e20f06f2db0a5cdbadc6b.jpg https://te.legra.ph/file/dfb17b7113756689d1157.jpg https://te.legra.ph/file/e2c6398a9405104ee54a2.jpg https://te.legra.ph/file/8fb297d8d87113955e13a.jpg https://te.legra.ph/file/9305b907779de8d073ac2.jpg https://te.legra.ph/file/8934a9e779a7f21e44290.jpg')).split()
 
 # Admins, Channels & Users
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5721673207').split()]
@@ -33,11 +33,11 @@ AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_chan
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://akshaychand:akshaychand@cluster0.ga6vusx.mongodb.net/?retryWrites=true&w=majority")
-DATABASE_NAME = environ.get('DATABASE_NAME', "Mongodb")
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://akshay:chand@cluster0.fbevi6n.mongodb.net/?retryWrites=true&w=majority")
+DATABASE_NAME = environ.get('DATABASE_NAME', "mongodb")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 # Others
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002138727373'))
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001942599034'))
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'iPapdiscussion')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "False")), False)
 IMDB = is_enabled((environ.get('IMDB', "True")), True)
@@ -75,7 +75,7 @@ VR_LOG = int(environ.get('VR_LOG', '-1002199851318'))
 
 TUTORIAL_LINK = "https://t.me/HoW_ToOpEn/42"
 
-API = "570bcebdb0b2b6080fc5b71f2e6cd1f68bf5494a"
+API = "16fe63613f0c168ed1cd899307368200c968b963"
 SITE = "publicearn.com"
 
 STREAM_API = "570bcebdb0b2b6080fc5b71f2e6cd1f68bf5494a"
@@ -86,10 +86,10 @@ IS_SHORTLINK = is_enabled((environ.get('IS_SHORTLINK', "True")), True)
 SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 
 # Add the ID of the update channel where new file updates will be sent
-update_channel = "-1002199347865"
+update_channel = "-1002148324943"
 
 BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", "-1002222888781")) 
-GEN_URL = os.environ.get("GEN_URL", "https://streambot001-akshaystbot-628fe2d530bc.herokuapp.com/") # https://example.com/
+GEN_URL = os.environ.get("GEN_URL", "https://t.me/akshaychand08/") # https://example.com/
 
 
 
@@ -108,13 +108,13 @@ CAPTION_LANGUAGES = {
 }
 
 # movie request 
-REQ_GRP = int(environ.get('REQ_GRP', '-1004516305794'))
-RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1002199347865'))
+REQ_GRP = int(environ.get('REQ_GRP', '-1001878519368'))
+RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1001682547846'))
 
 # Welcome area
 NEWGRP = environ.get('NEWGRP',"https://telegra.ph/file/80dc73a6d73bed659cda5.jpg")
 GRP_LNK = environ.get('GRP_LNK',"https://t.me/iPapcornPrimeGroup")
-CHNL_LNK = environ.get('CHNL_LNK',"https://t.me/+LDtKhpufANk1MjJl")
+CHNL_LNK = environ.get('CHNL_LNK',"https://t.me/arsOfficial10")
 
 REPLACE_WORDS = (
     list(os.environ.get("REPLACE_WORDS").split(","))
@@ -129,8 +129,4 @@ BLACKLIST_WORDS = (
     if os.environ.get("BLACKLIST_WORDS")
     else []
 )
-BLACKLIST_WORDS = ["[D&O]", "Telegram @  Studios", "[MM]", "@adda_files", "files", "[]", "[FC]", "[CF]", "LinkZz", "[DFBC]", "@malangmovie", "@AkPictureOfficial", "@mxplayer", "@New_Movie", "@Infinite_Movies2", "MM", "@R A R B G", "[F&T]", "[KMH]", "[DnO]", "[F&T]", "MLM", "@TM_LMO", "@x265_E4E", "@HEVC MoviesZ", "SSDMovies", "@MM Linkz", "[CC]", "@Mallu_Movies", "@DK Drama", "@luxmv_Linkz", "@Akw_links", "CK HEVC", "@Team_HDT", "[CP]", "www 1TamilMV men", "www TamilRockers", "@MM", "@mm", "[MW]", "@TN68 Linkzz", "@Clipmate_Movie", "[MASHOBUC]", "Official TheMoviesBoss", "www CineVez one", "www 7MovieRulz lv", "DCENIMAS", "Eliteflix Official", "@desimovies", "movieworldkdy", "www 1TamilMV vip"]
-
-NEWGRP = environ.get('NEWGRP',"https://telegra.ph/file/80dc73a6d73bed659cda5.jpg")
-CHNL_LNK = environ.get('CHNL_LNK',"https://t.me/arsOfficial10")
-
+BLACKLIST_WORDS = ["[D&O]", "Telegram @  Studios", "@adda_files", "files",  "[MM]", "[]", "[FC]", "[CF]", "LinkZz", "[DFBC]", "@malangmovie", "@AkPictureOfficial", "@mxplayer", "@New_Movie", "@Infinite_Movies2", "MM", "@R A R B G", "[F&T]", "[KMH]", "[DnO]", "[F&T]", "MLM", "@TM_LMO", "@x265_E4E", "@HEVC MoviesZ", "SSDMovies", "@MM Linkz", "[CC]", "@Mallu_Movies", "@DK Drama", "@luxmv_Linkz", "@Akw_links", "CK HEVC", "@Team_HDT", "[CP]", "www 1TamilMV men", "www TamilRockers", "@MM", "@mm", "[MW]", "@TN68 Linkzz", "@Clipmate_Movie", "[MASHOBUC]", "Official TheMoviesBoss", "www CineVez one", "www 7MovieRulz lv", "DCENIMAS", "Eliteflix Official", "@desimovies", "movieworldkdy", "www 1TamilMV vip"]
