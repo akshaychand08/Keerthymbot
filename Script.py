@@ -152,7 +152,7 @@ Name - {}
 
 🔑 Please verify to get unlimited access for one day.
 
-🆘 If you are having any problem with verification, send a screenshot or screen recording showing the problem to @ARS_official10 and ask for help.
+🆘 If you are having any problem with verification, send a screenshot or screen recording showing the problem to @iPapcornPrimeSupport and ask for help.
 
 🌟 If you don't want to verify daily, you can subscribe to our premium plan to enjoy unlimited movies without the need for daily verification. 
 
