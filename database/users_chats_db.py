@@ -219,6 +219,7 @@ class Database:
             }
 
             user = await self.misc.insert_one(res)
+            user = await self.misc.find_one({"user_id": user_id})
 
         return user
 
