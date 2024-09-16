@@ -216,11 +216,9 @@ class Database:
             res = {
                 "user_id": user_id,
                 "last_verified": datetime.datetime(2020, 5, 17, 0, 0, 0, tzinfo=ist_timezone),
-                
-            }
-            user = await self.misc.insert_one(res)
-            user = await self.misc.find_one({"user_id": user_id})
-
+            } 
+            user = await self.misc.insert_one(res) 
+            user = await self.misc.find_one({"user_id": user_id}) 
         return user
 
     async def update_notcopy_user(self, user_id, value:dict):
