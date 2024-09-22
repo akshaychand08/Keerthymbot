@@ -267,37 +267,7 @@ async def seasons_(client: Client, query: CallbackQuery):
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])  
     
     await query.message.edit_text("<b>ᴡʜɪᴄʜ sᴇᴀsᴏɴ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ? sᴇʟᴇᴄᴛ ʜᴇʀᴇ 👇</b>", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(btn))
-
-@Client.on_callback_query(filters.regex(r"^season"))
-async def seasons_(client: Client, query: CallbackQuery):
-    _, key, req, offset = query.data.split("#")
-    if int(req) != query.from_user.id:
-        return await query.answer(f"Hello {query.from_user.first_name},\nDon't Click Other Results!", show_alert=True)
-    
-    btn = [[
-        InlineKeyboardButton("Season 1", callback_data=f"fl#s01#{key}#{offset}#{req}"),
-        InlineKeyboardButton("Season 2", callback_data=f"fl#s02#{key}#{offset}#{req}")
-        ],[
-        InlineKeyboardButton("Season 3", callback_data=f"fl#s03#{key}#{offset}#{req}"),
-        InlineKeyboardButton("Season 4", callback_data=f"fl#s04#{key}#{offset}#{req}")
-        ],[
-        InlineKeyboardButton("Season 5", callback_data=f"fl#s05#{key}#{offset}#{req}"),
-        InlineKeyboardButton("Season 6", callback_data=f"fl#s06#{key}#{offset}#{req}")
-        ],[
-        InlineKeyboardButton("Season 7", callback_data=f"fl#s07#{key}#{offset}#{req}"),
-        InlineKeyboardButton("Season 8", callback_data=f"fl#s08#{key}#{offset}#{req}")
-        ],[
-        InlineKeyboardButton("Season 9", callback_data=f"fl#s09#{key}#{offset}#{req}"),
-        InlineKeyboardButton("Season 10", callback_data=f"fl#s10#{key}#{offset}#{req}")
-        ],[
-        InlineKeyboardButton("Season 11", callback_data=f"fl#s11#{key}#{offset}#{req}"),
-        InlineKeyboardButton("Season 12", callback_data=f"fl#s12#{key}#{offset}#{req}")
-    ]] 
-    
-    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])  
-    
-    await query.message.edit_text("<b>ᴡʜɪᴄʜ sᴇᴀsᴏɴ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ? sᴇʟᴇᴄᴛ ʜᴇʀᴇ 👇</b>", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(btn))
-    
+  
 @Client.on_callback_query(filters.regex(r"^fl"))
 async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     _, lang, key, offset, req = query.data.split("#")
@@ -323,8 +293,9 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
             [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / 10)}", callback_data="buttons"),
              InlineKeyboardButton(text="ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{l_offset}#{offset}")]
         )
-    btn.insert(0, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
-         
+    btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
+    btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("sᴇᴀsᴏɴ", callback_data=f"season#{key}#{req}#{offset}")])         
+             
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
     try:    
         await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
@@ -381,8 +352,8 @@ async def lang_next_page(bot, query):
              InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
         ) 
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
-    btn.insert(0, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
-         
+    btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
+    btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("sᴇᴀsᴏɴ", callback_data=f"season#{key}#{req}#{offset}")])         
     try:
         await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
     except MessageNotModified:
