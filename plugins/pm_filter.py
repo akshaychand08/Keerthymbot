@@ -211,7 +211,7 @@ async def refercall(bot, query):
     )    
     await query.answer()
     
- @Client.on_callback_query(filters.regex(r"^languages"))
+@Client.on_callback_query(filters.regex(r"^languages"))
 async def languages_(client: Client, query: CallbackQuery):
     _, key, req, offset = query.data.split("#")
     if int(req) != query.from_user.id:
