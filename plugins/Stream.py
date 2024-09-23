@@ -48,5 +48,5 @@ async def stream_link(client, query):
        stream = await get_shortlinks(stream, stream_url=True)
        download = await get_shortlinks(download, stream_url=True) 
      btn = [InlineKeyboardButton("🖥 Download / Online Pay 🖥", url=stream,)
-     ],[InlineKeyboardButton("⏮️ How to open ⏭️", url="https://t.me/HoW_ToOpEn/42")]
+     ],[InlineKeyboardButton("⏮️ How to open ⏭️", url="https://t.me/HoW_To_VerifYz/60")]
      return await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
