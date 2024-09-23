@@ -146,14 +146,11 @@ async def start(client:Client, message):
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
             return
-        btn = [
-            [
-                InlineKeyboardButton(
-                    "🤖 Join Updates Channel", url=invite_link.invite_link
-                )
-            ]
-        ]
-
+        btn = [[
+                InlineKeyboardButton("🤖 Join Updates Channel", url=invite_link.invite_link)
+	    ], [
+                InlineKeyboardButton("🔹ꜰᴏʟʟᴏᴡ ɪɴsᴛᴀ🔹",url="https://www.instagram.com/akshaychand10?igsh=OGQ5ZDc2ODk2ZA==")
+	    ]]
         if message.command[1] != "subscribe":
             try:
                 kk, file_id = message.command[1].split("_", 1)
