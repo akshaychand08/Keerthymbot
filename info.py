@@ -73,7 +73,7 @@ VR_COM_photo = "https://telegra.ph/file/a00c405a374d21ea7cfb7.jpg"
 
 VR_LOG = int(environ.get('VR_LOG', '-1002199851318'))
 
-TUTORIAL_LINK = "https://t.me/HoW_ToOpEn/42"
+TUTORIAL_LINK = "https://t.me/HoW_To_VerifYz/60"
 
 API = "16fe63613f0c168ed1cd899307368200c968b963"
 SITE = "publicearn.com"
@@ -89,7 +89,7 @@ SHORT_MODE = is_enabled((environ.get('SHORT_MODE', "True")), True)
 update_channel = "-1002148324943"
 
 BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", "-1002222888781")) 
-GEN_URL = os.environ.get("GEN_URL", "https://t.me/akshaychand08/") # https://example.com/
+GEN_URL = os.environ.get("GEN_URL", "https://ak-stream.koyeb.app/") # https://example.com/
 
 
 
