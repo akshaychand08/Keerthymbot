@@ -287,6 +287,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     batch_ids = files
     temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
     batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.from_user.id}"          
+    grp_id = query.message.chat.id
     
     btn = []
     for file in files:        
@@ -328,7 +329,8 @@ async def lang_next_page(bot, query):
         n_offset = int(n_offset)
     except:
         n_offset = 0 
-        
+    grp_id = query.message.chat.id
+    
     batch_ids = files
     temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
     batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.from_user.id}"          
