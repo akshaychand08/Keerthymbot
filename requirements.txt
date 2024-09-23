@@ -1,6 +1,6 @@
 pyrofork==2.3.41
 tgcrypto
-pymongo==4.9.1
+pymongo[srv]
 motor==3.6.0
 marshmallow
 umongo==3.1.0
@@ -16,4 +16,3 @@ aiocache
 aiohttp
 psutil
 pyrogram==2.0.106
-
