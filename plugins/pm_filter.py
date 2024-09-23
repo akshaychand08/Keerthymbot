@@ -282,7 +282,12 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
 
     if not files:
         await query.answer(f"sᴏʀʀʏ '{lang.title()}' ꜰɪʟᴇs ɴᴏᴛ ꜰᴏᴜɴᴅ 😕", show_alert=1)
-        return          
+        return  
+
+    batch_ids = files
+    temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.from_user.id}"          
+    
     btn = []
     for file in files:        
         btn.append([
@@ -293,7 +298,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
             [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / 10)}", callback_data="buttons"),
              InlineKeyboardButton(text="ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{l_offset}#{offset}")]
         )
-    btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_file)])
+    btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
     btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
          
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
@@ -322,7 +327,12 @@ async def lang_next_page(bot, query):
     try:
         n_offset = int(n_offset)
     except:
-        n_offset = 0
+        n_offset = 0 
+        
+    batch_ids = files
+    temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.from_user.id}"          
+
     btn = []
     for file in files:        
         btn.append([
@@ -352,7 +362,7 @@ async def lang_next_page(bot, query):
              InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
         ) 
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
-    btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_file)])
+    btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
     btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
          
     try:
