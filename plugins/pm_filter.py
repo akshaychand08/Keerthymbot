@@ -893,7 +893,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     elif query.data.startswith("rq"):
         _, status, message_id, user_query = query.data.split("#", maxsplit=3)
-        dict_info = {"town": "Type only web series name don't type season", "nah":"Not available in Hindi", "nak":"Not available in Kannada", "tomn":"Type only movie Name", "natm":"Not available in Tamil", "nam":"Not available in Malayalam", "nak":"Not available in kannada", "nat":"Not available in Telugu", "simd":"Send imdb link\n\nClick here to generate  imdb link 🔻", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "not":"Not released OTT yet", "nry":"Not released yet", "na":"Not available"}
+        dict_info = {"town": "Type only web series name👇\n\nEx.Taaza Khabar All Season ❌\nTaaza Khabar season 1❌\nTaaza Khabar S01 ✅\nTaaza Khabar S02 ✅\nTaaza Khabar S01 complete ✅", "nah":"Not available in Hindi", "nak":"Not available in Kannada", "tomn":"Type only movie Name", "natm":"Not available in Tamil", "nam":"Not available in Malayalam", "nak":"Not available in kannada", "nat":"Not available in Telugu", "simd":"Send imdb link\n\nClick here to generate  imdb link 🔻", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "not":"Not released OTT yet", "nry":"Not released yet", "na":"Not available"}
 
         user_message = await client.get_messages(REQ_GRP, int(message_id))
         try:
