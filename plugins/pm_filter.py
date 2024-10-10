@@ -293,34 +293,16 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     for file in files:        
         btn.append([
             InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')
-        ])
-    
-    if 0 < l_offset <= 10:
-        b_offset = 0
-    elif l_offset == 0:
-        b_offset = None
-    else:
-        b_offset = l_offset - 10
-    if n_offset == 0:
+        ])    
+    if l_offset != "":
         btn.append(
-            [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
-             InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons")]
+            [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / 10)}", callback_data="buttons"),
+             InlineKeyboardButton(text="ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{l_offset}#{offset}")]
         )
-    elif b_offset is None:
-        btn.append(
-            [InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),
-             InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
-        )
-    else:
-        btn.append(
-            [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
-             InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),
-             InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
-        ) 
-    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
     btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
     btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
          
+    btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
     try:    
         await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
     except MessageNotModified:
@@ -911,7 +893,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     elif query.data.startswith("rq"):
         _, status, message_id, user_query = query.data.split("#", maxsplit=3)
-        dict_info = {"town": "Type only web series name👇\n\nEx.Taaza Khabar All Season ❌\nTaaza Khabar season 1❌\nTaaza Khabar S01 ✅\nTaaza Khabar S02 ✅\nTaaza Khabar S01 complete ✅", "nah":"Not available in Hindi", "nak":"Not available in Kannada", "tomn":"Type only movie Name", "natm":"Not available in Tamil", "nam":"Not available in Malayalam", "nak":"Not available in kannada", "nat":"Not available in Telugu", "simd":"Send imdb link\n\nClick here to generate  imdb link 🔻", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "not":"Not released OTT yet", "nry":"Not released yet", "na":"Not available"}
+        dict_info = {"town": "Type only web series name don't type season", "nah":"Not available in Hindi", "nak":"Not available in Kannada", "tomn":"Type only movie Name", "natm":"Not available in Tamil", "nam":"Not available in Malayalam", "nak":"Not available in kannada", "nat":"Not available in Telugu", "simd":"Send imdb link\n\nClick here to generate  imdb link 🔻", "au":"Already uploaded ✅ \n\n Go to Google and check your spelling  <b><a href=https://www.google.com>𝐆𝐨𝐨𝐠𝐥𝐞</a></b>", "up":"Updated  ✅", "not":"Not released OTT yet", "nry":"Not released yet", "na":"Not available"}
 
         user_message = await client.get_messages(REQ_GRP, int(message_id))
         try:
