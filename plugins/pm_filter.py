@@ -291,20 +291,13 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     
     btn = []
     for file in files:        
+        btn.append([
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')
+        ])    
+    if l_offset != "":
         btn.append(
-            [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
-             InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons")]
-        )
-    elif b_offset is None:
-        btn.append(
-            [InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),
-             InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
-        )
-    else:
-        btn.append(
-            [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
-             InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),
-             InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
+            [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / 10)}", callback_data="buttons"),
+             InlineKeyboardButton(text="ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{l_offset}#{offset}")]
         )
     btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
     btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
