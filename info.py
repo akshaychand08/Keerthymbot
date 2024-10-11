@@ -78,8 +78,8 @@ TUTORIAL_LINK = "https://t.me/HoW_To_VerifYz/60"
 API = "16fe63613f0c168ed1cd899307368200c968b963"
 SITE = "publicearn.com"
 
-STREAM_API = "570bcebdb0b2b6080fc5b71f2e6cd1f68bf5494a"
-STREAM_SITE = "publicearn.com"
+STREAM_API = "xKcAOJCVGsOh0aXI8Yjdj3SFjxp1"
+STREAM_SITE = "shareus.io"
 
 IS_SHORTLINK = is_enabled((environ.get('IS_SHORTLINK', "True")), True)
 
