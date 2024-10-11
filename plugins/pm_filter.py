@@ -309,26 +309,32 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         pass
     await query.answer()
 
+
 @Client.on_callback_query(filters.regex(r"^lang_next"))
 async def lang_next_page(bot, query):
     ident, req, key, lang, l_offset, offset = query.data.split("#")
+    
     if int(req) != query.from_user.id:
         return await query.answer(f"Hello {query.from_user.first_name},\nDon't Click Other Results!", show_alert=True)
+
     try:
         l_offset = int(l_offset)
     except:
         l_offset = 0
+        
     search = BUTTONS.get(key)
+    
     if not search:
         await query.answer(f"Hello {query.from_user.first_name},\nSend New Request Again!", show_alert=True)
         return
-    files, l_offset, total = await get_search_results(f"{search} {lang}", offset=0, filter=True)
+
+    files, l_offset, total = await get_search_results(f"{search} {lang}", offset=l_offset, filter=True)  # l_offset update here
+
     if not files:
         return
-    try:
-        n_offset = int(n_offset)
-    except:
-        n_offset = 0 
+    
+    n_offset = l_offset + len(files)  # Correctly calculate next offset
+
     grp_id = query.message.chat.id
     
     batch_ids = files
@@ -347,32 +353,28 @@ async def lang_next_page(bot, query):
         b_offset = None
     else:
         b_offset = l_offset - 10
-    if n_offset == 0:
+
+    if n_offset >= total:  # Last page condition, no next button
         btn.append(
             [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
              InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons")]
         )
-    elif b_offset is None:
-        btn.append(
-            [InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),
-             InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
-        )
-    else:
+    else:  
         btn.append(
             [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
              InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),
              InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
-        ) 
+        )
+
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
     btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
-    btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
-         
+    btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"), InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
+    
     try:
         await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
     except MessageNotModified:
         pass
     await query.answer()
-
 
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
