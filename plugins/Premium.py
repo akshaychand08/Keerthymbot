@@ -9,6 +9,13 @@ from database.users_chats_db import db, delete_all_msg
 from pyrogram import Client, filters 
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong
 
+
+
+@Client.on_message(filters.command("del_vr") & filters.private & filters.user(ADMINS))
+async def del_vrlerify(client, message):
+  await db.dl_verify_id_info()
+  await message.reply('Deleted!')
+
 @Client.on_message(filters.command("del_msg") & filters.user(ADMINS))
 async def del_msg(client, message):
     user_id = message.from_user.id
