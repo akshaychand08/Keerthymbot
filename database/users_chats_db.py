@@ -256,6 +256,10 @@ class Database:
 
     async def get_verify_id_info(self, user_id: int, hash):
         return await self.verify_id.find_one({"user_id": user_id, "hash": hash})
+
+    async def dl_verify_id_info(self):
+        await self.verify_id.drop()        
+    
     
     async def update_verify_id_info(self, user_id, hash, value: dict):
         myquery = {"user_id": user_id, "hash": hash}
