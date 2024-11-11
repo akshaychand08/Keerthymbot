@@ -35,49 +35,40 @@ class Media(Document):
         collection_name = COLLECTION_NAME
 
 
-import re
-
 async def save_file(bot, media):
     """Save file in database"""
 
     # TODO: Find better way to get same file_id for same media to avoid duplicates
     file_id, file_ref = unpack_new_file_id(media.file_id)
-
-    # Remove username patterns like @username from file_name and caption
-    cleaned_file_name = re.sub(r"@[\w_]+", "", media.file_name)
-    cleaned_file_name = re.sub(r"(_|\-|\.|\+|\s)+", " ", cleaned_file_name).strip()
-
-    cleaned_caption = None
-    if media.caption:
-        cleaned_caption = re.sub(r"@[\w_]+", "", media.caption.html)
-        cleaned_caption = re.sub(r"(\s)+", " ", cleaned_caption).strip()
-
+    file_name = re.sub(r"(_|\-|\.|\+)", " ", str(media.file_name))
     try:
         file = Media(
             file_id=file_id,
             file_ref=file_ref,
-            file_name=cleaned_file_name,
+            file_name=file_name,
             file_size=media.file_size,
             file_type=media.file_type,
             mime_type=media.mime_type,
-            caption=cleaned_caption,
+            caption=media.caption.html if media.caption else None,
         )
     except ValidationError:
-        #logger.exception('Error occurred while saving file in database')
+       # logger.exception('Error occurred while saving file in database')
         return False, 2
     else:
         try:
             await file.commit()
         except DuplicateKeyError:      
             #logger.warning(
-               # f'{getattr(media, "file_name", "NO_FILE")} is already saved in database'
-            #)
+              #  f'{getattr(media, "file_name", "NO_FILE")} is already saved in database'
+           # )
 
             return False, 0
         else:
-            #logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
+           # logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
+           # if SEND_MSG:
+               # await send_msg(bot, file.file_name, file.caption)
             return True, 1
-
+            
 async def get_search_results(query, file_type=None, max_results=10, offset=0, filter=False):
     """For given query return (results, next_offset)"""
 
