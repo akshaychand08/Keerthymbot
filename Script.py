@@ -173,12 +173,12 @@ You are now verified until tonight at 12:00 AM. Enjoy your unlimited access for 
     PREMIUM_TEXT = """<b><i><u> 🌟 ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs 🌟</u></i></b>
 
 * At Rs.9    -  1 day
-* At Rs.25   -  15 day
-* At Rs.49   -  1 month 
-* At Rs.99   -  2 months
-* At Rs.149  -  3 months
-* At Rs.199  -  4 months
-* At Rs.239  -  5 months
+* At Rs.30   -  15 day
+* At Rs.59   -  1 month 
+* At Rs.120  -  2 months
+* At Rs.159  -  3 months
+* At Rs.210  -  4 months
+* At Rs.259  -  5 months
 * At Rs.299  -  6 months
 
 
