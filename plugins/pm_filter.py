@@ -245,6 +245,10 @@ async def seasons_(client: Client, query: CallbackQuery):
         return await query.answer(f"Hello {query.from_user.first_name},\nDon't Click Other Results!", show_alert=True)
     
     btn = [[
+        InlineKeyboardButton("📀 COMBINED 📀", callback_data=f"fl#combined#{key}#{offset}#{req}")
+        ],[
+        InlineKeyboardButton("💿 COMPLETE 💿", callback_data=f"fl#complete#{key}#{offset}#{req}")
+        ],[
         InlineKeyboardButton("Season 1", callback_data=f"fl#s01#{key}#{offset}#{req}"),
         InlineKeyboardButton("Season 2", callback_data=f"fl#s02#{key}#{offset}#{req}")
         ],[
