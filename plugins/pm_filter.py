@@ -3,6 +3,8 @@ import asyncio
 import re
 import ast
 import math
+from pyrogram.types import InlineKeyboardButton
+from pyrogram.errors import MessageNotModified
 from .Reqst import badreqst, usreqst
 from database.reffer import referdb
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
