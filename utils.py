@@ -1,5 +1,5 @@
 import logging
-from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
+from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid, MessageNotModified
 from info import STREAM_API, STREAM_SITE, BLACKLIST_WORDS, API, SITE, AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, REPLACE_WORDS
 from imdb import Cinemagoer
 import asyncio
