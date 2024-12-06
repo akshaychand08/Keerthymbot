@@ -339,7 +339,7 @@ async def lang_next_page(bot, query):
     if not files:
         return
     
-    n_offset = l_offset + len(files)  # Correctly calculate next offset
+    n_offset = f"{l_offset}{len(files)}"  # Correctly calculate next offset
 
     grp_id = query.message.chat.id
     
