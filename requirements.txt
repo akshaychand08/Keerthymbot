@@ -1,6 +1,6 @@
 #git+https://github.com/TelegramPlayGround/pyrogram
-git+https://github.com/Mayuri-Chan/pyrofork
-#pyrofork
+#git+https://github.com/Mayuri-Chan/pyrofork
+pyrofork==2.3.45
 #pyrogram
 tgcrypto
 pymongo==4.9.2
