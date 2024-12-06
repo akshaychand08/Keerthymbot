@@ -17,3 +17,5 @@ aiocache
 aiohttp==3.10.11
 psutil
 cinemagoer==2023.5.1
+datetime
+git+https://github.com/agronholm/anyio
