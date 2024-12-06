@@ -6,6 +6,7 @@ logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("imdbpy").setLevel(logging.ERROR)
+logging.getLogger("asyncio").setLevel(logging.CRITICAL -1)
 
 from asyncio import sleep 
 from datetime import datetime
