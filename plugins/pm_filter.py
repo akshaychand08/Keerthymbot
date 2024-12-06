@@ -364,7 +364,7 @@ async def lang_next_page(bot, query):
     else:
         b_offset = l_offset - 10
 
-    if n_offset = total:  # Last page condition, no next button
+    if n_offset >= total:  # Last page condition, no next button
         btn.append(
             [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
              InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons")]
