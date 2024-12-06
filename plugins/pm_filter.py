@@ -364,6 +364,12 @@ async def lang_next_page(bot, query):
     else:
         b_offset = l_offset - 10
 
+    if isinstance(n_offset, str):
+    n_offset = int(n_offset)  # Convert string to integer
+
+    if isinstance(total, str):
+    total = int(total)  # Convert string to integer
+
     if n_offset >= total:  # Last page condition, no next button
         btn.append(
             [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
