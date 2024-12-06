@@ -188,10 +188,14 @@ async def advantage_spoll_choker(bot, query):
         else:                
             btn = [[
             InlineKeyboardButton('🎖️ ᴀᴅᴍɪɴ 🎖️', url="https://t.me/iPapdiscussion")
-        ]]        
-            k=await query.message.edit('<b>✯ sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs 📂 ᴡᴇʀᴇ ꜰᴏᴜɴᴅ\n\n👇 sᴇɴᴅ ʀᴇǫᴜᴇsᴛ 📩</b>', reply_markup=InlineKeyboardMarkup(btn))    
-            await asyncio.sleep(60)
-            await k.delete()
+        ]]     
+            try:
+              k=await query.message.edit('<b>✯ sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs 📂 ᴡᴇʀᴇ ꜰᴏᴜɴᴅ\n\n👇 sᴇɴᴅ ʀᴇǫᴜᴇsᴛ 📩</b>', reply_markup=InlineKeyboardMarkup(btn))    
+              await asyncio.sleep(60)
+              await k.delete() 
+            except MessageNotModified:
+              pass
+            await query.answer()
 
 @Client.on_callback_query(filters.regex(r"^reffff"))
 async def refercall(bot, query):
