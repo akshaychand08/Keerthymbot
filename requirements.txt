@@ -1,4 +1,4 @@
-pyrogram>=2.0.30
+pyrogram==2.0.30
 pyrofork==2.3.45
 git+https://github.com/KurimuzonAkuma/pyrogram
 tgcrypto
