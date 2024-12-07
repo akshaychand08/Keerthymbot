@@ -197,8 +197,9 @@ async def advantage_spoll_choker(bot, query):
             except MessageNotModified:
               pass
               await query.answer()
-            except QueryIdInvalid
-            
+            except QueryIdInvalid:
+              pass
+                
 @Client.on_callback_query(filters.regex(r"^reffff"))
 async def refercall(bot, query):
     btn = [[
