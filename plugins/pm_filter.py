@@ -326,77 +326,42 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
 @Client.on_callback_query(filters.regex(r"^lang_next"))
 async def lang_next_page(bot, query):
     ident, req, key, lang, l_offset, offset = query.data.split("#")
-    
     if int(req) != query.from_user.id:
         return await query.answer(f"Hello {query.from_user.first_name},\nDon't Click Other Results!", show_alert=True)
 
-    try:
-        l_offset = int(l_offset)
-    except ValueError:
-        l_offset = 0
-        
+    l_offset = int(l_offset) if l_offset.isdigit() else 0
     search = BUTTONS.get(key)
-    
     if not search:
-        await query.answer(f"Hello {query.from_user.first_name},\nSend New Request Again!", show_alert=True)
-        return
-
-    # Fetch search results
-    files, l_offset, total = await get_search_results(f"{search} {lang}", offset=l_offset, filter=True)
-
+        return await query.answer(f"Hello {query.from_user.first_name},\nSend New Request Again!", show_alert=True)
+    files, n_offset, total = await get_search_results(f"{search} {lang}", offset=l_offset, filter=True)
     if not files:
         return
-    
-    # Calculate next offset
-    n_offset = l_offset + len(files)
-
-    # Debugging Logs
-    print(f"DEBUG: l_offset = {l_offset}, n_offset = {n_offset}, total = {total}")
-
-    grp_id = query.message.chat.id
-    
+    try:
+        n_offset = int(n_offset)
+    except:
+        n_offset = 0
+    grp_id = query.message.chat.id 
     batch_ids = files
     temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
-    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.from_user.id}"          
-
-    btn = []
-    for file in files:        
-        btn.append([
-            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')
-        ])
+    batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.message.from_user.id}"          
     
-    # Back offset calculation
-    if l_offset <= 10:
-        b_offset = 0
+    btn = [[InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}",url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')] for file in files]
+
+    b_offset = l_offset - 10 if l_offset > 10 else 0 if l_offset > 0 else None
+    if n_offset:
+        btn.append([InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}") if b_offset is not None else None,InlineKeyboardButton(f"{(l_offset // 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")])
     else:
-        b_offset = l_offset - len(files)
-
-    # Ensure total is integer
-    if isinstance(total, str):
-        total = int(total)
-
-    # Pagination Buttons
-    if n_offset >= total:  # Last page
-        btn.append(
-            [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
-             InlineKeyboardButton(f"{l_offset // 10 + 1}/{total // 10 + 1}", callback_data="buttons")]
-        )
-    else:  # Middle pages
-        btn.append(
-            [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
-             InlineKeyboardButton(f"{l_offset // 10 + 1}/{total // 10 + 1}", callback_data="buttons"),
-             InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
-        )
-
+        btn.append([InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}") if b_offset is not None else None,InlineKeyboardButton(f"{(l_offset // 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons")])
+    offset = 0
     btn.append([InlineKeyboardButton(text="⪻ ʙᴀᴄᴋ ᴛᴏ ᴍᴀɪɴ ᴘᴀɢᴇ", callback_data=f"next_{req}_{key}_{offset}")])
-    btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
-    btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"), InlineKeyboardButton("season", callback_data=f"season#{key}#{req}#{offset}")])
-    
+    btn.insert(0, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("send all", callback_data=batch_link)])
     try:
         await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
     except MessageNotModified:
         pass
     await query.answer()
+
+
     
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
