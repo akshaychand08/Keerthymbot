@@ -332,7 +332,7 @@ async def lang_next_page(bot, query):
 
     try:
         l_offset = int(l_offset)
-    except:
+    except ValueError:
         l_offset = 0
         
     search = BUTTONS.get(key)
@@ -346,7 +346,10 @@ async def lang_next_page(bot, query):
     if not files:
         return
     
-    n_offset = f"{l_offset}{len(files)}"  # Correctly calculate next offset
+    try:
+        n_offset = int(f"{l_offset}{len(files)}")  # Correctly calculate next offset and convert to int
+    except ValueError:
+        n_offset = 0
 
     grp_id = query.message.chat.id
     
@@ -369,6 +372,8 @@ async def lang_next_page(bot, query):
 
     if isinstance(total, str):
        total = int(total)  # Convert string to integer
+
+    # Updated condition to avoid TypeError
     if n_offset >= total:  # Last page condition, no next button
         btn.append(
             [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
