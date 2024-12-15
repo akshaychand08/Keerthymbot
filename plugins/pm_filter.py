@@ -341,15 +341,13 @@ async def lang_next_page(bot, query):
         await query.answer(f"Hello {query.from_user.first_name},\nSend New Request Again!", show_alert=True)
         return
 
-    files, l_offset, total = await get_search_results(f"{search} {lang}", offset=l_offset, filter=True)  # l_offset update here
+    files, l_offset, total = await get_search_results(f"{search} {lang}", offset=l_offset, filter=True)
 
     if not files:
         return
     
-    try:
-        n_offset = int(f"{l_offset}{len(files)}")  # Correctly calculate next offset and convert to int
-    except ValueError:
-        n_offset = 0
+    # Correctly calculate next offset
+    n_offset = l_offset + len(files)
 
     grp_id = query.message.chat.id
     
@@ -371,18 +369,18 @@ async def lang_next_page(bot, query):
         b_offset = l_offset - 10
 
     if isinstance(total, str):
-       total = int(total)  # Convert string to integer
+        total = int(total)  # Convert string to integer
 
-    # Updated condition to avoid TypeError
+    # Correct next/back button logic
     if n_offset >= total:  # Last page condition, no next button
         btn.append(
             [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
-             InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons")]
+             InlineKeyboardButton(f"{math.ceil(l_offset / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons")]
         )
     else:  
         btn.append(
             [InlineKeyboardButton("« ʙᴀᴄᴋ", callback_data=f"lang_next#{req}#{key}#{lang}#{b_offset}#{offset}"),
-             InlineKeyboardButton(f"{math.ceil(int(l_offset) / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),
+             InlineKeyboardButton(f"{math.ceil(l_offset / 10) + 1}/{math.ceil(total / 10)}", callback_data="buttons"),
              InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"lang_next#{req}#{key}#{lang}#{n_offset}#{offset}")]
         )
 
@@ -395,6 +393,7 @@ async def lang_next_page(bot, query):
     except MessageNotModified:
         pass
     await query.answer()
+    
 
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
