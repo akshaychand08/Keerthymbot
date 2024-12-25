@@ -75,8 +75,8 @@ VR_LOG = int(environ.get('VR_LOG', '-1002199851318'))
 
 TUTORIAL_LINK = "https://t.me/HoW_To_VerifYz/60"
 
-API = "c5a75e53e4d7872eed7864ea49923c08b92b420b"
-SITE = "tryshort.in"
+API = "375baac571ff26fd50f055d19e99a464b3c55037"
+SITE = "genzurl.com"
 
 STREAM_API = "xKcAOJCVGsOh0aXI8Yjdj3SFjxp1"
 STREAM_SITE = "shareus.io"
