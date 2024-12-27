@@ -3,7 +3,7 @@ import asyncio
 import re
 import ast
 import math
-from pyrogram.types import InlineKeyboardButton
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import MessageNotModified
 from .Reqst import badreqst, usreqst
 from database.reffer import referdb
