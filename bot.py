@@ -2,11 +2,11 @@ import logging
 import logging.config
 
 # Get logging configurations
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig("logging.conf")
 logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
-logging.getLogger("imdbpy").setLevel(logging.ERROR)
-logging.getLogger("asyncio").setLevel(logging.CRITICAL -1)
+logging.getLogger("cinemagoer").setLevel(logging.ERROR)
+LOGGER = logging.getLogger(__name__)
 
 from asyncio import sleep 
 from datetime import datetime
