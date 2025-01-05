@@ -122,5 +122,5 @@ class Bot(Client):
 
 
 app = Bot()
-run(self.start())
+app.run()
 
