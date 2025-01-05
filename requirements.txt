@@ -17,6 +17,6 @@ aiocache
 aiohttp==3.10.11
 psutil
 cinemagoer==2023.5.1
-IMDb
+imdbpy
 datetime
 #git+https://github.com/agronholm/anyio
