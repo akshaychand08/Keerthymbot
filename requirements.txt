@@ -1,4 +1,4 @@
-pyrogram>=2.0.106
+#pyrogram>=2.0.106
 #pyrofork==2.3.45
 #git+https://github.com/akshaychand08/pyrogram-1
 git+https://github.com/Mayuri-Chan/pyrofork
