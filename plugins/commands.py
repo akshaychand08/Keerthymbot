@@ -43,7 +43,7 @@ async def start(client:Client, message):
         await db.update_notcopy_user(user_id, {"last_verified":datetime.now(tz=ist_timezone)})
         await db.update_verify_id_info(user_id, verify_id, {"verified":True})     
         url = temp.VR_ID.get(user_id)
-        buttons = [[InlineKeyboardButton("🔹ꜰᴏʟʟᴏᴡ ɪɴsᴛᴀ🔹",url="https://www.instagram.com/akshaychand10?igsh=OGQ5ZDc2ODk2ZA=="),]]
+        buttons = [[InlineKeyboardButton("🔹ꜰᴏʟʟᴏᴡ ɪɴsᴛᴀ🔹",url="https://www.instagram.com/akshay.gfx.10?igsh=MW5pcXU1dnlxbDI3OA=="),]]
         if file_id:
             buttons.insert(0, [InlineKeyboardButton("♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ɢᴇᴛ ғɪʟᴇ ♻️", url=url)])
         time_zone = datetime.now(pytz.timezone("Asia/Kolkata")) 
@@ -149,7 +149,7 @@ async def start(client:Client, message):
         btn = [[
                 InlineKeyboardButton("🔸ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ🔸", url=invite_link.invite_link)
 	    ], [
-                InlineKeyboardButton("🔹ꜰᴏʟʟᴏᴡ ɪɴsᴛᴀ🔹",url="https://www.instagram.com/akshaychand10?igsh=OGQ5ZDc2ODk2ZA==")
+                InlineKeyboardButton("🔹ꜰᴏʟʟᴏᴡ ɪɴsᴛᴀ🔹",url="https://www.instagram.com/akshay.gfx.10?igsh=MW5pcXU1dnlxbDI3OA==")
 	    ]]
         if message.command[1] != "subscribe":
             try:
@@ -320,7 +320,7 @@ async def start(client:Client, message):
                 ],
                 [
                     InlineKeyboardButton(
-                        "🔹𝗙𝗼𝗹𝗹𝗼𝘄 𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺🔹", url="https://www.instagram.com/akshaychand10?igsh=OGQ5ZDc2ODk2ZA=="
+                        "🔹𝗙𝗼𝗹𝗹𝗼𝘄 𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺🔹", url="https://www.instagram.com/akshay.gfx.10?igsh=MW5pcXU1dnlxbDI3OA=="
                     )
                 ],
             ]
