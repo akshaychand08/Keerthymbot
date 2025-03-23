@@ -1097,9 +1097,9 @@ async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     req = message.from_user.id if message.from_user else 0 
     BUTTONS[key] = search   
     name, link = await ipl_data()
-    btn.insert(0) InlineKeyboardButton(name, url=link)])
-    btn.insert(1, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
-    btn.insert(2, [
+    btn.insert(0, [InlineKeyboardButton(name, url=link)])
+    btn.insert(1, [
+	InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link),
         InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
         InlineKeyboardButton("sᴇᴀsᴏɴ", callback_data=f"season#{key}#{req}#{offset}")
     ])
