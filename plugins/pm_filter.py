@@ -34,6 +34,48 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 
+Button_data = None  
+
+@Client.on_message(filters.command("add_btn") & filters.private)
+async def add_button(client, message):
+    global Button_data  # Global variable
+
+    if len(message.command) < 3:
+        return await message.reply("Usage: /add_btn [name] [url]")
+
+    button_name = " ".join(message.command[1:-1])  # Button name
+    button_link = message.command[-1]  # Button link
+
+    Button_data = {"name": button_name, "link": button_link}
+
+    await message.reply(f"✅ **Button Updated:**\n\n- `{button_name}` → {button_link}")
+
+@Client.on_message(filters.command("show_btn") & filters.private)
+async def show_button(client, message):
+    if not Button_data:
+        return await message.reply("⚠️ No button added yet.")
+
+    btn = Button_data  
+    await message.reply(f"**📌 Last Saved Button:**\n\n- `{btn['name']}` → {btn['link']}")
+
+@Client.on_message(filters.command("clear_btn") & filters.private)
+async def clear_button(client, message):
+    global Button_data
+    Button_data = None  
+
+    await message.reply("✅ **Button data cleared.**")
+
+async def ipl_data():
+    global Button_data  #
+    
+    if not Button_data:
+        return "No buttons added yet"
+
+    return f"{Button_data['name']} {Button_data['link']}"  
+
+
+
+
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_search(client, message):
     manual = await manual_filters(client, message)
@@ -1054,9 +1096,13 @@ async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     key = f"{message.chat.id}-{message.id}"
     req = message.from_user.id if message.from_user else 0 
     BUTTONS[key] = search   
+    ipl = await ipl_data()
     btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
-    btn.insert(1, [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),InlineKeyboardButton("sᴇᴀsᴏɴ", callback_data=f"season#{key}#{req}#{offset}")])                 
-
+    btn.insert(1, [
+        InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
+        InlineKeyboardButton(ipl['name'], url=ipl['link']),
+        InlineKeyboardButton("sᴇᴀsᴏɴ", callback_data=f"season#{key}#{req}#{offset}")
+    ])
     cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: {message.chat.title}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
     if edit_message:
       await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
