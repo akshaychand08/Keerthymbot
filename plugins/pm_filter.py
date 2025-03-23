@@ -66,13 +66,13 @@ async def clear_button(client, message):
     await message.reply("✅ **Button data cleared.**")
 
 async def ipl_data():
-    global Button_data  #
+    global Button_data  
     
     if not Button_data:
-        return "No buttons added yet"
+        return ("Watch IPL", "https://t.me/")  # Tuple return 
 
-    return f"{Button_data['name']} {Button_data['link']}"  
-
+    return (Button_data.get("name", "Watch IPL"), Button_data.get("link", "https://t.me/"))
+	
 
 
 
@@ -1096,11 +1096,11 @@ async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     key = f"{message.chat.id}-{message.id}"
     req = message.from_user.id if message.from_user else 0 
     BUTTONS[key] = search   
-    ipl = await ipl_data()
+    name, link = await ipl_data()
     btn.insert(0, [InlineKeyboardButton("📂 sᴇɴᴅ ᴀʟʟ", callback_data=batch_link)])
     btn.insert(1, [
         InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
-        InlineKeyboardButton(ipl[0]['name'], url=ipl[0]['link']),
+        InlineKeyboardButton(name, url=link),
         InlineKeyboardButton("sᴇᴀsᴏɴ", callback_data=f"season#{key}#{req}#{offset}")
     ])
     cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: {message.chat.title}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
