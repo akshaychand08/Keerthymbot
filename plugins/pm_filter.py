@@ -69,9 +69,9 @@ async def ipl_data():
     global Button_data  
     
     if not Button_data:
-        return ("Watch IPL", "https://t.me/")  # Tuple return 
+        return ("Follow Insta", "https://www.instagram.com/akshaychand10?igsh=ejdlaGxkYWJuc210")  # Tuple return 
 
-    return (Button_data.get("name", "Watch IPL"), Button_data.get("link", "https://t.me/"))
+    return (Button_data.get("name", "Follow Insta"), Button_data.get("link", "https://www.instagram.com/akshaychand10?igsh=ejdlaGxkYWJuc210"))
 	
 
 
