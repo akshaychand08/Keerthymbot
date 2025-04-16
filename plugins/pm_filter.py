@@ -350,7 +350,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     btn = []
     for file in files:        
         btn.append([
-            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", callback_data=f'files#{grp_id}_{file.file_id}')
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", callback_data=f'file#{grp_id}#{file.file_id}')
         ])    
     if l_offset != "":
         btn.append(
