@@ -191,14 +191,14 @@ async def plan(client, message):
 
 
 async def add_premium(client, user_id, uss):
-    seconds = 2592000
+    seconds = 864000
     if seconds > 0:
         expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
         user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
         await db.update_user(user_data)  # Use the update_user method to update or insert user data                    
         await client.send_message(
         chat_id=user_id,
-        text=f"🙋‍♂ <b>Hey {uss.mention}\n\nCongratulations you have received 1 month premium subscription for referring 20 users", disable_web_page_preview=True,              
+        text=f"🙋‍♂ <b>Hey {uss.mention}\n\nCongratulations you have received 10 day premium subscription for referring 10 users", disable_web_page_preview=True,              
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔰 ᴍᴏᴠɪᴇ ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ 🔰", url=f"https://t.me/+KP3OcudPwQczZDBl")]]))
         for admin in ADMINS:
             await client.send_message(chat_id=admin, text=f"Successfully completed task by this:\n\nuser: {uss.mention}\n\nuser id: {uss.id}!")
