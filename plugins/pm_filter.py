@@ -1111,6 +1111,7 @@ async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     else:
       await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
     if spoll:
+	await asyncio.sleep(100)
         await msg.message.delete()
         
 async def advantage_spell_chok(msg, sts):
