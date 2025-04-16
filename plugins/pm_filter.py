@@ -171,7 +171,7 @@ async def next_page(bot, query):
     btn = []
     for file in files:        
         btn.append([
-            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", callback_data=f'file#{grp_id}_{file.file_id}')
         ])
 
     if 0 < offset <= 10:
@@ -390,7 +390,7 @@ async def lang_next_page(bot, query):
     temp.GETALL[f"{query.message.chat.id}-{query.message.id}"] = batch_ids
     batch_link = f"batchfiles#{query.message.chat.id}#{query.message.id}#{query.message.from_user.id}"          
     
-    btn = [[InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}",url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')] for file in files]
+    btn = [[InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}",callback_data=f'file#{grp_id}_{file.file_id}')] for file in files]
 
     b_offset = l_offset - 10 if l_offset > 10 else 0 if l_offset > 0 else None
     if n_offset:
@@ -1079,7 +1079,7 @@ async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     btn = []
     for file in files:        
         btn.append([
-            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", url=f'https://telegram.dog/{temp.U_NAME}?start=files_{grp_id}_{file.file_id}')
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", callback_data=f'file#{grp_id}_{file.file_id}')
         ])
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
