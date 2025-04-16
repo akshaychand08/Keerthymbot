@@ -110,7 +110,7 @@ CAPTION_LANGUAGES = {
 
 # movie request 
 REQ_GRP = int(environ.get('REQ_GRP', '-1001878519368'))
-RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1001682547846'))
+RQST_CHANNEL = int(environ.get('RQST_CHANNEL', '-1002692115692'))
 
 # Welcome area
 NEWGRP = environ.get('NEWGRP',"https://telegra.ph/file/80dc73a6d73bed659cda5.jpg")
