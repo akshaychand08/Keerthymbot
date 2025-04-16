@@ -30,6 +30,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+scheduler = AsyncIOScheduler({"apscheduler.timezone": "UTC"}, job_defaults={"misfire_grace_time": 5}, daemon=True,run_async=True,)
+scheduler.start()
+
 
 BUTTONS = {}
 SPELL_CHECK = {}
@@ -1107,9 +1111,10 @@ async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     ])
     cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: {message.chat.title}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
     if edit_message:
-      await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+      am = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
     else:
-      await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn))
+      am = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn)) 
+    scheduler.add_job(am.delete, 'date', run_date=datetime.now() + timedelta(seconds=180)) # auto delete after 3 minutes 
     if spoll:
         await msg.message.delete()
         
