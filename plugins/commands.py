@@ -20,7 +20,7 @@ from database.users_chats_db import db
 from info import TUTORIAL_LINK, VR_COM_photo, VR_LOG, CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
 from utils import replace_username, get_shortlinks, get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
-import re
+import re, info
 import json
 import base64
 logger = logging.getLogger(__name__)
@@ -219,9 +219,19 @@ async def start(client:Client, message):
                 protect_content = False,
                 reply_markup=reply_markup,
                 parse_mode=enums.ParseMode.HTML
-            )
+            ) 
+            chat_id, msg_id = await db.get_channel_id()  
+            msg = await client.get_messages(int(chat_id), int(msg_id)) 
+            media = getattr(msg, msg.media.value)
+            dl=await client.send_cached_media(
+                chat_id=user_id,
+                file_id=media.file_id,
+                caption=script.TUTORIAL_CAPTAIN
+	    ) 
+            return		
             await asyncio.sleep(120) 
-            await dmb.delete()	
+            await dmb.delete() 
+            await dl.delete()
             return 
 
     if data.startswith("sendallfiles"):
@@ -599,3 +609,33 @@ async def refusers(client, message):
             await sts.edit('users not found')
     else: 
         await message.reply_text('use /ref_user users_id')
+
+
+@Client.on_message(filters.command("my_tutorial") & filters.user(ADMINS))
+async def send_or_save_tutorial_link(client, message):
+    if len(message.command) == 2: 
+        tutorial_link = message.command[1]
+
+        # Channel ID & Message ID Extract Karna
+        try:
+            parts = tutorial_link.split("/")  
+            msg_id = int(parts[-1])  # Message ID extract
+            chat = await client.get_chat(parts[-2])  # Channel ID extract
+            chat_id = chat.id  
+        except Exception as e:
+            return await message.reply_text("Invalid link! Please provide a valid tutorial link.")
+
+        # Database me save karna
+        await db.save_tutorial_link(tutorial_link)  
+        await db.save_channel_id(chat_id, msg_id)  
+
+        info.TUTORIAL_LINK = tutorial_link  
+
+        await message.reply_text(f"✅ Tutorial link saved:\n{tutorial_link}\n\n"
+                                 f"📢 Channel ID: `{chat_id}`\n"
+                                 f"🆔 Message ID: `{msg_id}`")
+    else: 
+        return await message.reply_text("❌ Usage: /my_tutorial <link>")
+
+
+	    
