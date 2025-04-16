@@ -90,16 +90,20 @@ these are the extra features of Eva Maria
 • /myplan - user command 
 • /get_premium - checking user current premium 
 • /premium_users - all premium user list 
-
-• /verification - Check all time Verify 
+• /ref_user - check referral users 
+   
 • /set_shortlink - Add Shortlink
 • /set_streamlink - Stream link shartener
 • /add_url - Stream Gen URL
 • /get_url - check current stream link
+• /add_btn - Home button 
+• /my_tutorial link - verify video 
+
+• /verification - Check all time Verify
+• /del_vr - Verify Deta Delete.
 
 • /logs - <code>to get the rescent errors</code>
 • /stats - <code>to get status of files in db.</code>
-• /del_vr- <code>Verify Deta Delete.</code>
 • /delete - <code>to delete a specific file from db.</code>
 • /deleteall - <code>to delete all file from db.</code>
 • /users - <code>to get list of my users and ids.</code>
