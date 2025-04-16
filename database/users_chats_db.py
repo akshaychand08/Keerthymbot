@@ -42,7 +42,40 @@ class Database:
         self.verify_id = self.db.verify_id
         self.users = self.db.uersz
         self.shortlink_col = self.db.shortlinks
+        self.collection = self.db["channel_messages"]  # Collection define kar diya
 
+    async def save_channel_id(self, chat_id: int, msg_id: int):
+        """Chat ID aur Message ID ko save karega, purana replace hoke naya add hoga."""
+        await self.collection.update_one(
+            {"chat_id": chat_id},  
+            {"$set": {"msg_id": msg_id}},  
+            upsert=True  
+        )
+
+    async def get_channel_id(self):
+        """Latest Chat ID aur Message ID retrieve karega."""
+        data = await self.collection.find_one({}, sort=[("_id", -1)])  # Latest entry fetch karega
+        if data:
+            return data["chat_id"], data["msg_id"]
+        return None, None  
+
+
+    
+    async def save_tutorial_link(self, link):
+        # Agar pehle se link exist nahi karta, toh save karega
+        if not await self.shortlink_col.find_one({"type": "tutorial"}):
+            await self.shortlink_col.insert_one({"type": "tutorial", "link": link})
+        else:
+            # Agar pehle se hai, toh link update karega
+            await self.shortlink_col.update_one({"type": "tutorial"}, {"$set": {"link": link}})
+
+
+    async def get_tutorial_link(self):
+        # Link ko database se retrieve karta hai
+        data = await self.shortlink_col.find_one({"type": "tutorial"})
+        return data["link"] if data else None
+
+    
     async def save_shortlink_data(self, api, site):
         data = {
             'api': api,
