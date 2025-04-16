@@ -171,7 +171,7 @@ async def next_page(bot, query):
     btn = []
     for file in files:        
         btn.append([
-            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", callback_data=f'file#{grp_id}_{file.file_id}')
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", callback_data=f'file#{grp_id}#{file.file_id}')
         ])
 
     if 0 < offset <= 10:
@@ -1079,7 +1079,7 @@ async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     btn = []
     for file in files:        
         btn.append([
-            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", callback_data=f'file#{grp_id}_{file.file_id}')
+            InlineKeyboardButton(text=f"⚡️ {get_size(file.file_size)}» {remove_username(file.file_name)}", callback_data=f'file#{grp_id}#{file.file_id}')
         ])
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
