@@ -21,3 +21,4 @@ cinemagoer==2023.5.1
 imdbpy
 datetime
 #git+https://github.com/agronholm/anyio
+apscheduler
