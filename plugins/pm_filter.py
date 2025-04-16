@@ -1113,9 +1113,15 @@ async def auto_filter(client, msg, sts, spoll=False, edit_message=None):
     cap = f"<b>📕 ᴛɪᴛʟᴇ: {search}\n⚡️ ᴘᴏᴡᴇʀᴇᴅ: {message.chat.title}</a>\n🤦 ʀᴇǫᴜᴇꜱᴛ: {message.from_user.mention}</b>"
     if edit_message:
       am = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+      await asyncio.sleep(180)
+      await am.delete()
+      await message.delete()    
     else:
-      am = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn)) 
+      ak = await sts.edit(cap, reply_markup=InlineKeyboardMarkup(btn)) 
     scheduler.add_job(am.delete, 'date', run_date=datetime.now() + timedelta(seconds=180)) # auto delete after 3 minutes 
+      await asyncio.sleep(180)
+      await ak.delete()
+      await message.delete()
     if spoll:
         await msg.message.delete()
         
