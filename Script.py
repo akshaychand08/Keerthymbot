@@ -209,6 +209,12 @@ click to check your activ plan- /myplan
 * Contact: @akshaychand08 for Any Doubts and Clarification
 """
 
+    TUTORIAL_CAPTAIN = """
+How to verify plz watch this video...
+
+Verify kaise karna hai is video ko pura dekhe..
+"""
+
 FILE_CAP = """
 ғɪʟᴇ ɴᴀᴍᴇ:- <code>{}</code>
 
@@ -219,3 +225,5 @@ FILE_CAP = """
 ʀᴇǫᴜᴇꜱᴛᴇᴅ ʙʏ:- {}
 
 ᴘᴏᴡᴇʀᴇᴅ ʙʏ: <spoiler><a href=https://t.me/{}>{}</a></spoiler>"""
+
+
