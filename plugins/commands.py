@@ -337,7 +337,12 @@ async def start(client:Client, message):
                 ],
             ]
         ),
-    )                    
+    ) 
+    async def del_func():
+            await asyncio.sleep(180)
+            await am.delete()
+        await asyncio.create_task(del_func())
+        return
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
