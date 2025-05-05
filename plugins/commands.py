@@ -342,7 +342,7 @@ async def start(client:Client, message):
             ]
         ),
     )                    
-    scheduler.add_job(am.delete, 'date', run_date=datetime.now() + timedelta(seconds=600)) # auto delete after 10 minutes 
+    scheduler.add_job(am.delete, 'date', run_date=datetime.now() + timedelta(seconds=90)) # auto delete after 10 minutes 
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
