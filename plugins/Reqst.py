@@ -99,7 +99,7 @@ async def badreqst(msg, search, client):
                 InlineKeyboardButton("Not available",callback_data=f'rq#na#{msg_id}#{user_query}',),],[
                 InlineKeyboardButton("Close",callback_data="close_data"),],] 
 
-        await client.send_message(RQST_CHANNEL, text=f"my bot 👉 <a href=https://t.me/iPapcornPrimeBot>Click Here</a>\n\nGroup 👉 <a href=https://t.me/+2xBSNHJ8h4xjZmM1>Click Here</a>\n\nUser <b>{user_name}</b>\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/iPapdiscussion/{msg_id}>Click Here</a>\n😎", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(reply_markup1))
+        await client.send_message(RQST_CHANNEL, text=f"my bot 👉 <a href=https://t.me/iPapcornPrimeBot>Click Here</a>\n\nGroup 👉 <a href=https://t.me/+2xBSNHJ8h4xjZmM1>Click Here</a>\n\nUser <b>{user_name}</b>\n\nrequested for <code>{user_query}</code>\n\nReply to <code>/pm {user_id} {msg_id} message</code>`\n\nView message 👉 <a href=https://t.me/+sJaVzpXTaExhMGNl/{msg_id}>Click Here</a>\n😎", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(reply_markup1))
 
 
 #req_grp spell_check 
