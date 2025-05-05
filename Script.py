@@ -226,9 +226,9 @@ FILE_CAP = """
 
 ⚠ IMPORTANT ⚠
 
-This File Will Be Deleted After 10 Mins Please Forward This File Somewhere else
+This File Will Be Deleted After 1 Mins Please Forward This File Somewhere else
 
-यह फाइल 10 मिनट के बााद डिलिट हो जााएगी. डिलिट होने से पहले आप इसे कहि फोरवर्ड कर ले
+यह फाइल 1 मिनट के बााद डिलिट हो जााएगी. डिलिट होने से पहले आप इसे कहि फोरवर्ड कर ले
 
 ᴘᴏᴡᴇʀᴇᴅ ʙʏ: <spoiler><a href=https://t.me/{}>{}</a></spoiler>"""
 
