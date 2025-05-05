@@ -235,7 +235,7 @@ async def advantage_spoll_choker(bot, query):
             await auto_filter(bot, query, sts, k, edit_message=query.message)
         else:                
             btn = [[
-            InlineKeyboardButton('🎖️ ᴀᴅᴍɪɴ 🎖️', url="https://t.me/iPapdiscussion")
+            InlineKeyboardButton('🎖️ ᴀᴅᴍɪɴ 🎖️', url="https://t.me/+sJaVzpXTaExhMGNl")
         ]]     
             try:
               k=await query.message.edit('<b>✯ sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs 📂 ᴡᴇʀᴇ ꜰᴏᴜɴᴅ\n\n👇 sᴇɴᴅ ʀᴇǫᴜᴇsᴛ 📩</b>', reply_markup=InlineKeyboardMarkup(btn))    
